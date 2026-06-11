@@ -59,6 +59,14 @@ namespace DBnGame {
 
 
 	private: System::Windows::Forms::Label^ headerLabel;
+	private: System::Windows::Forms::StatusStrip^ statusStrip1;
+	private: System::Windows::Forms::ToolStripStatusLabel^ currentDbStatusLabel;
+
+	private: System::Windows::Forms::ToolStripStatusLabel^ dbModeStatusLabel;
+
+
+
+
 
 	protected:
 
@@ -87,7 +95,11 @@ namespace DBnGame {
 			this->searchButton = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitButton = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->headerLabel = (gcnew System::Windows::Forms::Label());
+			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->currentDbStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->dbModeStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->topBarMenuStrip->SuspendLayout();
+			this->statusStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// topBarMenuStrip
@@ -173,11 +185,41 @@ namespace DBnGame {
 			this->headerLabel->TabIndex = 2;
 			this->headerLabel->Text = L"База Данных Управляющей Компании";
 			// 
+			// statusStrip1
+			// 
+			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->currentDbStatusLabel,
+					this->dbModeStatusLabel
+			});
+			this->statusStrip1->Location = System::Drawing::Point(0, 539);
+			this->statusStrip1->Name = L"statusStrip1";
+			this->statusStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
+			this->statusStrip1->Size = System::Drawing::Size(909, 22);
+			this->statusStrip1->TabIndex = 3;
+			this->statusStrip1->Text = L"statusStrip1";
+			// 
+			// currentDbStatusLabel
+			// 
+			this->currentDbStatusLabel->Name = L"currentDbStatusLabel";
+			this->currentDbStatusLabel->Size = System::Drawing::Size(669, 17);
+			this->currentDbStatusLabel->Spring = true;
+			this->currentDbStatusLabel->Text = L"Текущая База Данных: Houses.txt";
+			this->currentDbStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// dbModeStatusLabel
+			// 
+			this->dbModeStatusLabel->Name = L"dbModeStatusLabel";
+			this->dbModeStatusLabel->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->dbModeStatusLabel->Size = System::Drawing::Size(225, 17);
+			this->dbModeStatusLabel->Text = L"Текущий Режим Работы: Пользователь";
+			this->dbModeStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
+			// 
 			// dataBase
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(909, 561);
+			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->headerLabel);
 			this->Controls->Add(this->topBarMenuStrip);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -192,6 +234,8 @@ namespace DBnGame {
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &dataBase::dataBase_FormClosed);
 			this->topBarMenuStrip->ResumeLayout(false);
 			this->topBarMenuStrip->PerformLayout();
+			this->statusStrip1->ResumeLayout(false);
+			this->statusStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
