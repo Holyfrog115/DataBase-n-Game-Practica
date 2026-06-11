@@ -98,12 +98,14 @@ namespace DBnGame {
 			});
 			this->topBarMenuStrip->Location = System::Drawing::Point(0, 0);
 			this->topBarMenuStrip->Name = L"topBarMenuStrip";
-			this->topBarMenuStrip->Size = System::Drawing::Size(914, 24);
+			this->topBarMenuStrip->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
+			this->topBarMenuStrip->Size = System::Drawing::Size(909, 24);
 			this->topBarMenuStrip->TabIndex = 1;
 			this->topBarMenuStrip->Text = L"menuStrip1";
 			// 
 			// createDbButton
 			// 
+			this->createDbButton->BackColor = System::Drawing::SystemColors::Control;
 			this->createDbButton->Name = L"createDbButton";
 			this->createDbButton->Size = System::Drawing::Size(80, 20);
 			this->createDbButton->Text = L"Создать БД";
@@ -162,9 +164,10 @@ namespace DBnGame {
 			// 
 			// headerLabel
 			// 
+			this->headerLabel->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->headerLabel->AutoSize = true;
 			this->headerLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 16, System::Drawing::FontStyle::Bold));
-			this->headerLabel->Location = System::Drawing::Point(264, 48);
+			this->headerLabel->Location = System::Drawing::Point(262, 48);
 			this->headerLabel->Name = L"headerLabel";
 			this->headerLabel->Size = System::Drawing::Size(410, 30);
 			this->headerLabel->TabIndex = 2;
@@ -174,13 +177,14 @@ namespace DBnGame {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(914, 561);
+			this->ClientSize = System::Drawing::Size(909, 561);
 			this->Controls->Add(this->headerLabel);
 			this->Controls->Add(this->topBarMenuStrip);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 													  static_cast<System::Byte>(204)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->topBarMenuStrip;
+			this->MinimumSize = System::Drawing::Size(925, 600);
 			this->Name = L"dataBase";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
