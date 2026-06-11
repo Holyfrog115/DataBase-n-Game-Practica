@@ -143,10 +143,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dataBase.cpp" />
+    <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="mainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dataBase.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="loginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="mainMenu.h">
@@ -156,6 +160,9 @@
   <ItemGroup>
     <EmbeddedResource Include="dataBase.resx">
       <DependentUpon>dataBase.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loginForm.resx">
+      <DependentUpon>loginForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainMenu.resx">
       <DependentUpon>mainMenu.h</DependentUpon>

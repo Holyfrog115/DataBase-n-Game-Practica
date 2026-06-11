@@ -1,4 +1,5 @@
 #pragma once
+#include "loginForm.h"
 
 namespace DBnGame {
 
@@ -63,6 +64,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::ToolStripStatusLabel^ currentDbStatusLabel;
 
 	private: System::Windows::Forms::ToolStripStatusLabel^ dbModeStatusLabel;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
 
 
@@ -98,8 +100,10 @@ namespace DBnGame {
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->currentDbStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->dbModeStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->topBarMenuStrip->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// topBarMenuStrip
@@ -133,6 +137,7 @@ namespace DBnGame {
 			this->loginButton->Name = L"loginButton";
 			this->loginButton->Size = System::Drawing::Size(198, 20);
 			this->loginButton->Text = L"Войти в Режим Администратора";
+			this->loginButton->Click += gcnew System::EventHandler(this, &dataBase::loginButton_Click);
 			// 
 			// dataEditButton
 			// 
@@ -214,11 +219,24 @@ namespace DBnGame {
 			this->dbModeStatusLabel->Text = L"Текущий Режим Работы: Пользователь";
 			this->dbModeStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																							  | System::Windows::Forms::AnchorStyles::Left)
+																							 | System::Windows::Forms::AnchorStyles::Right));
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Location = System::Drawing::Point(0, 96);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->ReadOnly = true;
+			this->dataGridView1->Size = System::Drawing::Size(912, 432);
+			this->dataGridView1->TabIndex = 4;
+			// 
 			// dataBase
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(909, 561);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->headerLabel);
 			this->Controls->Add(this->topBarMenuStrip);
@@ -236,6 +254,7 @@ namespace DBnGame {
 			this->topBarMenuStrip->PerformLayout();
 			this->statusStrip1->ResumeLayout(false);
 			this->statusStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -244,5 +263,10 @@ namespace DBnGame {
 	private: System::Void dataBase_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 		Application::Exit();
 	}
-	};
+	private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		loginForm^ loginFormInstance = gcnew loginForm();
+
+		loginFormInstance->ShowDialog();
+	}
+};
 }

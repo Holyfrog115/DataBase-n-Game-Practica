@@ -92,7 +92,9 @@ namespace DBnGame {
 			this->ClientSize = System::Drawing::Size(584, 561);
 			this->Controls->Add(this->gameButton);
 			this->Controls->Add(this->dataBaseButton);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MinimumSize = System::Drawing::Size(600, 600);
 			this->Name = L"mainMenu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Главное меню";
