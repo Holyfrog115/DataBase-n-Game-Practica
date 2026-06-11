@@ -1,4 +1,5 @@
 #pragma once
+#include "dataBase.h"
 
 namespace DBnGame {
 
@@ -70,6 +71,7 @@ namespace DBnGame {
 			this->dataBaseButton->TabIndex = 0;
 			this->dataBaseButton->Text = L"База данных";
 			this->dataBaseButton->UseVisualStyleBackColor = true;
+			this->dataBaseButton->Click += gcnew System::EventHandler(this, &mainMenu::dataBaseButton_Click);
 			// 
 			// gameButton
 			// 
@@ -98,5 +100,11 @@ namespace DBnGame {
 
 		}
 #pragma endregion
+	private: System::Void dataBaseButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		dataBase^ dataBaseForm = gcnew dataBase();
+		this->Hide();
+
+		dataBaseForm->Show();
+	}
 	};
 }
