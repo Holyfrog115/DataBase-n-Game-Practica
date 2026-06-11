@@ -142,14 +142,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dataBase.cpp" />
     <ClCompile Include="mainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dataBase.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="mainMenu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dataBase.resx">
+      <DependentUpon>dataBase.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="mainMenu.resx">
       <DependentUpon>mainMenu.h</DependentUpon>
     </EmbeddedResource>

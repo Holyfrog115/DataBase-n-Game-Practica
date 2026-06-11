@@ -34,8 +34,11 @@ namespace DBnGame {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ dataBaseButton;
+	private: System::Windows::Forms::Button^ gameButton;
+	protected:
+
+
 	protected:
 
 	private:
@@ -52,36 +55,41 @@ namespace DBnGame {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(mainMenu::typeid));
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->dataBaseButton = (gcnew System::Windows::Forms::Button());
+			this->gameButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
-			// button1
+			// dataBaseButton
 			// 
-			this->button1->Location = System::Drawing::Point(144, 120);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(288, 120);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"button1";
-			this->button1->UseVisualStyleBackColor = true;
+			this->dataBaseButton->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->dataBaseButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+																	  static_cast<System::Byte>(204)));
+			this->dataBaseButton->Location = System::Drawing::Point(144, 120);
+			this->dataBaseButton->Name = L"dataBaseButton";
+			this->dataBaseButton->Size = System::Drawing::Size(288, 120);
+			this->dataBaseButton->TabIndex = 0;
+			this->dataBaseButton->Text = L"База данных";
+			this->dataBaseButton->UseVisualStyleBackColor = true;
 			// 
-			// button2
+			// gameButton
 			// 
-			this->button2->Location = System::Drawing::Point(144, 288);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(288, 120);
-			this->button2->TabIndex = 1;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = true;
+			this->gameButton->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->gameButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+																  static_cast<System::Byte>(204)));
+			this->gameButton->Location = System::Drawing::Point(144, 288);
+			this->gameButton->Name = L"gameButton";
+			this->gameButton->Size = System::Drawing::Size(288, 120);
+			this->gameButton->TabIndex = 1;
+			this->gameButton->Text = L"Морской Бой";
+			this->gameButton->UseVisualStyleBackColor = true;
 			// 
 			// mainMenu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(584, 561);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Controls->Add(this->gameButton);
+			this->Controls->Add(this->dataBaseButton);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"mainMenu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
