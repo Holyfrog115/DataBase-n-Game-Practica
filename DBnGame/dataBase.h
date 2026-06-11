@@ -1,5 +1,6 @@
 #pragma once
 #include "loginForm.h"
+#include "enteringLines.h"
 
 namespace DBnGame {
 
@@ -154,6 +155,7 @@ namespace DBnGame {
 			this->enterHouseButton->Name = L"enterHouseButton";
 			this->enterHouseButton->Size = System::Drawing::Size(296, 22);
 			this->enterHouseButton->Text = L"Ввод Строк";
+			this->enterHouseButton->Click += gcnew System::EventHandler(this, &dataBase::enterHouseButton_Click);
 			// 
 			// deleteHouseButton
 			// 
@@ -263,10 +265,19 @@ namespace DBnGame {
 	private: System::Void dataBase_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 		Application::Exit();
 	}
+
+
 	private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		loginForm^ loginFormInstance = gcnew loginForm();
 
 		loginFormInstance->ShowDialog();
+	}
+
+
+	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		enteringLines^ enteringLinesFormInstance = gcnew enteringLines();
+
+		enteringLinesFormInstance->ShowDialog();
 	}
 };
 }

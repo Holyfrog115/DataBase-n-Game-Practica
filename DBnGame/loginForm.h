@@ -71,10 +71,11 @@ namespace DBnGame {
 			// loginLabel
 			// 
 			this->loginLabel->AutoSize = true;
-			this->loginLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 18, System::Drawing::FontStyle::Bold));
+			this->loginLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																  static_cast<System::Byte>(204)));
 			this->loginLabel->Location = System::Drawing::Point(24, 48);
 			this->loginLabel->Name = L"loginLabel";
-			this->loginLabel->Size = System::Drawing::Size(88, 32);
+			this->loginLabel->Size = System::Drawing::Size(86, 32);
 			this->loginLabel->TabIndex = 0;
 			this->loginLabel->Text = L"Логин:";
 			// 
@@ -88,7 +89,7 @@ namespace DBnGame {
 			// 
 			// loginButton
 			// 
-			this->loginButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 16, System::Drawing::FontStyle::Bold));
+			this->loginButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->loginButton->Location = System::Drawing::Point(72, 240);
 			this->loginButton->Name = L"loginButton";
 			this->loginButton->Size = System::Drawing::Size(240, 72);
@@ -107,10 +108,10 @@ namespace DBnGame {
 			// passwordLabel
 			// 
 			this->passwordLabel->AutoSize = true;
-			this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 18, System::Drawing::FontStyle::Bold));
+			this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18));
 			this->passwordLabel->Location = System::Drawing::Point(24, 120);
 			this->passwordLabel->Name = L"passwordLabel";
-			this->passwordLabel->Size = System::Drawing::Size(105, 32);
+			this->passwordLabel->Size = System::Drawing::Size(101, 32);
 			this->passwordLabel->TabIndex = 3;
 			this->passwordLabel->Text = L"Пароль:";
 			// 
