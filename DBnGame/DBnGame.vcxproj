@@ -199,6 +199,9 @@
     <EmbeddedResource Include="mainMenu.resx">
       <DependentUpon>mainMenu.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="searchForm.resx">
+      <DependentUpon>searchForm.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

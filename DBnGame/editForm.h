@@ -82,6 +82,7 @@ namespace DBnGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(editForm::typeid));
 			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->totalAreaTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->totalAreaLabel = (gcnew System::Windows::Forms::Label());
@@ -269,6 +270,7 @@ namespace DBnGame {
 			this->Controls->Add(this->streetNameLabel);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
 			this->Name = L"editForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;

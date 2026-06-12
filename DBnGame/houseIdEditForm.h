@@ -56,6 +56,7 @@ namespace DBnGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(houseIdEditForm::typeid));
 			this->idTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->idLabel = (gcnew System::Windows::Forms::Label());
 			this->continueButton = (gcnew System::Windows::Forms::Button());
@@ -100,6 +101,7 @@ namespace DBnGame {
 			this->Controls->Add(this->idLabel);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
 			this->Name = L"houseIdEditForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
