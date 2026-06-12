@@ -35,10 +35,20 @@ namespace DBnGame {
 			}
 		}
 	private: System::Windows::Forms::RadioButton^ singleLineDeleteButton;
-	private: System::Windows::Forms::RadioButton^ radioButton1;
+	private: System::Windows::Forms::RadioButton^ multipleLinesDeleteButton;
+
 	private: System::Windows::Forms::Label^ lineIdLabel;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox1;
+	private: System::Windows::Forms::MaskedTextBox^ lineIdTextBox;
+
 	private: System::Windows::Forms::Button^ deleteButton;
+	private: System::Windows::Forms::MaskedTextBox^ startIdTextBox;
+
+	private: System::Windows::Forms::Label^ startIdLabel;
+	private: System::Windows::Forms::MaskedTextBox^ endIdTextBox;
+
+
+	private: System::Windows::Forms::Label^ endIdLabel;
+
 	protected:
 
 	protected:
@@ -58,10 +68,14 @@ namespace DBnGame {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(deletingLines::typeid));
 			this->singleLineDeleteButton = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
+			this->multipleLinesDeleteButton = (gcnew System::Windows::Forms::RadioButton());
 			this->lineIdLabel = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->lineIdTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->deleteButton = (gcnew System::Windows::Forms::Button());
+			this->startIdTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->startIdLabel = (gcnew System::Windows::Forms::Label());
+			this->endIdTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->endIdLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// singleLineDeleteButton
@@ -73,19 +87,22 @@ namespace DBnGame {
 			this->singleLineDeleteButton->Name = L"singleLineDeleteButton";
 			this->singleLineDeleteButton->Size = System::Drawing::Size(221, 34);
 			this->singleLineDeleteButton->TabIndex = 0;
+			this->singleLineDeleteButton->TabStop = true;
 			this->singleLineDeleteButton->Text = L"Удаление 1 строки";
 			this->singleLineDeleteButton->UseVisualStyleBackColor = true;
+			this->singleLineDeleteButton->CheckedChanged += gcnew System::EventHandler(this, &deletingLines::singleLineDeleteButton_CheckedChanged);
 			// 
-			// radioButton1
+			// multipleLinesDeleteButton
 			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->radioButton1->Location = System::Drawing::Point(264, 24);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(312, 34);
-			this->radioButton1->TabIndex = 1;
-			this->radioButton1->Text = L"Удаление нескольких строк";
-			this->radioButton1->UseVisualStyleBackColor = true;
+			this->multipleLinesDeleteButton->AutoSize = true;
+			this->multipleLinesDeleteButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->multipleLinesDeleteButton->Location = System::Drawing::Point(264, 24);
+			this->multipleLinesDeleteButton->Name = L"multipleLinesDeleteButton";
+			this->multipleLinesDeleteButton->Size = System::Drawing::Size(312, 34);
+			this->multipleLinesDeleteButton->TabIndex = 1;
+			this->multipleLinesDeleteButton->Text = L"Удаление нескольких строк";
+			this->multipleLinesDeleteButton->UseVisualStyleBackColor = true;
+			this->multipleLinesDeleteButton->CheckedChanged += gcnew System::EventHandler(this, &deletingLines::multipleLinesDeleteButton_CheckedChanged);
 			// 
 			// lineIdLabel
 			// 
@@ -97,13 +114,13 @@ namespace DBnGame {
 			this->lineIdLabel->TabIndex = 2;
 			this->lineIdLabel->Text = L"ID Записи:";
 			// 
-			// maskedTextBox1
+			// lineIdTextBox
 			// 
-			this->maskedTextBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox1->Location = System::Drawing::Point(240, 192);
-			this->maskedTextBox1->Name = L"maskedTextBox1";
-			this->maskedTextBox1->Size = System::Drawing::Size(264, 36);
-			this->maskedTextBox1->TabIndex = 3;
+			this->lineIdTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->lineIdTextBox->Location = System::Drawing::Point(240, 192);
+			this->lineIdTextBox->Name = L"lineIdTextBox";
+			this->lineIdTextBox->Size = System::Drawing::Size(264, 36);
+			this->lineIdTextBox->TabIndex = 3;
 			// 
 			// deleteButton
 			// 
@@ -115,15 +132,59 @@ namespace DBnGame {
 			this->deleteButton->Text = L"Удалить";
 			this->deleteButton->UseVisualStyleBackColor = true;
 			// 
+			// startIdTextBox
+			// 
+			this->startIdTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->startIdTextBox->Location = System::Drawing::Point(312, 144);
+			this->startIdTextBox->Name = L"startIdTextBox";
+			this->startIdTextBox->Size = System::Drawing::Size(192, 36);
+			this->startIdTextBox->TabIndex = 6;
+			this->startIdTextBox->Visible = false;
+			// 
+			// startIdLabel
+			// 
+			this->startIdLabel->AutoSize = true;
+			this->startIdLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->startIdLabel->Location = System::Drawing::Point(72, 144);
+			this->startIdLabel->Name = L"startIdLabel";
+			this->startIdLabel->Size = System::Drawing::Size(238, 30);
+			this->startIdLabel->TabIndex = 5;
+			this->startIdLabel->Text = L"ID-Начало Интервала:";
+			this->startIdLabel->Visible = false;
+			// 
+			// endIdTextBox
+			// 
+			this->endIdTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->endIdTextBox->Location = System::Drawing::Point(312, 240);
+			this->endIdTextBox->Name = L"endIdTextBox";
+			this->endIdTextBox->Size = System::Drawing::Size(192, 36);
+			this->endIdTextBox->TabIndex = 8;
+			this->endIdTextBox->Visible = false;
+			// 
+			// endIdLabel
+			// 
+			this->endIdLabel->AutoSize = true;
+			this->endIdLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->endIdLabel->Location = System::Drawing::Point(72, 240);
+			this->endIdLabel->Name = L"endIdLabel";
+			this->endIdLabel->Size = System::Drawing::Size(227, 30);
+			this->endIdLabel->TabIndex = 7;
+			this->endIdLabel->Text = L"ID-Конец Интервала:";
+			this->endIdLabel->Visible = false;
+			// 
 			// deletingLines
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(584, 561);
+			this->Controls->Add(this->endIdTextBox);
+			this->Controls->Add(this->endIdLabel);
+			this->Controls->Add(this->startIdTextBox);
+			this->Controls->Add(this->startIdLabel);
 			this->Controls->Add(this->deleteButton);
-			this->Controls->Add(this->maskedTextBox1);
+			this->Controls->Add(this->lineIdTextBox);
 			this->Controls->Add(this->lineIdLabel);
-			this->Controls->Add(this->radioButton1);
+			this->Controls->Add(this->multipleLinesDeleteButton);
 			this->Controls->Add(this->singleLineDeleteButton);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 													  static_cast<System::Byte>(204)));
@@ -137,5 +198,25 @@ namespace DBnGame {
 
 		}
 #pragma endregion
-	};
+	private: System::Void multipleLinesDeleteButton_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		this->lineIdLabel->Visible = false;
+		this->lineIdTextBox->Visible = false;
+
+		this->startIdLabel->Visible = true;
+		this->startIdTextBox->Visible = true;
+		this->endIdLabel->Visible = true;
+		this->endIdTextBox->Visible = true;
+	}
+
+
+	private: System::Void singleLineDeleteButton_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		this->startIdLabel->Visible = false;
+		this->startIdTextBox->Visible = false;
+		this->endIdLabel->Visible = false;
+		this->endIdTextBox->Visible = false;
+		
+		this->lineIdLabel->Visible = true;
+		this->lineIdTextBox->Visible = true;
+	}
+};
 }
