@@ -1,6 +1,7 @@
 #pragma once
 #include "loginForm.h"
 #include "enteringLines.h"
+#include "deletingLines.h"
 
 namespace DBnGame {
 
@@ -162,6 +163,7 @@ namespace DBnGame {
 			this->deleteHouseButton->Name = L"deleteHouseButton";
 			this->deleteHouseButton->Size = System::Drawing::Size(296, 22);
 			this->deleteHouseButton->Text = L"Удаление Строк";
+			this->deleteHouseButton->Click += gcnew System::EventHandler(this, &dataBase::deleteHouseButton_Click);
 			// 
 			// changeHouseDataButton
 			// 
@@ -278,6 +280,13 @@ namespace DBnGame {
 		enteringLines^ enteringLinesFormInstance = gcnew enteringLines();
 
 		enteringLinesFormInstance->ShowDialog();
+	}
+
+
+	private: System::Void deleteHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		deletingLines^ deletingLinesInstance = gcnew deletingLines();
+
+		deletingLinesInstance->ShowDialog();
 	}
 };
 }
