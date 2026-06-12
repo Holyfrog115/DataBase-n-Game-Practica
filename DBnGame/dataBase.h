@@ -53,6 +53,7 @@ namespace DBnGame {
 
 	private: System::Windows::Forms::Form^ mainMenuForm;
 	private: bool isExiting = false;
+	private: String^ currentDbFilePath = "";
 
 
 	protected:

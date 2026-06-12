@@ -142,6 +142,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="createDbForm.cpp" />
     <ClCompile Include="dataBase.cpp" />
     <ClCompile Include="deletingLines.cpp" />
     <ClCompile Include="editForm.cpp" />
@@ -152,6 +153,9 @@
     <ClCompile Include="searchForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="createDbForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="dataBase.h">
       <FileType>CppForm</FileType>
     </ClInclude>
