@@ -3,6 +3,7 @@
 #include "enteringLines.h"
 #include "deletingLines.h"
 #include "houseIdEditForm.h"
+#include "searchForm.h"
 
 namespace DBnGame {
 
@@ -178,6 +179,7 @@ namespace DBnGame {
 			this->searchButton->Name = L"searchButton";
 			this->searchButton->Size = System::Drawing::Size(198, 20);
 			this->searchButton->Text = L"Поиск Информации по Запросу";
+			this->searchButton->Click += gcnew System::EventHandler(this, &dataBase::searchButton_Click);
 			// 
 			// exitButton
 			// 
@@ -296,6 +298,13 @@ namespace DBnGame {
 		houseIdEditForm^ editFormInstance = gcnew houseIdEditForm();
 
 		editFormInstance->Show();
+	}
+
+
+	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		searchForm^ searchFormInstance = gcnew searchForm();
+
+		searchFormInstance->ShowDialog();
 	}
 };
 }
