@@ -36,6 +36,9 @@
     <ClCompile Include="editForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="searchForm.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainMenu.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="editForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="searchForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
