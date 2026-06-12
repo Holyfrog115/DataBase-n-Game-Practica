@@ -2,6 +2,7 @@
 #include "loginForm.h"
 #include "enteringLines.h"
 #include "deletingLines.h"
+#include "houseIdEditForm.h"
 
 namespace DBnGame {
 
@@ -170,6 +171,7 @@ namespace DBnGame {
 			this->changeHouseDataButton->Name = L"changeHouseDataButton";
 			this->changeHouseDataButton->Size = System::Drawing::Size(296, 22);
 			this->changeHouseDataButton->Text = L"Корректировка Полей Заданной Строки";
+			this->changeHouseDataButton->Click += gcnew System::EventHandler(this, &dataBase::changeHouseDataButton_Click);
 			// 
 			// searchButton
 			// 
@@ -287,6 +289,13 @@ namespace DBnGame {
 		deletingLines^ deletingLinesInstance = gcnew deletingLines();
 
 		deletingLinesInstance->ShowDialog();
+	}
+
+
+	private: System::Void changeHouseDataButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		houseIdEditForm^ editFormInstance = gcnew houseIdEditForm();
+
+		editFormInstance->ShowDialog();
 	}
 };
 }
