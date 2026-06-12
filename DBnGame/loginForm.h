@@ -71,20 +71,19 @@ namespace DBnGame {
 			// loginLabel
 			// 
 			this->loginLabel->AutoSize = true;
-			this->loginLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-																  static_cast<System::Byte>(204)));
+			this->loginLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->loginLabel->Location = System::Drawing::Point(24, 48);
 			this->loginLabel->Name = L"loginLabel";
-			this->loginLabel->Size = System::Drawing::Size(86, 32);
+			this->loginLabel->Size = System::Drawing::Size(80, 30);
 			this->loginLabel->TabIndex = 0;
 			this->loginLabel->Text = L"Логин:";
 			// 
 			// loginTextBox
 			// 
-			this->loginTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18));
+			this->loginTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->loginTextBox->Location = System::Drawing::Point(144, 48);
 			this->loginTextBox->Name = L"loginTextBox";
-			this->loginTextBox->Size = System::Drawing::Size(216, 39);
+			this->loginTextBox->Size = System::Drawing::Size(216, 36);
 			this->loginTextBox->TabIndex = 1;
 			// 
 			// loginButton
@@ -99,19 +98,19 @@ namespace DBnGame {
 			// 
 			// passwordTextBox
 			// 
-			this->passwordTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18));
+			this->passwordTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->passwordTextBox->Location = System::Drawing::Point(144, 120);
 			this->passwordTextBox->Name = L"passwordTextBox";
-			this->passwordTextBox->Size = System::Drawing::Size(216, 39);
+			this->passwordTextBox->Size = System::Drawing::Size(216, 36);
 			this->passwordTextBox->TabIndex = 4;
 			// 
 			// passwordLabel
 			// 
 			this->passwordLabel->AutoSize = true;
-			this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18));
+			this->passwordLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->passwordLabel->Location = System::Drawing::Point(24, 120);
 			this->passwordLabel->Name = L"passwordLabel";
-			this->passwordLabel->Size = System::Drawing::Size(101, 32);
+			this->passwordLabel->Size = System::Drawing::Size(94, 30);
 			this->passwordLabel->TabIndex = 3;
 			this->passwordLabel->Text = L"Пароль:";
 			// 
