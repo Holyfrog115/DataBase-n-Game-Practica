@@ -34,6 +34,10 @@ namespace DBnGame {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^ createButton;
+	protected:
+	private: System::Windows::Forms::TextBox^ dbNameTextBox;
+	private: System::Windows::Forms::Label^ dbNameLabel;
 
 	private:
 		/// <summary>
@@ -49,13 +53,47 @@ namespace DBnGame {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(createDbForm::typeid));
+			this->createButton = (gcnew System::Windows::Forms::Button());
+			this->dbNameTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->dbNameLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
+			// 
+			// createButton
+			// 
+			this->createButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->createButton->Location = System::Drawing::Point(72, 240);
+			this->createButton->Name = L"createButton";
+			this->createButton->Size = System::Drawing::Size(240, 72);
+			this->createButton->TabIndex = 7;
+			this->createButton->Text = L"Создать";
+			this->createButton->UseVisualStyleBackColor = true;
+			// 
+			// dbNameTextBox
+			// 
+			this->dbNameTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->dbNameTextBox->Location = System::Drawing::Point(48, 120);
+			this->dbNameTextBox->Name = L"dbNameTextBox";
+			this->dbNameTextBox->Size = System::Drawing::Size(288, 36);
+			this->dbNameTextBox->TabIndex = 6;
+			// 
+			// dbNameLabel
+			// 
+			this->dbNameLabel->AutoSize = true;
+			this->dbNameLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->dbNameLabel->Location = System::Drawing::Point(24, 72);
+			this->dbNameLabel->Name = L"dbNameLabel";
+			this->dbNameLabel->Size = System::Drawing::Size(345, 30);
+			this->dbNameLabel->TabIndex = 5;
+			this->dbNameLabel->Text = L"Введите Название Базы Данных:";
 			// 
 			// createDbForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 30);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(584, 561);
+			this->ClientSize = System::Drawing::Size(384, 361);
+			this->Controls->Add(this->createButton);
+			this->Controls->Add(this->dbNameTextBox);
+			this->Controls->Add(this->dbNameLabel);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 													  static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
@@ -65,6 +103,7 @@ namespace DBnGame {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Создание Базы Данных";
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
