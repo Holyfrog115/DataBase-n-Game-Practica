@@ -73,6 +73,13 @@ namespace DBnGame {
 
 	private: System::Windows::Forms::ToolStripStatusLabel^ dbModeStatusLabel;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ id;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ commissionYear;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ floors;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ appartments;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ livingArea;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ totalArea;
 
 
 
@@ -93,6 +100,8 @@ namespace DBnGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(dataBase::typeid));
 			this->topBarMenuStrip = (gcnew System::Windows::Forms::MenuStrip());
 			this->createDbButton = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -109,6 +118,13 @@ namespace DBnGame {
 			this->currentDbStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->dbModeStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->commissionYear = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->floors = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->appartments = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->livingArea = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->totalArea = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->topBarMenuStrip->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -116,6 +132,8 @@ namespace DBnGame {
 			// 
 			// topBarMenuStrip
 			// 
+			this->topBarMenuStrip->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(227)), static_cast<System::Int32>(static_cast<System::Byte>(227)),
+																				static_cast<System::Int32>(static_cast<System::Byte>(227)));
 			this->topBarMenuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->createDbButton,
 					this->openDbButton, this->loginButton, this->dataEditButton, this->searchButton, this->exitButton
@@ -129,7 +147,8 @@ namespace DBnGame {
 			// 
 			// createDbButton
 			// 
-			this->createDbButton->BackColor = System::Drawing::SystemColors::Control;
+			this->createDbButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(227)), static_cast<System::Int32>(static_cast<System::Byte>(227)),
+																			   static_cast<System::Int32>(static_cast<System::Byte>(227)));
 			this->createDbButton->Name = L"createDbButton";
 			this->createDbButton->Size = System::Drawing::Size(80, 20);
 			this->createDbButton->Text = L"Создать БД";
@@ -205,11 +224,13 @@ namespace DBnGame {
 			// 
 			// statusStrip1
 			// 
+			this->statusStrip1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(227)), static_cast<System::Int32>(static_cast<System::Byte>(227)),
+																			 static_cast<System::Int32>(static_cast<System::Byte>(227)));
 			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->currentDbStatusLabel,
 					this->dbModeStatusLabel
 			});
-			this->statusStrip1->Location = System::Drawing::Point(0, 539);
+			this->statusStrip1->Location = System::Drawing::Point(0, 530);
 			this->statusStrip1->Name = L"statusStrip1";
 			this->statusStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
 			this->statusStrip1->Size = System::Drawing::Size(909, 22);
@@ -219,7 +240,7 @@ namespace DBnGame {
 			// currentDbStatusLabel
 			// 
 			this->currentDbStatusLabel->Name = L"currentDbStatusLabel";
-			this->currentDbStatusLabel->Size = System::Drawing::Size(669, 17);
+			this->currentDbStatusLabel->Size = System::Drawing::Size(638, 17);
 			this->currentDbStatusLabel->Spring = true;
 			this->currentDbStatusLabel->Text = L"Текущая База Данных: Houses.txt";
 			this->currentDbStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -237,18 +258,88 @@ namespace DBnGame {
 			this->dataGridView1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 																							  | System::Windows::Forms::AnchorStyles::Left)
 																							 | System::Windows::Forms::AnchorStyles::Right));
+			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																		static_cast<System::Byte>(204)));
+			dataGridViewCellStyle1->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(0, 96);
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
+				this->id, this->address,
+					this->commissionYear, this->floors, this->appartments, this->livingArea, this->totalArea
+			});
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle2->BackColor = System::Drawing::SystemColors::Window;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+																		static_cast<System::Byte>(204)));
+			dataGridViewCellStyle2->ForeColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle2;
+			this->dataGridView1->Location = System::Drawing::Point(24, 96);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
-			this->dataGridView1->Size = System::Drawing::Size(912, 432);
+			this->dataGridView1->RowHeadersVisible = false;
+			this->dataGridView1->RowTemplate->Height = 30;
+			this->dataGridView1->Size = System::Drawing::Size(864, 432);
 			this->dataGridView1->TabIndex = 4;
+			// 
+			// id
+			// 
+			this->id->FillWeight = 40;
+			this->id->HeaderText = L"ID";
+			this->id->Name = L"id";
+			this->id->ReadOnly = true;
+			// 
+			// address
+			// 
+			this->address->FillWeight = 150;
+			this->address->HeaderText = L"Адрес Дома";
+			this->address->Name = L"address";
+			this->address->ReadOnly = true;
+			// 
+			// commissionYear
+			// 
+			this->commissionYear->HeaderText = L"Год Сдачи";
+			this->commissionYear->Name = L"commissionYear";
+			this->commissionYear->ReadOnly = true;
+			// 
+			// floors
+			// 
+			this->floors->HeaderText = L"Количество Этажей";
+			this->floors->Name = L"floors";
+			this->floors->ReadOnly = true;
+			// 
+			// appartments
+			// 
+			this->appartments->HeaderText = L"Количество квартир";
+			this->appartments->Name = L"appartments";
+			this->appartments->ReadOnly = true;
+			// 
+			// livingArea
+			// 
+			this->livingArea->HeaderText = L"Общая Жилая Площадь";
+			this->livingArea->Name = L"livingArea";
+			this->livingArea->ReadOnly = true;
+			// 
+			// totalArea
+			// 
+			this->totalArea->HeaderText = L"Общая Площадь Дома";
+			this->totalArea->Name = L"totalArea";
+			this->totalArea->ReadOnly = true;
 			// 
 			// dataBase
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(909, 561);
+			this->ClientSize = System::Drawing::Size(909, 552);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->headerLabel);
@@ -257,7 +348,7 @@ namespace DBnGame {
 													  static_cast<System::Byte>(204)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->topBarMenuStrip;
-			this->MinimumSize = System::Drawing::Size(925, 600);
+			this->MinimumSize = System::Drawing::Size(925, 554);
 			this->Name = L"dataBase";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
