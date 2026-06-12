@@ -34,6 +34,13 @@ namespace DBnGame {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::MaskedTextBox^ idTextBox;
+	protected:
+
+	private: System::Windows::Forms::Label^ idLabel;
+	private: System::Windows::Forms::Button^ continueButton;
+	protected:
+
 
 	private:
 		/// <summary>
@@ -48,11 +55,56 @@ namespace DBnGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"houseIdEditForm";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->idTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->idLabel = (gcnew System::Windows::Forms::Label());
+			this->continueButton = (gcnew System::Windows::Forms::Button());
+			this->SuspendLayout();
+			// 
+			// idTextBox
+			// 
+			this->idTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->idTextBox->Location = System::Drawing::Point(240, 72);
+			this->idTextBox->Name = L"idTextBox";
+			this->idTextBox->Size = System::Drawing::Size(120, 36);
+			this->idTextBox->TabIndex = 5;
+			// 
+			// idLabel
+			// 
+			this->idLabel->AutoSize = true;
+			this->idLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->idLabel->Location = System::Drawing::Point(24, 72);
+			this->idLabel->Name = L"idLabel";
+			this->idLabel->Size = System::Drawing::Size(206, 30);
+			this->idLabel->TabIndex = 4;
+			this->idLabel->Text = L"Введите ID Записи:";
+			// 
+			// continueButton
+			// 
+			this->continueButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->continueButton->Location = System::Drawing::Point(48, 216);
+			this->continueButton->Name = L"continueButton";
+			this->continueButton->Size = System::Drawing::Size(264, 72);
+			this->continueButton->TabIndex = 6;
+			this->continueButton->Text = L"Продолжить";
+			this->continueButton->UseVisualStyleBackColor = true;
+			// 
+			// houseIdEditForm
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(12, 30);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(384, 361);
+			this->Controls->Add(this->continueButton);
+			this->Controls->Add(this->idTextBox);
+			this->Controls->Add(this->idLabel);
+			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
+			this->Name = L"houseIdEditForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Корректировка Полей Строки";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 #pragma endregion
 	};

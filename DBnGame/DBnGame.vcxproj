@@ -179,6 +179,9 @@
     <EmbeddedResource Include="enteringLines.resx">
       <DependentUpon>enteringLines.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="houseIdEditForm.resx">
+      <DependentUpon>houseIdEditForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.h</DependentUpon>
     </EmbeddedResource>
