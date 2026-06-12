@@ -20,12 +20,13 @@ namespace DBnGame {
 	public ref class dataBase : public System::Windows::Forms::Form
 	{
 	public:
-		dataBase(void)
+		dataBase(System::Windows::Forms::Form^ mainMenuForm)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->mainMenuForm = mainMenuForm;
 		}
 
 	protected:
@@ -49,6 +50,9 @@ namespace DBnGame {
 	private: System::Windows::Forms::ToolStripMenuItem^ changeHouseDataButton;
 	private: System::Windows::Forms::ToolStripMenuItem^ searchButton;
 	private: System::Windows::Forms::ToolStripMenuItem^ exitButton;
+
+	private: System::Windows::Forms::Form^ mainMenuForm;
+	private: bool isExiting = false;
 
 
 	protected:
@@ -269,7 +273,9 @@ namespace DBnGame {
 		}
 #pragma endregion
 	private: System::Void dataBase_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
-		Application::Exit();
+		if (!isExiting) {
+			Application::Exit();
+		}
 	}
 
 
