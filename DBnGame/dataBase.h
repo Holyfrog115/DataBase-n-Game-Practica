@@ -190,6 +190,7 @@ namespace DBnGame {
 			this->exitButton->Name = L"exitButton";
 			this->exitButton->Size = System::Drawing::Size(155, 20);
 			this->exitButton->Text = L"Выход из программы БД";
+			this->exitButton->Click += gcnew System::EventHandler(this, &dataBase::exitButton_Click);
 			// 
 			// headerLabel
 			// 
@@ -311,6 +312,15 @@ namespace DBnGame {
 		searchForm^ searchFormInstance = gcnew searchForm();
 
 		searchFormInstance->ShowDialog();
+	}
+
+
+	private: System::Void exitButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->isExiting = true;
+
+		mainMenuForm->Show();
+
+		this->Close();
 	}
 };
 }
