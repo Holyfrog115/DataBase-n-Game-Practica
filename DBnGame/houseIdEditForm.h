@@ -1,4 +1,5 @@
 #pragma once
+#include "editForm.h"
 
 namespace DBnGame {
 
@@ -87,6 +88,7 @@ namespace DBnGame {
 			this->continueButton->TabIndex = 6;
 			this->continueButton->Text = L"Продолжить";
 			this->continueButton->UseVisualStyleBackColor = true;
+			this->continueButton->Click += gcnew System::EventHandler(this, &houseIdEditForm::continueButton_Click);
 			// 
 			// houseIdEditForm
 			// 
@@ -107,5 +109,12 @@ namespace DBnGame {
 
 		}
 #pragma endregion
+	private: System::Void continueButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		editForm^ editFormInstance = gcnew editForm();
+
+		editFormInstance->Show();
+		
+		this->Close();
+	}
 	};
 }

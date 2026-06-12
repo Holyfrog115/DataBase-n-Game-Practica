@@ -180,6 +180,9 @@
     <EmbeddedResource Include="deletingLines.resx">
       <DependentUpon>deletingLines.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="editForm.resx">
+      <DependentUpon>editForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="enteringLines.resx">
       <DependentUpon>enteringLines.h</DependentUpon>
     </EmbeddedResource>
