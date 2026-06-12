@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="dataBase.cpp" />
     <ClCompile Include="deletingLines.cpp" />
+    <ClCompile Include="editForm.cpp" />
     <ClCompile Include="enteringLines.cpp" />
     <ClCompile Include="houseIdEditForm.cpp" />
     <ClCompile Include="loginForm.cpp" />
@@ -154,6 +155,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="deletingLines.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="editForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="enteringLines.h">
