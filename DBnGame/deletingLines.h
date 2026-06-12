@@ -192,7 +192,7 @@ namespace DBnGame {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"deletingLines";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"deletingLines";
+			this->Text = L"Удаление Строк";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
