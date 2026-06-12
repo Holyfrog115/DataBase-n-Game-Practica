@@ -182,6 +182,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="createDbForm.resx">
+      <DependentUpon>createDbForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataBase.resx">
       <DependentUpon>dataBase.h</DependentUpon>
     </EmbeddedResource>

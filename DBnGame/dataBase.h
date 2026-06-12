@@ -4,6 +4,7 @@
 #include "deletingLines.h"
 #include "houseIdEditForm.h"
 #include "searchForm.h"
+#include "createDbForm.h"
 
 namespace DBnGame {
 
@@ -153,12 +154,14 @@ namespace DBnGame {
 			this->createDbButton->Name = L"createDbButton";
 			this->createDbButton->Size = System::Drawing::Size(80, 20);
 			this->createDbButton->Text = L"Создать БД";
+			this->createDbButton->Click += gcnew System::EventHandler(this, &dataBase::createDbButton_Click);
 			// 
 			// openDbButton
 			// 
 			this->openDbButton->Name = L"openDbButton";
 			this->openDbButton->Size = System::Drawing::Size(84, 20);
 			this->openDbButton->Text = L"Открыть БД";
+			this->openDbButton->Click += gcnew System::EventHandler(this, &dataBase::openDbButton_Click);
 			// 
 			// loginButton
 			// 
@@ -241,7 +244,7 @@ namespace DBnGame {
 			// currentDbStatusLabel
 			// 
 			this->currentDbStatusLabel->Name = L"currentDbStatusLabel";
-			this->currentDbStatusLabel->Size = System::Drawing::Size(638, 17);
+			this->currentDbStatusLabel->Size = System::Drawing::Size(669, 17);
 			this->currentDbStatusLabel->Spring = true;
 			this->currentDbStatusLabel->Text = L"Текущая База Данных: Houses.txt";
 			this->currentDbStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -413,6 +416,24 @@ namespace DBnGame {
 		mainMenuForm->Show();
 
 		this->Close();
+	}
+
+
+	private: System::Void createDbButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		createDbForm^ createDbFormInstance = gcnew createDbForm();
+		createDbFormInstance->ShowDialog();
+	}
+
+
+	private: System::Void openDbButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
+
+		openFileDialog->InitialDirectory = System::IO::Path::GetFullPath(System::Windows::Forms::Application::StartupPath);
+		openFileDialog->Filter = "Текстовые файлы (*.txt)|*.txt";
+		openFileDialog->FilterIndex = 1;
+		openFileDialog->RestoreDirectory = true;
+
+		openFileDialog->ShowDialog();
 	}
 };
 }
