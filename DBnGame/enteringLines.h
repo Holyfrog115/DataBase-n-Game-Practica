@@ -34,23 +34,43 @@ namespace DBnGame {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ streetNameLabel;
+	private: System::Windows::Forms::MaskedTextBox^ streetNameTextBox;
+	private: System::Windows::Forms::Button^ addButton;
 	protected:
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox1;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox2;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox3;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox4;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox5;
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox6;
-	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox7;
-	private: System::Windows::Forms::Label^ label7;
-	private: System::Windows::Forms::Button^ button2;
+
+	protected:
+
+
+	private: System::Windows::Forms::MaskedTextBox^ houseNumberTextBox;
+
+	private: System::Windows::Forms::Label^ houseNumberLabel;
+	private: System::Windows::Forms::MaskedTextBox^ commissionYearTextBox;
+
+
+	private: System::Windows::Forms::Label^ commissionYearLabel;
+	private: System::Windows::Forms::MaskedTextBox^ floorsTextBox;
+
+	private: System::Windows::Forms::Label^ floorsLabel;
+
+
+
+	private: System::Windows::Forms::MaskedTextBox^ appartementsTextBox;
+	private: System::Windows::Forms::Label^ appartementsLabel;
+	private: System::Windows::Forms::MaskedTextBox^ livingAreaTextBox;
+
+
+
+
+
+	private: System::Windows::Forms::Label^ livingAreaLabel;
+	private: System::Windows::Forms::MaskedTextBox^ totalAreaTextBox;
+
+
+	private: System::Windows::Forms::Label^ totalAreaLabel;
+	private: System::Windows::Forms::Button^ cancelButton;
+
+
 
 	private:
 		/// <summary>
@@ -66,191 +86,191 @@ namespace DBnGame {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(enteringLines::typeid));
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->maskedTextBox2 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox3 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox4 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox5 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox6 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox7 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->streetNameLabel = (gcnew System::Windows::Forms::Label());
+			this->streetNameTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->addButton = (gcnew System::Windows::Forms::Button());
+			this->houseNumberTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->houseNumberLabel = (gcnew System::Windows::Forms::Label());
+			this->commissionYearTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->commissionYearLabel = (gcnew System::Windows::Forms::Label());
+			this->floorsTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->floorsLabel = (gcnew System::Windows::Forms::Label());
+			this->appartementsTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->appartementsLabel = (gcnew System::Windows::Forms::Label());
+			this->livingAreaTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->livingAreaLabel = (gcnew System::Windows::Forms::Label());
+			this->totalAreaTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->totalAreaLabel = (gcnew System::Windows::Forms::Label());
+			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
-			// label1
+			// streetNameLabel
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label1->Location = System::Drawing::Point(24, 48);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(188, 30);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Название Улицы:";
+			this->streetNameLabel->AutoSize = true;
+			this->streetNameLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->streetNameLabel->Location = System::Drawing::Point(24, 48);
+			this->streetNameLabel->Name = L"streetNameLabel";
+			this->streetNameLabel->Size = System::Drawing::Size(188, 30);
+			this->streetNameLabel->TabIndex = 0;
+			this->streetNameLabel->Text = L"Название Улицы:";
 			// 
-			// maskedTextBox1
+			// streetNameTextBox
 			// 
-			this->maskedTextBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox1->Location = System::Drawing::Point(336, 48);
-			this->maskedTextBox1->Name = L"maskedTextBox1";
-			this->maskedTextBox1->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox1->TabIndex = 1;
+			this->streetNameTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->streetNameTextBox->Location = System::Drawing::Point(336, 48);
+			this->streetNameTextBox->Name = L"streetNameTextBox";
+			this->streetNameTextBox->Size = System::Drawing::Size(216, 36);
+			this->streetNameTextBox->TabIndex = 1;
 			// 
-			// button1
+			// addButton
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->button1->Location = System::Drawing::Point(312, 432);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(216, 72);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Добавить";
-			this->button1->UseVisualStyleBackColor = true;
+			this->addButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->addButton->Location = System::Drawing::Point(312, 432);
+			this->addButton->Name = L"addButton";
+			this->addButton->Size = System::Drawing::Size(240, 72);
+			this->addButton->TabIndex = 2;
+			this->addButton->Text = L"Добавить";
+			this->addButton->UseVisualStyleBackColor = true;
 			// 
-			// maskedTextBox2
+			// houseNumberTextBox
 			// 
-			this->maskedTextBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox2->Location = System::Drawing::Point(336, 96);
-			this->maskedTextBox2->Name = L"maskedTextBox2";
-			this->maskedTextBox2->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox2->TabIndex = 4;
+			this->houseNumberTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->houseNumberTextBox->Location = System::Drawing::Point(336, 96);
+			this->houseNumberTextBox->Name = L"houseNumberTextBox";
+			this->houseNumberTextBox->Size = System::Drawing::Size(216, 36);
+			this->houseNumberTextBox->TabIndex = 4;
 			// 
-			// label2
+			// houseNumberLabel
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label2->Location = System::Drawing::Point(24, 96);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(147, 30);
-			this->label2->TabIndex = 3;
-			this->label2->Text = L"Номер Дома:";
+			this->houseNumberLabel->AutoSize = true;
+			this->houseNumberLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->houseNumberLabel->Location = System::Drawing::Point(24, 96);
+			this->houseNumberLabel->Name = L"houseNumberLabel";
+			this->houseNumberLabel->Size = System::Drawing::Size(147, 30);
+			this->houseNumberLabel->TabIndex = 3;
+			this->houseNumberLabel->Text = L"Номер Дома:";
 			// 
-			// maskedTextBox3
+			// commissionYearTextBox
 			// 
-			this->maskedTextBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox3->Location = System::Drawing::Point(336, 144);
-			this->maskedTextBox3->Name = L"maskedTextBox3";
-			this->maskedTextBox3->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox3->TabIndex = 6;
+			this->commissionYearTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->commissionYearTextBox->Location = System::Drawing::Point(336, 144);
+			this->commissionYearTextBox->Name = L"commissionYearTextBox";
+			this->commissionYearTextBox->Size = System::Drawing::Size(216, 36);
+			this->commissionYearTextBox->TabIndex = 6;
 			// 
-			// label3
+			// commissionYearLabel
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label3->Location = System::Drawing::Point(24, 144);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(291, 30);
-			this->label3->TabIndex = 5;
-			this->label3->Text = L"Год Сдачи в Эксплуатацию:";
+			this->commissionYearLabel->AutoSize = true;
+			this->commissionYearLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->commissionYearLabel->Location = System::Drawing::Point(24, 144);
+			this->commissionYearLabel->Name = L"commissionYearLabel";
+			this->commissionYearLabel->Size = System::Drawing::Size(291, 30);
+			this->commissionYearLabel->TabIndex = 5;
+			this->commissionYearLabel->Text = L"Год Сдачи в Эксплуатацию:";
 			// 
-			// maskedTextBox4
+			// floorsTextBox
 			// 
-			this->maskedTextBox4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox4->Location = System::Drawing::Point(336, 192);
-			this->maskedTextBox4->Name = L"maskedTextBox4";
-			this->maskedTextBox4->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox4->TabIndex = 8;
+			this->floorsTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->floorsTextBox->Location = System::Drawing::Point(336, 192);
+			this->floorsTextBox->Name = L"floorsTextBox";
+			this->floorsTextBox->Size = System::Drawing::Size(216, 36);
+			this->floorsTextBox->TabIndex = 8;
 			// 
-			// label4
+			// floorsLabel
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label4->Location = System::Drawing::Point(24, 192);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(218, 30);
-			this->label4->TabIndex = 7;
-			this->label4->Text = L"Количество Этажей:";
+			this->floorsLabel->AutoSize = true;
+			this->floorsLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->floorsLabel->Location = System::Drawing::Point(24, 192);
+			this->floorsLabel->Name = L"floorsLabel";
+			this->floorsLabel->Size = System::Drawing::Size(218, 30);
+			this->floorsLabel->TabIndex = 7;
+			this->floorsLabel->Text = L"Количество Этажей:";
 			// 
-			// maskedTextBox5
+			// appartementsTextBox
 			// 
-			this->maskedTextBox5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox5->Location = System::Drawing::Point(336, 240);
-			this->maskedTextBox5->Name = L"maskedTextBox5";
-			this->maskedTextBox5->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox5->TabIndex = 10;
+			this->appartementsTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->appartementsTextBox->Location = System::Drawing::Point(336, 240);
+			this->appartementsTextBox->Name = L"appartementsTextBox";
+			this->appartementsTextBox->Size = System::Drawing::Size(216, 36);
+			this->appartementsTextBox->TabIndex = 10;
 			// 
-			// label5
+			// appartementsLabel
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label5->Location = System::Drawing::Point(24, 240);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(227, 30);
-			this->label5->TabIndex = 9;
-			this->label5->Text = L"Количество Квартир:";
+			this->appartementsLabel->AutoSize = true;
+			this->appartementsLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->appartementsLabel->Location = System::Drawing::Point(24, 240);
+			this->appartementsLabel->Name = L"appartementsLabel";
+			this->appartementsLabel->Size = System::Drawing::Size(227, 30);
+			this->appartementsLabel->TabIndex = 9;
+			this->appartementsLabel->Text = L"Количество Квартир:";
 			// 
-			// maskedTextBox6
+			// livingAreaTextBox
 			// 
-			this->maskedTextBox6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox6->Location = System::Drawing::Point(336, 288);
-			this->maskedTextBox6->Name = L"maskedTextBox6";
-			this->maskedTextBox6->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox6->TabIndex = 12;
+			this->livingAreaTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->livingAreaTextBox->Location = System::Drawing::Point(336, 288);
+			this->livingAreaTextBox->Name = L"livingAreaTextBox";
+			this->livingAreaTextBox->Size = System::Drawing::Size(216, 36);
+			this->livingAreaTextBox->TabIndex = 12;
 			// 
-			// label6
+			// livingAreaLabel
 			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label6->Location = System::Drawing::Point(24, 288);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(259, 30);
-			this->label6->TabIndex = 11;
-			this->label6->Text = L"Общая Жилая Площадь:";
+			this->livingAreaLabel->AutoSize = true;
+			this->livingAreaLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->livingAreaLabel->Location = System::Drawing::Point(24, 288);
+			this->livingAreaLabel->Name = L"livingAreaLabel";
+			this->livingAreaLabel->Size = System::Drawing::Size(259, 30);
+			this->livingAreaLabel->TabIndex = 11;
+			this->livingAreaLabel->Text = L"Общая Жилая Площадь:";
 			// 
-			// maskedTextBox7
+			// totalAreaTextBox
 			// 
-			this->maskedTextBox7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->maskedTextBox7->Location = System::Drawing::Point(336, 336);
-			this->maskedTextBox7->Name = L"maskedTextBox7";
-			this->maskedTextBox7->Size = System::Drawing::Size(216, 36);
-			this->maskedTextBox7->TabIndex = 14;
+			this->totalAreaTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->totalAreaTextBox->Location = System::Drawing::Point(336, 336);
+			this->totalAreaTextBox->Name = L"totalAreaTextBox";
+			this->totalAreaTextBox->Size = System::Drawing::Size(216, 36);
+			this->totalAreaTextBox->TabIndex = 14;
 			// 
-			// label7
+			// totalAreaLabel
 			// 
-			this->label7->AutoSize = true;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->label7->Location = System::Drawing::Point(24, 336);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(247, 30);
-			this->label7->TabIndex = 13;
-			this->label7->Text = L"Общая Площадь Дома:";
+			this->totalAreaLabel->AutoSize = true;
+			this->totalAreaLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->totalAreaLabel->Location = System::Drawing::Point(24, 336);
+			this->totalAreaLabel->Name = L"totalAreaLabel";
+			this->totalAreaLabel->Size = System::Drawing::Size(247, 30);
+			this->totalAreaLabel->TabIndex = 13;
+			this->totalAreaLabel->Text = L"Общая Площадь Дома:";
 			// 
-			// button2
+			// cancelButton
 			// 
-			this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
-			this->button2->Location = System::Drawing::Point(48, 432);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(216, 72);
-			this->button2->TabIndex = 15;
-			this->button2->Text = L"Отменить Ввод";
-			this->button2->UseVisualStyleBackColor = true;
+			this->cancelButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
+			this->cancelButton->Location = System::Drawing::Point(24, 432);
+			this->cancelButton->Name = L"cancelButton";
+			this->cancelButton->Size = System::Drawing::Size(240, 72);
+			this->cancelButton->TabIndex = 15;
+			this->cancelButton->Text = L"Отменить Ввод";
+			this->cancelButton->UseVisualStyleBackColor = true;
 			// 
 			// enteringLines
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(584, 561);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->maskedTextBox7);
-			this->Controls->Add(this->label7);
-			this->Controls->Add(this->maskedTextBox6);
-			this->Controls->Add(this->label6);
-			this->Controls->Add(this->maskedTextBox5);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->maskedTextBox4);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->maskedTextBox3);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->maskedTextBox2);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->maskedTextBox1);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->cancelButton);
+			this->Controls->Add(this->totalAreaTextBox);
+			this->Controls->Add(this->totalAreaLabel);
+			this->Controls->Add(this->livingAreaTextBox);
+			this->Controls->Add(this->livingAreaLabel);
+			this->Controls->Add(this->appartementsTextBox);
+			this->Controls->Add(this->appartementsLabel);
+			this->Controls->Add(this->floorsTextBox);
+			this->Controls->Add(this->floorsLabel);
+			this->Controls->Add(this->commissionYearTextBox);
+			this->Controls->Add(this->commissionYearLabel);
+			this->Controls->Add(this->houseNumberTextBox);
+			this->Controls->Add(this->houseNumberLabel);
+			this->Controls->Add(this->addButton);
+			this->Controls->Add(this->streetNameTextBox);
+			this->Controls->Add(this->streetNameLabel);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 													  static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
