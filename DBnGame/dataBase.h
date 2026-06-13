@@ -55,6 +55,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Form^ mainMenuForm;
 	private: bool isExiting = false;
 	private: String^ currentDbFilePath = "";
+	private: String^ currentDbName = "";
 
 
 	protected:
@@ -419,11 +420,17 @@ namespace DBnGame {
 	}
 
 
+	private: System::Void updateDbNameLabel() {
+		this->currentDbStatusLabel->Text = "Текущая База Данных: " + this->currentDbName;
+	}
+
+
 	private: System::Void createDbButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		createDbForm^ createDbFormInstance = gcnew createDbForm();
 		if (createDbFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-			this->currentDbFilePath = createDbFormInstance->currentDbName;
-			this->currentDbStatusLabel->Text = "Текущая База Данных: " + createDbFormInstance->currentDbName;
+			this->currentDbName = createDbFormInstance->currentDbName;
+			this->currentDbFilePath = createDbFormInstance->currentDbfilePath;
+			updateDbNameLabel();
 		}
 	}
 
@@ -434,9 +441,12 @@ namespace DBnGame {
 		openFileDialog->InitialDirectory = System::IO::Path::GetFullPath(System::Windows::Forms::Application::StartupPath) + "dataBases/";
 		openFileDialog->Filter = "Текстовые файлы (*.txt)|*.txt";
 		openFileDialog->FilterIndex = 1;
-		openFileDialog->RestoreDirectory = true;
 
-		openFileDialog->ShowDialog();
+		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			this->currentDbFilePath = openFileDialog->FileName;
+			this->currentDbName = openFileDialog->SafeFileName;
+			updateDbNameLabel();
+		}
 	}
 };
 }
