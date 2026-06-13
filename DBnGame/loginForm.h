@@ -95,6 +95,7 @@ namespace DBnGame {
 			this->loginButton->TabIndex = 2;
 			this->loginButton->Text = L"Войти";
 			this->loginButton->UseVisualStyleBackColor = true;
+			this->loginButton->Click += gcnew System::EventHandler(this, &loginForm::loginButton_Click);
 			// 
 			// passwordTextBox
 			// 
@@ -136,5 +137,17 @@ namespace DBnGame {
 
 		}
 #pragma endregion
-	};
+	private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (String::IsNullOrWhiteSpace(this->loginTextBox->Text) || String::IsNullOrWhiteSpace(this->passwordTextBox->Text)) {
+			MessageBox::Show("Пожалуйста, введите логин и пароль.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else if (this->loginTextBox->Text == "admin" && this->passwordTextBox->Text == "1234") {
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+			this->Close();
+		}
+		else {
+			MessageBox::Show("Неверный логин или пароль.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+};
 }

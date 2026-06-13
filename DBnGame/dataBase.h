@@ -54,6 +54,7 @@ namespace DBnGame {
 
 	private: System::Windows::Forms::Form^ mainMenuForm;
 	private: bool isExiting = false;
+	private: bool isAdminMode = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 
