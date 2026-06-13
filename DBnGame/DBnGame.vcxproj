@@ -147,6 +147,7 @@
     <ClCompile Include="deletingLines.cpp" />
     <ClCompile Include="editForm.cpp" />
     <ClCompile Include="enteringLines.cpp" />
+    <ClCompile Include="House.cpp" />
     <ClCompile Include="houseIdEditForm.cpp" />
     <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="mainMenu.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="enteringLines.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="House.h" />
     <ClInclude Include="houseIdEditForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

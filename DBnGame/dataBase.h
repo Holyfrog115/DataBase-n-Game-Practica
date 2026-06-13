@@ -5,6 +5,7 @@
 #include "houseIdEditForm.h"
 #include "searchForm.h"
 #include "createDbForm.h"
+#include "House.h"
 
 namespace DBnGame {
 
@@ -57,6 +58,7 @@ namespace DBnGame {
 	private: bool isAdminMode = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
+	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
 
 
 	protected:

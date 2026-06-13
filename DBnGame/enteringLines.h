@@ -249,6 +249,7 @@ namespace DBnGame {
 			this->cancelButton->TabIndex = 15;
 			this->cancelButton->Text = L"Отменить Ввод";
 			this->cancelButton->UseVisualStyleBackColor = true;
+			this->cancelButton->Click += gcnew System::EventHandler(this, &enteringLines::cancelButton_Click);
 			// 
 			// enteringLines
 			// 
@@ -283,5 +284,8 @@ namespace DBnGame {
 
 		}
 #pragma endregion
-	};
+	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+};
 }
