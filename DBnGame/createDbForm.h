@@ -110,6 +110,17 @@ namespace DBnGame {
 
 		}
 #pragma endregion
+	private: System::Void createDb(String^ filePath) {
+		this->currentDbName = this->dbNameTextBox->Text + ".txt";
+
+		File::Create(filePath)->Close();
+
+		this->DialogResult = System::Windows::Forms::DialogResult::OK;
+
+		this->Close();
+	}
+
+
 	private: System::Void createButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (String::IsNullOrWhiteSpace(this->dbNameTextBox->Text)) {
 			MessageBox::Show(this, "Имя базы данных не может быть пустым.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -119,13 +130,18 @@ namespace DBnGame {
 		}
 		else {
 			String^ filePath = Path::Combine(Application::StartupPath, "dataBases/" + this->dbNameTextBox->Text + ".txt");
-			this->currentDbName = this->dbNameTextBox->Text + ".txt";
-
-			File::Create(filePath)->Close();
-
-			this->DialogResult = System::Windows::Forms::DialogResult::OK;
-
-			this->Close();
+			
+			if (File::Exists(filePath)) {
+				if (MessageBox::Show(this, "База данных с таким именем уже существует.\nПерезаписать Базу Данных?",
+									 "Ошибка", MessageBoxButtons::YesNo, MessageBoxIcon::Error)
+									 == System::Windows::Forms::DialogResult::Yes) {
+					createDb(filePath);
+				}
+			}
+			else {
+				createDb(filePath);
+			}
+			
 		}
 	}
 	};
