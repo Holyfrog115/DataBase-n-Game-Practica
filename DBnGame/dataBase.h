@@ -401,7 +401,7 @@ namespace DBnGame {
 
 
 	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		enteringLines^ enteringLinesFormInstance = gcnew enteringLines();
+		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->currentDbFilePath);
 
 		enteringLinesFormInstance->ShowDialog();
 	}

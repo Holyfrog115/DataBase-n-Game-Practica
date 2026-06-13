@@ -8,6 +8,7 @@ namespace DBnGame {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for enteringLines
@@ -15,12 +16,13 @@ namespace DBnGame {
 	public ref class enteringLines : public System::Windows::Forms::Form
 	{
 	public:
-		enteringLines(void)
+		enteringLines(String^ filePath)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->filePath = filePath;
 		}
 
 	protected:
@@ -70,6 +72,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ totalAreaLabel;
 	private: System::Windows::Forms::Button^ cancelButton;
 
+	private: String^ filePath;
 
 
 	private:
@@ -131,6 +134,7 @@ namespace DBnGame {
 			this->addButton->TabIndex = 2;
 			this->addButton->Text = L"Добавить";
 			this->addButton->UseVisualStyleBackColor = true;
+			this->addButton->Click += gcnew System::EventHandler(this, &enteringLines::addButton_Click);
 			// 
 			// houseNumberTextBox
 			// 
@@ -285,7 +289,27 @@ namespace DBnGame {
 		}
 #pragma endregion
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Закрытие формы без сохранения данных
 		this->Close();
+	}
+
+
+	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Проверка на пустые поля
+		bool areEmpty = String::IsNullOrWhiteSpace(streetNameTextBox->Text) || String::IsNullOrWhiteSpace(houseNumberTextBox->Text) ||
+			String::IsNullOrWhiteSpace(commissionYearTextBox->Text) || String::IsNullOrWhiteSpace(floorsTextBox->Text) ||
+			String::IsNullOrWhiteSpace(appartementsTextBox->Text) || String::IsNullOrWhiteSpace(livingAreaTextBox->Text) ||
+			String::IsNullOrWhiteSpace(totalAreaTextBox->Text);
+
+		if (!areEmpty) {
+			StreamWriter^ writer = gcnew StreamWriter(this->filePath, true, System::Text::Encoding::UTF8);
+
+			// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
+			writer->WriteLine(streetNameTextBox->Text + ";" + houseNumberTextBox->Text + ";" + commissionYearTextBox->Text + ";" +
+							  floorsTextBox->Text + ";" + appartementsTextBox->Text + ";" + livingAreaTextBox->Text + ";" + totalAreaTextBox->Text);
+
+			writer->Close();
+		}
 	}
 };
 }
