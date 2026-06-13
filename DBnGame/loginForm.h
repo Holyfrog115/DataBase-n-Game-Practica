@@ -104,6 +104,7 @@ namespace DBnGame {
 			this->passwordTextBox->Name = L"passwordTextBox";
 			this->passwordTextBox->Size = System::Drawing::Size(216, 36);
 			this->passwordTextBox->TabIndex = 4;
+			this->passwordTextBox->UseSystemPasswordChar = true;
 			// 
 			// passwordLabel
 			// 

@@ -145,7 +145,7 @@ namespace DBnGame {
 			this->topBarMenuStrip->Location = System::Drawing::Point(0, 0);
 			this->topBarMenuStrip->Name = L"topBarMenuStrip";
 			this->topBarMenuStrip->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			this->topBarMenuStrip->Size = System::Drawing::Size(909, 24);
+			this->topBarMenuStrip->Size = System::Drawing::Size(934, 24);
 			this->topBarMenuStrip->TabIndex = 1;
 			this->topBarMenuStrip->Text = L"menuStrip1";
 			// 
@@ -178,6 +178,7 @@ namespace DBnGame {
 				this->enterHouseButton,
 					this->deleteHouseButton, this->changeHouseDataButton
 			});
+			this->dataEditButton->Enabled = false;
 			this->dataEditButton->Name = L"dataEditButton";
 			this->dataEditButton->Size = System::Drawing::Size(187, 20);
 			this->dataEditButton->Text = L"Ввод и Корректировка Данных";
@@ -222,7 +223,7 @@ namespace DBnGame {
 			this->headerLabel->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->headerLabel->AutoSize = true;
 			this->headerLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 16, System::Drawing::FontStyle::Bold));
-			this->headerLabel->Location = System::Drawing::Point(262, 48);
+			this->headerLabel->Location = System::Drawing::Point(275, 48);
 			this->headerLabel->Name = L"headerLabel";
 			this->headerLabel->Size = System::Drawing::Size(410, 30);
 			this->headerLabel->TabIndex = 2;
@@ -236,17 +237,17 @@ namespace DBnGame {
 				this->currentDbStatusLabel,
 					this->dbModeStatusLabel
 			});
-			this->statusStrip1->Location = System::Drawing::Point(0, 530);
+			this->statusStrip1->Location = System::Drawing::Point(0, 509);
 			this->statusStrip1->Name = L"statusStrip1";
 			this->statusStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			this->statusStrip1->Size = System::Drawing::Size(909, 22);
+			this->statusStrip1->Size = System::Drawing::Size(934, 22);
 			this->statusStrip1->TabIndex = 3;
 			this->statusStrip1->Text = L"statusStrip1";
 			// 
 			// currentDbStatusLabel
 			// 
 			this->currentDbStatusLabel->Name = L"currentDbStatusLabel";
-			this->currentDbStatusLabel->Size = System::Drawing::Size(638, 17);
+			this->currentDbStatusLabel->Size = System::Drawing::Size(694, 17);
 			this->currentDbStatusLabel->Spring = true;
 			this->currentDbStatusLabel->Text = L"Текущая База Данных:";
 			this->currentDbStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -294,7 +295,7 @@ namespace DBnGame {
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->RowTemplate->Height = 30;
-			this->dataGridView1->Size = System::Drawing::Size(864, 432);
+			this->dataGridView1->Size = System::Drawing::Size(889, 411);
 			this->dataGridView1->TabIndex = 4;
 			// 
 			// id
@@ -345,7 +346,7 @@ namespace DBnGame {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(909, 552);
+			this->ClientSize = System::Drawing::Size(934, 531);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->headerLabel);
@@ -354,7 +355,7 @@ namespace DBnGame {
 													  static_cast<System::Byte>(204)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->topBarMenuStrip;
-			this->MinimumSize = System::Drawing::Size(925, 554);
+			this->MinimumSize = System::Drawing::Size(950, 570);
 			this->Name = L"dataBase";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -380,7 +381,20 @@ namespace DBnGame {
 	private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		loginForm^ loginFormInstance = gcnew loginForm();
 
-		loginFormInstance->ShowDialog();
+		if (!this->isAdminMode) {
+			if (loginFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				this->isAdminMode = !isAdminMode;
+				updateCurrentMode();
+				updateLoginButton();
+				updateButtonsAccess();
+			}
+		}
+		else {
+			this->isAdminMode = !isAdminMode;
+			updateCurrentMode();
+			updateLoginButton();
+			updateButtonsAccess();
+		}
 	}
 
 
@@ -423,6 +437,36 @@ namespace DBnGame {
 
 	private: System::Void updateDbNameLabel() {
 		this->currentDbStatusLabel->Text = "Текущая База Данных: " + this->currentDbName;
+	}
+
+
+	private: System::Void updateCurrentMode() {
+		if (this->isAdminMode) {
+			dbModeStatusLabel->Text = "Текущий Режим Работы: Администратор";
+		}
+		else {
+			dbModeStatusLabel->Text = "Текущий Режим Работы: Пользователь";
+		}
+	}
+
+
+	private: System::Void updateLoginButton() {
+		if (this->isAdminMode) {
+			loginButton->Text = "Выйти из Режима Администратора";
+		}
+		else {
+			loginButton->Text = "Войти в Режим Администратора";
+		}
+	}
+
+
+	private: System::Void updateButtonsAccess() {
+		if (this->isAdminMode) {
+			dataEditButton->Enabled = true;
+		}
+		else {
+			dataEditButton->Enabled = false;
+		}
 	}
 
 
