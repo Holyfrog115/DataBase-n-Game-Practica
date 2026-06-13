@@ -1,4 +1,5 @@
 #pragma once
+#include "House.h"
 
 namespace DBnGame {
 
@@ -16,13 +17,14 @@ namespace DBnGame {
 	public ref class enteringLines : public System::Windows::Forms::Form
 	{
 	public:
-		enteringLines(String^ filePath)
+		enteringLines(String^ filePath, System::Windows::Forms::DataGridView^ targetGrid)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 			this->filePath = filePath;
+			this->targetGrid = targetGrid;
 		}
 
 	protected:
@@ -73,6 +75,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Button^ cancelButton;
 
 	private: String^ filePath;
+	private: System::Windows::Forms::DataGridView^ targetGrid;
 
 
 	private:
@@ -309,6 +312,12 @@ namespace DBnGame {
 							  floorsTextBox->Text + ";" + appartementsTextBox->Text + ";" + livingAreaTextBox->Text + ";" + totalAreaTextBox->Text);
 
 			writer->Close();
+
+			this->targetGrid->Rows->Add(0, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
+										appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
+		}
+		else {
+			MessageBox::Show("Поля не могут быть пустыми.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 };

@@ -79,7 +79,8 @@ namespace DBnGame {
 	private: System::Windows::Forms::ToolStripStatusLabel^ currentDbStatusLabel;
 
 	private: System::Windows::Forms::ToolStripStatusLabel^ dbModeStatusLabel;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridView^ dbGridView;
+
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ id;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ commissionYear;
@@ -124,7 +125,7 @@ namespace DBnGame {
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->currentDbStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->dbModeStatusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->dbGridView = (gcnew System::Windows::Forms::DataGridView());
 			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->commissionYear = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -134,7 +135,7 @@ namespace DBnGame {
 			this->totalArea = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->topBarMenuStrip->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dbGridView))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// topBarMenuStrip
@@ -264,13 +265,13 @@ namespace DBnGame {
 			this->dbModeStatusLabel->Text = L"Текущий Режим Работы: Пользователь";
 			this->dbModeStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			// 
-			// dataGridView1
+			// dbGridView
 			// 
-			this->dataGridView1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-																							  | System::Windows::Forms::AnchorStyles::Left)
-																							 | System::Windows::Forms::AnchorStyles::Right));
-			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
-			this->dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			this->dbGridView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+																						   | System::Windows::Forms::AnchorStyles::Left)
+																						  | System::Windows::Forms::AnchorStyles::Right));
+			this->dbGridView->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dbGridView->BackgroundColor = System::Drawing::Color::White;
 			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
 			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
 			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -279,9 +280,9 @@ namespace DBnGame {
 			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
 			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
 			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
+			this->dbGridView->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this->dbGridView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dbGridView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
 				this->id, this->address,
 					this->commissionYear, this->floors, this->appartments, this->livingArea, this->totalArea
 			});
@@ -293,14 +294,14 @@ namespace DBnGame {
 			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::SystemColors::Highlight;
 			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
 			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle2;
-			this->dataGridView1->Location = System::Drawing::Point(24, 96);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->ReadOnly = true;
-			this->dataGridView1->RowHeadersVisible = false;
-			this->dataGridView1->RowTemplate->Height = 30;
-			this->dataGridView1->Size = System::Drawing::Size(889, 411);
-			this->dataGridView1->TabIndex = 4;
+			this->dbGridView->DefaultCellStyle = dataGridViewCellStyle2;
+			this->dbGridView->Location = System::Drawing::Point(24, 96);
+			this->dbGridView->Name = L"dbGridView";
+			this->dbGridView->ReadOnly = true;
+			this->dbGridView->RowHeadersVisible = false;
+			this->dbGridView->RowTemplate->Height = 30;
+			this->dbGridView->Size = System::Drawing::Size(889, 411);
+			this->dbGridView->TabIndex = 4;
 			// 
 			// id
 			// 
@@ -351,7 +352,7 @@ namespace DBnGame {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(934, 531);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->dbGridView);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->headerLabel);
 			this->Controls->Add(this->topBarMenuStrip);
@@ -369,7 +370,7 @@ namespace DBnGame {
 			this->topBarMenuStrip->PerformLayout();
 			this->statusStrip1->ResumeLayout(false);
 			this->statusStrip1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dbGridView))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -403,7 +404,7 @@ namespace DBnGame {
 
 
 	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->currentDbFilePath);
+		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->currentDbFilePath, this->dbGridView);
 
 		enteringLinesFormInstance->ShowDialog();
 	}

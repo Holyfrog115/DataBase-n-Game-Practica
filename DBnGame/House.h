@@ -7,6 +7,7 @@ private:
 	int houseNumber;
 	int commissionYear;
 	int floorsNumber;
+	int appartmentsNumber;
 	double livingArea;
 	double totalArea;
 
@@ -21,12 +22,13 @@ public:
 		totalArea = 0.0;
 	}
 
-	House(int id, System::String^ address, int houseNumber, int commissionYear, int floorsNumber, double livingArea, double totalArea) {
+	House(int id, System::String^ address, int houseNumber, int commissionYear, int floorsNumber, int appartmentsNumber, double livingArea, double totalArea) {
 		this->id = id;
 		this->address = address;
 		this->houseNumber = houseNumber;
 		this->commissionYear = commissionYear;
 		this->floorsNumber = floorsNumber;
+		this->appartmentsNumber = appartmentsNumber;
 		this->livingArea = livingArea;
 		this->totalArea = totalArea;
 	}
@@ -51,6 +53,10 @@ public:
 		this->floorsNumber = floorsNumber;
 	}
 
+	System::Void setAppartmentsNumber(int appartmentsNumber) {
+		this->appartmentsNumber = appartmentsNumber;
+	}
+
 	System::Void setLivingArea(double livingArea) {
 		this->livingArea = livingArea;
 	}
@@ -73,6 +79,10 @@ public:
 
 	int getFloorsNumber() {
 		return floorsNumber;
+	}
+
+	int getAppartmentsNumber() {
+		return appartmentsNumber;
 	}
 
 	double getLivingArea() {
