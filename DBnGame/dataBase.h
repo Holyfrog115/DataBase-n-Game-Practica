@@ -56,6 +56,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Form^ mainMenuForm;
 	private: bool isExiting = false;
 	private: bool isAdminMode = false;
+	private: bool isDbOpen = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
@@ -208,6 +209,7 @@ namespace DBnGame {
 			// 
 			// searchButton
 			// 
+			this->searchButton->Enabled = false;
 			this->searchButton->Name = L"searchButton";
 			this->searchButton->Size = System::Drawing::Size(198, 20);
 			this->searchButton->Text = L"Поиск Информации по Запросу";
@@ -463,7 +465,10 @@ namespace DBnGame {
 
 
 	private: System::Void updateButtonsAccess() {
-		if (this->isAdminMode) {
+		if (this->isDbOpen) {
+			searchButton->Enabled = true;
+		}
+		if (this->isAdminMode && this->isDbOpen) {
 			dataEditButton->Enabled = true;
 		}
 		else {
@@ -477,7 +482,9 @@ namespace DBnGame {
 		if (createDbFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			this->currentDbName = createDbFormInstance->currentDbName;
 			this->currentDbFilePath = createDbFormInstance->currentDbfilePath;
+			this->isDbOpen = true;
 			updateDbNameLabel();
+			updateButtonsAccess();
 		}
 	}
 
@@ -492,7 +499,9 @@ namespace DBnGame {
 		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			this->currentDbFilePath = openFileDialog->FileName;
 			this->currentDbName = openFileDialog->SafeFileName;
+			this->isDbOpen = true;
 			updateDbNameLabel();
+			updateButtonsAccess();
 		}
 	}
 };
