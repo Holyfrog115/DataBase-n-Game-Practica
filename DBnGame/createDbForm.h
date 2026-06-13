@@ -8,6 +8,7 @@ namespace DBnGame {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for createDbForm
@@ -67,6 +68,7 @@ namespace DBnGame {
 			this->createButton->TabIndex = 7;
 			this->createButton->Text = L"Создать";
 			this->createButton->UseVisualStyleBackColor = true;
+			this->createButton->Click += gcnew System::EventHandler(this, &createDbForm::createButton_Click);
 			// 
 			// dbNameTextBox
 			// 
@@ -107,5 +109,18 @@ namespace DBnGame {
 
 		}
 #pragma endregion
+	private: System::Void createButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (String::IsNullOrWhiteSpace(this->dbNameTextBox->Text)) {
+			MessageBox::Show(this, "Имя базы данных не может быть пустым.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else if (this->dbNameTextBox->Text->Contains(".txt")) {
+			MessageBox::Show(this, "Имя базы данных не должно содержать расширение .txt.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else {
+			String^ filePath = Path::Combine(Application::StartupPath, "dataBases/" + this->dbNameTextBox->Text + ".txt");
+			
+			File::Create(filePath)->Close();
+		}
+	}
 	};
 }
