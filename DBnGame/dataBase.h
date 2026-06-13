@@ -431,7 +431,7 @@ namespace DBnGame {
 	private: System::Void openDbButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
 
-		openFileDialog->InitialDirectory = System::IO::Path::GetFullPath(System::Windows::Forms::Application::StartupPath);
+		openFileDialog->InitialDirectory = System::IO::Path::GetFullPath(System::Windows::Forms::Application::StartupPath) + "dataBases/";
 		openFileDialog->Filter = "Текстовые файлы (*.txt)|*.txt";
 		openFileDialog->FilterIndex = 1;
 		openFileDialog->RestoreDirectory = true;
