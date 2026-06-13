@@ -40,6 +40,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::TextBox^ dbNameTextBox;
 	private: System::Windows::Forms::Label^ dbNameLabel;
 	public: String^ currentDbName;
+	public: String^ currentDbfilePath;
 
 	private:
 		/// <summary>
@@ -110,10 +111,10 @@ namespace DBnGame {
 
 		}
 #pragma endregion
-	private: System::Void createDb(String^ filePath) {
+	private: System::Void createDb() {
 		this->currentDbName = this->dbNameTextBox->Text + ".txt";
 
-		File::Create(filePath)->Close();
+		File::Create(this->currentDbfilePath)->Close();
 
 		this->DialogResult = System::Windows::Forms::DialogResult::OK;
 
@@ -129,17 +130,17 @@ namespace DBnGame {
 			MessageBox::Show(this, "Имя базы данных не должно содержать расширение .txt.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
-			String^ filePath = Path::Combine(Application::StartupPath, "dataBases/" + this->dbNameTextBox->Text + ".txt");
+			this->currentDbfilePath = Path::Combine(Application::StartupPath, "dataBases/" + this->dbNameTextBox->Text + ".txt");
 			
-			if (File::Exists(filePath)) {
+			if (File::Exists(this->currentDbfilePath)) {
 				if (MessageBox::Show(this, "База данных с таким именем уже существует.\nПерезаписать Базу Данных?",
 									 "Ошибка", MessageBoxButtons::YesNo, MessageBoxIcon::Error)
 									 == System::Windows::Forms::DialogResult::Yes) {
-					createDb(filePath);
+					createDb();
 				}
 			}
 			else {
-				createDb(filePath);
+				createDb();
 			}
 			
 		}
