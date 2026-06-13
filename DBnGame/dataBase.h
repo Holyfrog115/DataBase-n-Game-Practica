@@ -244,9 +244,9 @@ namespace DBnGame {
 			// currentDbStatusLabel
 			// 
 			this->currentDbStatusLabel->Name = L"currentDbStatusLabel";
-			this->currentDbStatusLabel->Size = System::Drawing::Size(669, 17);
+			this->currentDbStatusLabel->Size = System::Drawing::Size(638, 17);
 			this->currentDbStatusLabel->Spring = true;
-			this->currentDbStatusLabel->Text = L"Текущая База Данных: Houses.txt";
+			this->currentDbStatusLabel->Text = L"Текущая База Данных:";
 			this->currentDbStatusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// dbModeStatusLabel
@@ -421,7 +421,10 @@ namespace DBnGame {
 
 	private: System::Void createDbButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		createDbForm^ createDbFormInstance = gcnew createDbForm();
-		createDbFormInstance->ShowDialog();
+		if (createDbFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			this->currentDbFilePath = createDbFormInstance->currentDbName;
+			this->currentDbStatusLabel->Text = "Текущая База Данных: " + createDbFormInstance->currentDbName;
+		}
 	}
 
 

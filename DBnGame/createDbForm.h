@@ -39,6 +39,7 @@ namespace DBnGame {
 	protected:
 	private: System::Windows::Forms::TextBox^ dbNameTextBox;
 	private: System::Windows::Forms::Label^ dbNameLabel;
+	public: String^ currentDbName;
 
 	private:
 		/// <summary>
@@ -118,8 +119,13 @@ namespace DBnGame {
 		}
 		else {
 			String^ filePath = Path::Combine(Application::StartupPath, "dataBases/" + this->dbNameTextBox->Text + ".txt");
-			
+			this->currentDbName = this->dbNameTextBox->Text + ".txt";
+
 			File::Create(filePath)->Close();
+
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+
+			this->Close();
 		}
 	}
 	};
