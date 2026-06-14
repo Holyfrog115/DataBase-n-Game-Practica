@@ -231,13 +231,13 @@ namespace DBnGame {
 		if (singleLineDeleteButton->Checked) {
 			int idToDelete;
 
+			// Проверка ввода ID на корректность (число, не пустая строка и т.д.)
 			if (!Int32::TryParse(lineIdTextBox->Text, idToDelete)) {
-				// Если конвертация не удалась (введены буквы, пустая строка и т.д.)
 				MessageBox::Show("Пожалуйста, введите корректный числовой ID записи!",
 								 "Ошибка ввода",
 								 MessageBoxButtons::OK,
 								 MessageBoxIcon::Error);
-				return; // Выходим из функции, не выполняя удаление
+				return;
 			}
 
 			int listId = -1;
@@ -255,6 +255,43 @@ namespace DBnGame {
 			}
 			else {
 				MessageBox::Show("Запись с указанным ID не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		}
+		else {
+			int startId;
+			int endId;
+
+			// Проверка ввода ID на корректность (число, не пустая строка и т.д.)
+			if (!Int32::TryParse(startIdTextBox->Text, startId) || !Int32::TryParse(endIdTextBox->Text, endId)) {
+				MessageBox::Show("Пожалуйста, введите корректные числовые ID диапазона!", "Ошибка ввода", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+
+			System::Collections::Generic::List<House^>^ housesToDelete = gcnew System::Collections::Generic::List<House^>();
+
+			for each (House^ house in housesList) {
+				if (house->getId() >= startId && house->getId() <= endId) {
+					housesToDelete->Add(house);
+				}
+			}
+
+			if (housesToDelete->Count > 0) {
+				for each (House ^ house in housesToDelete) {
+					housesList->Remove(house);
+				}
+
+				for (int i = targetGrid->Rows->Count - 1; i >= 0; i--) {
+					if (targetGrid->Rows[i]->Cells[0]->Value != nullptr) {
+						int cellId = Convert::ToInt32(targetGrid->Rows[i]->Cells[0]->Value);
+
+						if (cellId >= startId && cellId <= endId) {
+							targetGrid->Rows->RemoveAt(i);
+						}
+					}
+				}
+			}
+			else {
+				MessageBox::Show("Записей с указанными ID не найдено.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		}
 	}
