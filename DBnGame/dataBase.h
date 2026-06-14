@@ -60,7 +60,7 @@ namespace DBnGame {
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
-	private: int lastId = 0;
+	private: int lastId = -1;
 
 
 	protected:
@@ -488,7 +488,7 @@ namespace DBnGame {
 		while ((line = reader->ReadLine()) != nullptr) {
 			House^ house = gcnew House();
 			array<String^>^ fields = line->Split(';');
-			if (fields->Length == 7) {
+			if (fields->Length == 8) {
 				house->setId(Convert::ToInt32(fields[0]));
 				house->setAddress(fields[1]);
 				house->setCommissionYear(Convert::ToInt32(fields[2]));
@@ -523,9 +523,10 @@ namespace DBnGame {
 			this->currentDbName = createDbFormInstance->currentDbName;
 			this->currentDbFilePath = createDbFormInstance->currentDbfilePath;
 			this->isDbOpen = true;
-			this->lastId = 0;
+			this->lastId = -1;
 			updateDbNameLabel();
 			updateButtonsAccess();
+			updateDb();
 		}
 	}
 
