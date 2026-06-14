@@ -420,6 +420,7 @@ namespace DBnGame {
 		deletingLines^ deletingLinesInstance = gcnew deletingLines(this->housesList, dbGridView);
 
 		deletingLinesInstance->ShowDialog();
+		updateLastId();
 	}
 
 
@@ -509,6 +510,7 @@ namespace DBnGame {
 
 		reader->Close();
 
+		updateLastId();
 		updateGridView();
 	}
 
@@ -518,6 +520,16 @@ namespace DBnGame {
 		for each (House^ house in housesList) {
 			dbGridView->Rows->Add(house->getId(), house->getAddress(), house->getCommissionYear(), house->getFloorsNumber(),
 								  house->getAppartmentsNumber(), house->getLivingArea(), house->getTotalArea());
+		}
+	}
+
+
+	private: System::Void updateLastId() {
+		if (housesList->Count > 0) {
+			this->lastId = housesList[housesList->Count - 1]->getId();
+		}
+		else {
+			this->lastId = -1;
 		}
 	}
 
