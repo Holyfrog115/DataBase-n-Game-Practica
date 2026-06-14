@@ -312,14 +312,13 @@ namespace DBnGame {
 			StreamWriter^ writer = gcnew StreamWriter(this->filePath, true, System::Text::Encoding::UTF8);
 
 			// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
-			writer->WriteLine(this->lastId + ";" + streetNameTextBox->Text + ";" + houseNumberTextBox->Text + ";" + commissionYearTextBox->Text + ";" +
+			writer->WriteLine(++this->lastId + ";" + streetNameTextBox->Text + ";" + houseNumberTextBox->Text + ";" + commissionYearTextBox->Text + ";" +
 							  floorsTextBox->Text + ";" + appartementsTextBox->Text + ";" + livingAreaTextBox->Text + ";" + totalAreaTextBox->Text);
 
 			writer->Close();
 
 			this->targetGrid->Rows->Add(this->lastId, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
 										appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
-			this->lastId++;
 		}
 		else {
 			MessageBox::Show("Поля не могут быть пустыми.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
