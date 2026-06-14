@@ -1,4 +1,5 @@
 #pragma once
+#include "House.h"
 
 namespace DBnGame {
 
@@ -15,12 +16,14 @@ namespace DBnGame {
 	public ref class deletingLines : public System::Windows::Forms::Form
 	{
 	public:
-		deletingLines(void)
+		deletingLines(System::Collections::Generic::List<House^>^ housesList, System::Windows::Forms::DataGridView^ targetGrid)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->housesList = housesList;
+			this->targetGrid = targetGrid;
 		}
 
 	protected:
@@ -48,6 +51,9 @@ namespace DBnGame {
 
 
 	private: System::Windows::Forms::Label^ endIdLabel;
+
+	private: System::Collections::Generic::List<House^>^ housesList;
+	private: System::Windows::Forms::DataGridView^ targetGrid;
 
 	protected:
 
@@ -131,6 +137,7 @@ namespace DBnGame {
 			this->deleteButton->TabIndex = 4;
 			this->deleteButton->Text = L"Удалить";
 			this->deleteButton->UseVisualStyleBackColor = true;
+			this->deleteButton->Click += gcnew System::EventHandler(this, &deletingLines::deleteButton_Click);
 			// 
 			// startIdTextBox
 			// 
@@ -217,6 +224,39 @@ namespace DBnGame {
 		
 		this->lineIdLabel->Visible = true;
 		this->lineIdTextBox->Visible = true;
+	}
+
+
+	private: System::Void deleteButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (singleLineDeleteButton->Checked) {
+			int idToDelete;
+
+			if (!Int32::TryParse(lineIdTextBox->Text, idToDelete)) {
+				// Если конвертация не удалась (введены буквы, пустая строка и т.д.)
+				MessageBox::Show("Пожалуйста, введите корректный числовой ID записи!",
+								 "Ошибка ввода",
+								 MessageBoxButtons::OK,
+								 MessageBoxIcon::Error);
+				return; // Выходим из функции, не выполняя удаление
+			}
+
+			int listId = -1;
+
+			for each (House ^ house in housesList) {
+				if (house->getId() == idToDelete) {
+					listId = housesList->IndexOf(house);
+					break;
+				}
+			}
+
+			if (listId != -1) {
+				housesList->RemoveAt(listId);
+				targetGrid->Rows->RemoveAt(listId);
+			}
+			else {
+				MessageBox::Show("Запись с указанным ID не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		}
 	}
 };
 }

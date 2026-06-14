@@ -410,14 +410,14 @@ namespace DBnGame {
 
 
 	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->housesList, this->dbGridView, this->lastId);
+		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->housesList, dbGridView, this->lastId);
 
 		enteringLinesFormInstance->ShowDialog();
 	}
 
 
 	private: System::Void deleteHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		deletingLines^ deletingLinesInstance = gcnew deletingLines();
+		deletingLines^ deletingLinesInstance = gcnew deletingLines(this->housesList, dbGridView);
 
 		deletingLinesInstance->ShowDialog();
 	}
