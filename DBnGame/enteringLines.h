@@ -17,7 +17,7 @@ namespace DBnGame {
 	public ref class enteringLines : public System::Windows::Forms::Form
 	{
 	public:
-		enteringLines(String^ filePath, System::Windows::Forms::DataGridView^ targetGrid)
+		enteringLines(String^ filePath, System::Windows::Forms::DataGridView^ targetGrid, int lastId)
 		{
 			InitializeComponent();
 			//
@@ -25,6 +25,7 @@ namespace DBnGame {
 			//
 			this->filePath = filePath;
 			this->targetGrid = targetGrid;
+			this->lastId = lastId;
 		}
 
 	protected:
@@ -41,6 +42,9 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ streetNameLabel;
 	private: System::Windows::Forms::MaskedTextBox^ streetNameTextBox;
 	private: System::Windows::Forms::Button^ addButton;
+
+	private: int lastId;
+
 	protected:
 
 	protected:
@@ -308,13 +312,14 @@ namespace DBnGame {
 			StreamWriter^ writer = gcnew StreamWriter(this->filePath, true, System::Text::Encoding::UTF8);
 
 			// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
-			writer->WriteLine(streetNameTextBox->Text + ";" + houseNumberTextBox->Text + ";" + commissionYearTextBox->Text + ";" +
+			writer->WriteLine(this->lastId + ";" + streetNameTextBox->Text + ";" + houseNumberTextBox->Text + ";" + commissionYearTextBox->Text + ";" +
 							  floorsTextBox->Text + ";" + appartementsTextBox->Text + ";" + livingAreaTextBox->Text + ";" + totalAreaTextBox->Text);
 
 			writer->Close();
 
-			this->targetGrid->Rows->Add(0, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
+			this->targetGrid->Rows->Add(this->lastId, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
 										appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
+			this->lastId++;
 		}
 		else {
 			MessageBox::Show("Поля не могут быть пустыми.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);

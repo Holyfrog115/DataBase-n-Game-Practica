@@ -60,6 +60,7 @@ namespace DBnGame {
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
+	private: int lastId = 0;
 
 
 	protected:
@@ -404,7 +405,7 @@ namespace DBnGame {
 
 
 	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->currentDbFilePath, this->dbGridView);
+		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->currentDbFilePath, this->dbGridView, this->lastId);
 
 		enteringLinesFormInstance->ShowDialog();
 	}
@@ -478,12 +479,51 @@ namespace DBnGame {
 	}
 
 
+	private: System::Void updateDb() {
+		StreamReader^ reader = gcnew StreamReader(this->currentDbFilePath, System::Text::Encoding::UTF8);
+		String^ line;
+
+		housesList->Clear();
+
+		while ((line = reader->ReadLine()) != nullptr) {
+			House^ house = gcnew House();
+			array<String^>^ fields = line->Split(';');
+			if (fields->Length == 7) {
+				house->setId(Convert::ToInt32(fields[0]));
+				house->setAddress(fields[1]);
+				house->setCommissionYear(Convert::ToInt32(fields[2]));
+				house->setFloorsNumber(Convert::ToInt32(fields[3]));
+				house->setAppartmentsNumber(Convert::ToInt32(fields[4]));
+				house->setLivingArea(Convert::ToDouble(fields[5]));
+				house->setTotalArea(Convert::ToDouble(fields[6]));
+				housesList->Add(house);
+				
+				this->lastId = house->getId();
+			}
+		}
+
+		reader->Close();
+
+		updateGridView();
+	}
+
+
+	private: System::Void updateGridView() {
+		dbGridView->Rows->Clear();
+		for each (House^ house in housesList) {
+			dbGridView->Rows->Add(house->getId(), house->getAddress(), house->getCommissionYear(), house->getFloorsNumber(),
+								  house->getAppartmentsNumber(), house->getLivingArea(), house->getTotalArea());
+		}
+	}
+
+
 	private: System::Void createDbButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		createDbForm^ createDbFormInstance = gcnew createDbForm();
 		if (createDbFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			this->currentDbName = createDbFormInstance->currentDbName;
 			this->currentDbFilePath = createDbFormInstance->currentDbfilePath;
 			this->isDbOpen = true;
+			this->lastId = 0;
 			updateDbNameLabel();
 			updateButtonsAccess();
 		}
@@ -503,6 +543,7 @@ namespace DBnGame {
 			this->isDbOpen = true;
 			updateDbNameLabel();
 			updateButtonsAccess();
+			updateDb();
 		}
 	}
 };
