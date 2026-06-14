@@ -268,6 +268,8 @@ namespace DBnGame {
 			// 
 			// dbGridView
 			// 
+			this->dbGridView->AllowUserToResizeColumns = false;
+			this->dbGridView->AllowUserToResizeRows = false;
 			this->dbGridView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 																						   | System::Windows::Forms::AnchorStyles::Left)
 																						  | System::Windows::Forms::AnchorStyles::Right));
@@ -378,6 +380,9 @@ namespace DBnGame {
 		}
 #pragma endregion
 	private: System::Void dataBase_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+		if (isDbOpen) {
+			savingDb();
+		}
 		if (!isExiting) {
 			Application::Exit();
 		}
@@ -405,7 +410,7 @@ namespace DBnGame {
 
 
 	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->currentDbFilePath, this->dbGridView, this->lastId);
+		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->housesList, this->dbGridView, this->lastId);
 
 		enteringLinesFormInstance->ShowDialog();
 	}
@@ -546,6 +551,20 @@ namespace DBnGame {
 			updateButtonsAccess();
 			updateDb();
 		}
+	}
+
+
+	private: System::Void savingDb() {
+		StreamWriter^ writer = gcnew StreamWriter(this->currentDbFilePath, false, System::Text::Encoding::UTF8);
+
+		// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
+		for each (House ^ house in housesList) {
+			writer->WriteLine(house->getId() + ";" + house->getAddress() + ";" + house->getHouseNumber() + ";"
+							  + house->getCommissionYear() + ";" + house->getFloorsNumber() + ";" + house->getAppartmentsNumber()
+							  + ";" + house->getLivingArea() + ";" + house->getTotalArea());
+		}
+
+		writer->Close();
 	}
 };
 }

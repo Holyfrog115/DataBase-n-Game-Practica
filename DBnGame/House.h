@@ -73,6 +73,10 @@ public:
 		return address;
 	}
 
+	int getHouseNumber() {
+		return houseNumber;
+	}
+
 	int getCommissionYear() {
 		return commissionYear;
 	}

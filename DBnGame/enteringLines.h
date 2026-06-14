@@ -17,13 +17,13 @@ namespace DBnGame {
 	public ref class enteringLines : public System::Windows::Forms::Form
 	{
 	public:
-		enteringLines(String^ filePath, System::Windows::Forms::DataGridView^ targetGrid, int lastId)
+		enteringLines(System::Collections::Generic::List<House^>^ housesList, System::Windows::Forms::DataGridView^ targetGrid, int lastId)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
-			this->filePath = filePath;
+			this->housesList = housesList;
 			this->targetGrid = targetGrid;
 			this->lastId = lastId;
 		}
@@ -78,7 +78,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ totalAreaLabel;
 	private: System::Windows::Forms::Button^ cancelButton;
 
-	private: String^ filePath;
+	private: System::Collections::Generic::List<House^>^ housesList;
 	private: System::Windows::Forms::DataGridView^ targetGrid;
 
 
@@ -309,13 +309,12 @@ namespace DBnGame {
 			String::IsNullOrWhiteSpace(totalAreaTextBox->Text);
 
 		if (!areEmpty) {
-			StreamWriter^ writer = gcnew StreamWriter(this->filePath, true, System::Text::Encoding::UTF8);
+			House^ house = gcnew House(++this->lastId, streetNameTextBox->Text, Convert::ToInt32(houseNumberTextBox->Text),
+									   Convert::ToInt32(commissionYearTextBox->Text), Convert::ToInt32(floorsTextBox->Text),
+									   Convert::ToInt32(appartementsTextBox->Text), Convert::ToDouble(livingAreaTextBox->Text),
+									   Convert::ToDouble(totalAreaTextBox->Text));
 
-			// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
-			writer->WriteLine(++this->lastId + ";" + streetNameTextBox->Text + ";" + houseNumberTextBox->Text + ";" + commissionYearTextBox->Text + ";" +
-							  floorsTextBox->Text + ";" + appartementsTextBox->Text + ";" + livingAreaTextBox->Text + ";" + totalAreaTextBox->Text);
-
-			writer->Close();
+			this->housesList->Add(house);
 
 			this->targetGrid->Rows->Add(this->lastId, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
 										appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
