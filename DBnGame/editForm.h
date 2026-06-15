@@ -295,7 +295,15 @@ namespace DBnGame {
 
 
 	private: System::Void changeButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		housesList[listId]->setAddress(streetNameTextBox->Text);
+		housesList[listId]->setHouseNumber(Convert::ToInt32(houseNumberTextBox->Text));
+		housesList[listId]->setCommissionYear(Convert::ToInt32(commissionYearTextBox->Text));
+		housesList[listId]->setFloorsNumber(Convert::ToInt32(floorsTextBox->Text));
+		housesList[listId]->setAppartmentsNumber(Convert::ToInt32(appartementsTextBox->Text));
+		housesList[listId]->setLivingArea(Convert::ToDouble(livingAreaTextBox->Text));
+		housesList[listId]->setTotalArea(Convert::ToDouble(totalAreaTextBox->Text));
 
+		this->Close();
 	}
 
 
