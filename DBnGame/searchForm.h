@@ -557,9 +557,106 @@ namespace DBnGame {
 
 
 	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		addFilters();
+
 		
 
+	}
 
+
+	private: System::Void addFilters() {
+		// Добавляет введенные пользователем фильтры в соответствующие переменные, которые затем будут использоваться для фильтрации списка домов
+
+		if (!String::IsNullOrWhiteSpace(streetNameTextBox->Text)) {
+			addressSearch = streetNameTextBox->Text;
+		}
+		else {
+			addressSearch = "";
+		}
+
+		if (!String::IsNullOrWhiteSpace(fromHouseNumberTextBox->Text)) {
+			houseNumberRange[0] = Convert::ToInt32(fromHouseNumberTextBox->Text);
+		}
+		else {
+			houseNumberRange[0] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(toHouseNumberTextBox->Text)) {
+			houseNumberRange[1] = Convert::ToInt32(toHouseNumberTextBox->Text);
+		}
+		else {
+			houseNumberRange[1] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(fromCommissionYearTextBox->Text)) {
+			commissionYearRange[0] = Convert::ToInt32(fromCommissionYearTextBox->Text);
+		}
+		else {
+			commissionYearRange[0] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(toCommissionYearTextBox->Text)) {
+			commissionYearRange[1] = Convert::ToInt32(toCommissionYearTextBox->Text);
+		}
+		else {
+			commissionYearRange[1] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(fromFloorsTextBox->Text)) {
+			floorsNumberRange[0] = Convert::ToInt32(fromFloorsTextBox->Text);
+		}
+		else {
+			floorsNumberRange[0] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(toFloorsTextBox->Text)) {
+			floorsNumberRange[1] = Convert::ToInt32(toFloorsTextBox->Text);
+		}
+		else {
+			floorsNumberRange[1] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(fromAppartmentsTextBox->Text)) {
+			appartmentsNumberRange[0] = Convert::ToInt32(fromAppartmentsTextBox->Text);
+		}
+		else {
+			appartmentsNumberRange[0] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(toAppartmentsTextBox->Text)) {
+			appartmentsNumberRange[1] = Convert::ToInt32(toAppartmentsTextBox->Text);
+		}
+		else {
+			appartmentsNumberRange[1] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(fromLivingAreaTextBox->Text)) {
+			livingAreaRange[0] = Convert::ToDouble(fromLivingAreaTextBox->Text);
+		}
+		else {
+			livingAreaRange[0] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(toLivingAreaTextBox->Text)) {
+			livingAreaRange[1] = Convert::ToDouble(toLivingAreaTextBox->Text);
+		}
+		else {
+			livingAreaRange[1] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(fromTotalAreaTextBox->Text)) {
+			totalAreaRange[0] = Convert::ToDouble(fromTotalAreaTextBox->Text);
+		}
+		else {
+			totalAreaRange[0] = -1;
+		}
+
+		if (!String::IsNullOrWhiteSpace(toTotalAreaTextBox->Text)) {
+			totalAreaRange[1] = Convert::ToDouble(toTotalAreaTextBox->Text);
+		}
+		else {
+			totalAreaRange[1] = -1;
+		}
 	}
 };
 }
