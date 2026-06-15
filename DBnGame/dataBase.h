@@ -497,11 +497,12 @@ namespace DBnGame {
 			if (fields->Length == 8) {
 				house->setId(Convert::ToInt32(fields[0]));
 				house->setAddress(fields[1]);
-				house->setCommissionYear(Convert::ToInt32(fields[2]));
-				house->setFloorsNumber(Convert::ToInt32(fields[3]));
-				house->setAppartmentsNumber(Convert::ToInt32(fields[4]));
-				house->setLivingArea(Convert::ToDouble(fields[5]));
-				house->setTotalArea(Convert::ToDouble(fields[6]));
+				house->setHouseNumber(Convert::ToInt32(fields[2]));
+				house->setCommissionYear(Convert::ToInt32(fields[3]));
+				house->setFloorsNumber(Convert::ToInt32(fields[4]));
+				house->setAppartmentsNumber(Convert::ToInt32(fields[5]));
+				house->setLivingArea(Convert::ToDouble(fields[6]));
+				house->setTotalArea(Convert::ToDouble(fields[7]));
 				housesList->Add(house);
 				
 				this->lastId = house->getId();
@@ -518,7 +519,7 @@ namespace DBnGame {
 	private: System::Void updateGridView() {
 		dbGridView->Rows->Clear();
 		for each (House^ house in housesList) {
-			dbGridView->Rows->Add(house->getId(), house->getAddress(), house->getCommissionYear(), house->getFloorsNumber(),
+			dbGridView->Rows->Add(house->getId(), house->getAddress() + ", " + house->getHouseNumber(), house->getCommissionYear(), house->getFloorsNumber(),
 								  house->getAppartmentsNumber(), house->getLivingArea(), house->getTotalArea());
 		}
 	}
