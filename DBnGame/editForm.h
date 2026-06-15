@@ -16,13 +16,13 @@ namespace DBnGame {
 	public ref class editForm : public System::Windows::Forms::Form
 	{
 	public:
-		editForm(int idToEdit)
+		editForm(int listId)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
-			this->idToEdit = idToEdit;
+			this->listId = listId;
 		}
 
 	protected:
@@ -54,7 +54,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::MaskedTextBox^ streetNameTextBox;
 	private: System::Windows::Forms::Label^ streetNameLabel;
 
-	private: int idToEdit;
+	private: int listId;
 
 	protected:
 
@@ -114,6 +114,7 @@ namespace DBnGame {
 			this->cancelButton->TabIndex = 31;
 			this->cancelButton->Text = L"Отменить Корректировку";
 			this->cancelButton->UseVisualStyleBackColor = true;
+			this->cancelButton->Click += gcnew System::EventHandler(this, &editForm::cancelButton_Click);
 			// 
 			// totalAreaTextBox
 			// 
@@ -284,5 +285,8 @@ namespace DBnGame {
 
 		}
 #pragma endregion
-	};
+	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+};
 }

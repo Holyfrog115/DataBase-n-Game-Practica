@@ -118,8 +118,6 @@ namespace DBnGame {
 		}
 #pragma endregion
 	private: System::Void continueButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		editForm^ editFormInstance = gcnew editForm();
-
 		int idToDelete;
 
 		// Проверка ввода ID на корректность (число, не пустая строка и т.д.)
@@ -141,6 +139,7 @@ namespace DBnGame {
 		}
 
 		if (listId != -1) {
+			editForm^ editFormInstance = gcnew editForm(listId);
 			editFormInstance->Show();
 			this->Close();
 		}
