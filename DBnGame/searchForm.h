@@ -16,14 +16,16 @@ namespace DBnGame {
 	public ref class searchForm : public System::Windows::Forms::Form
 	{
 	public:
-		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive, String^ addressSearch,
-		array<int>^ houseNumberRange, array<int>^ commissionYearRange, array<int>^ floorsNumberRange, array<int>^ appartmentsNumberRange,
-		array<int>^ livingAreaRange, array<int>^ totalAreaRange)
+		searchForm(System::Collections::Generic::List<House^>^ housesList, 
+				   System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive, String^ addressSearch,
+				   array<int>^ houseNumberRange, array<int>^ commissionYearRange, array<int>^ floorsNumberRange, 
+				   array<int>^ appartmentsNumberRange, array<int>^ livingAreaRange, array<int>^ totalAreaRange)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->housesList = housesList;
 			this->filteredHousesList = filteredHousesList;
 			this->isFilterActive = isFilterActive;
 			this->addressSearch = addressSearch;
@@ -115,6 +117,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::MaskedTextBox^ fromTotalAreaTextBox;
 
 	private: System::Collections::Generic::List<House^>^ filteredHousesList;
+	private: System::Collections::Generic::List<House^>^ housesList;
 	private: bool isFilterActive;
 	private: String^ addressSearch;
 		   array<int>^ houseNumberRange = gcnew array<int>(2);
@@ -553,18 +556,21 @@ namespace DBnGame {
 
 		fromTotalAreaTextBox->Text = "";
 		toTotalAreaTextBox->Text = "";
+
+		applyFilters();
+		this->isFilterActive = false;
 	}
 
 
 	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		addFilters();
-
-		
-
+		applyFilters();
+		startSearch();
+		this->isFilterActive = true;
+		this->Close();
 	}
 
 
-	private: System::Void addFilters() {
+	private: System::Void applyFilters() {
 		// Добавляет введенные пользователем фильтры в соответствующие переменные, которые затем будут использоваться для фильтрации списка домов
 
 		if (!String::IsNullOrWhiteSpace(streetNameTextBox->Text)) {
@@ -656,6 +662,82 @@ namespace DBnGame {
 		}
 		else {
 			totalAreaRange[1] = -1;
+		}
+	}
+
+
+	private: System::Void startSearch() {
+		for each (House ^ house in housesList) {
+			bool filterFlag = true;
+			if (!String::IsNullOrWhiteSpace(addressSearch)) {
+				if (!house->getAddress()->Contains(addressSearch)) {
+					filterFlag = false;
+				}
+			}
+			if (houseNumberRange[0] != -1 && filterFlag) {
+				if (house->getHouseNumber() < houseNumberRange[0]) {
+					filterFlag = false;
+				}
+			}
+			if (houseNumberRange[1] != -1 && filterFlag) {
+				if (house->getHouseNumber() > houseNumberRange[1]) {
+					filterFlag = false;
+				}
+			}
+			if (commissionYearRange[0] != -1 && filterFlag) {
+				if (house->getCommissionYear() < commissionYearRange[0]) {
+					filterFlag = false;
+				}
+			}
+			if (commissionYearRange[1] != -1 && filterFlag) {
+				if (house->getCommissionYear() > commissionYearRange[1]) {
+					filterFlag = false;
+				}
+			}
+			if (floorsNumberRange[0] != -1 && filterFlag) {
+				if (house->getFloorsNumber() < floorsNumberRange[0]) {
+					filterFlag = false;
+				}
+			}
+			if (floorsNumberRange[1] != -1 && filterFlag) {
+				if (house->getFloorsNumber() > floorsNumberRange[1]) {
+					filterFlag = false;
+				}
+			}
+			if (appartmentsNumberRange[0] != -1 && filterFlag) {
+				if (house->getAppartmentsNumber() < appartmentsNumberRange[0]) {
+					filterFlag = false;
+				}
+			}
+			if (appartmentsNumberRange[1] != -1 && filterFlag) {
+				if (house->getAppartmentsNumber() > appartmentsNumberRange[1]) {
+					filterFlag = false;
+				}
+			}
+			if (livingAreaRange[0] != -1 && filterFlag) {
+				if (house->getLivingArea() < livingAreaRange[0]) {
+					filterFlag = false;
+				}
+			}
+			if (livingAreaRange[1] != -1 && filterFlag) {
+				if (house->getLivingArea() > livingAreaRange[1]) {
+					filterFlag = false;
+				}
+			}
+			if (totalAreaRange[0] != -1 && filterFlag) {
+				if (house->getTotalArea() < totalAreaRange[0]) {
+					filterFlag = false;
+				}
+			}
+			if (totalAreaRange[1] != -1 && filterFlag) {
+				if (house->getTotalArea() > totalAreaRange[1]) {
+					filterFlag = false;
+				}
+			}
+
+			if (filterFlag) {
+				filteredHousesList->Add(house);
+			}
 		}
 	}
 };

@@ -442,11 +442,12 @@ namespace DBnGame {
 
 
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		searchForm^ searchFormInstance = gcnew searchForm(this->filteredHousesList, this->isFilterActive, this->addressSearch,
+		searchForm^ searchFormInstance = gcnew searchForm(this->housesList, this->filteredHousesList, this->isFilterActive, this->addressSearch,
 														  this->houseNumberRange, this->commissionYearRange, this->floorsNumberRange,
 														  this->appartmentsNumberRange, this->livingAreaRange, this->totalAreaRange);
 
 		searchFormInstance->ShowDialog();
+		updateGridView();
 	}
 
 
