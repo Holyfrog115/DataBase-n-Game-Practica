@@ -249,6 +249,7 @@ namespace DBnGame {
 			this->applyButton->TabIndex = 34;
 			this->applyButton->Text = L"Применить фильтры";
 			this->applyButton->UseVisualStyleBackColor = true;
+			this->applyButton->Click += gcnew System::EventHandler(this, &searchForm::applyButton_Click);
 			// 
 			// streetNameTextBox
 			// 
@@ -536,6 +537,19 @@ namespace DBnGame {
 
 		fromTotalAreaTextBox->Text = "";
 		toTotalAreaTextBox->Text = "";
+	}
+
+
+	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ address;
+		array<int>^ houseNumberRange = gcnew array<int>(2);
+		array<int>^ commisionYearRange = gcnew array<int>(2);
+		array<int>^ floorsNumberRange = gcnew array<int>(2);
+		array<int>^ appartmentsNumberRange = gcnew array<int>(2);
+		array<int>^ livingAreaRange = gcnew array<int>(2);
+		array<int>^ totalAreaRange = gcnew array<int>(2);
+
+
 	}
 };
 }
