@@ -63,6 +63,13 @@ namespace DBnGame {
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
 	private: System::Collections::Generic::List<House^>^ filteredHousesList = gcnew System::Collections::Generic::List<House^>();
 	private: int lastId = -1;
+	private: String^ addressSearch;
+		     array<int>^ houseNumberRange = gcnew array<int>(2);
+		     array<int>^ commissionYearRange = gcnew array<int>(2);
+		     array<int>^ floorsNumberRange = gcnew array<int>(2);
+		     array<int>^ appartmentsNumberRange = gcnew array<int>(2);
+		     array<int>^ livingAreaRange = gcnew array<int>(2);
+		     array<int>^ totalAreaRange = gcnew array<int>(2);
 
 
 	protected:
@@ -435,7 +442,9 @@ namespace DBnGame {
 
 
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		searchForm^ searchFormInstance = gcnew searchForm(this->filteredHousesList, this->isFilterActive);
+		searchForm^ searchFormInstance = gcnew searchForm(this->filteredHousesList, this->isFilterActive, this->addressSearch,
+														  this->houseNumberRange, this->commissionYearRange, this->floorsNumberRange,
+														  this->appartmentsNumberRange, this->livingAreaRange, this->totalAreaRange);
 
 		searchFormInstance->ShowDialog();
 	}

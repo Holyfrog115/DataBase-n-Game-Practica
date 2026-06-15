@@ -16,7 +16,9 @@ namespace DBnGame {
 	public ref class searchForm : public System::Windows::Forms::Form
 	{
 	public:
-		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive)
+		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive, String^ addressSearch,
+		array<int>^ houseNumberRange, array<int>^ commissionYearRange, array<int>^ floorsNumberRange, array<int>^ appartmentsNumberRange,
+		array<int>^ livingAreaRange, array<int>^ totalAreaRange)
 		{
 			InitializeComponent();
 			//
@@ -24,6 +26,13 @@ namespace DBnGame {
 			//
 			this->filteredHousesList = filteredHousesList;
 			this->isFilterActive = isFilterActive;
+			this->addressSearch = addressSearch;
+			this->houseNumberRange = houseNumberRange;
+			this->commissionYearRange = commissionYearRange;
+			this->floorsNumberRange = floorsNumberRange;
+			this->appartmentsNumberRange = appartmentsNumberRange;
+			this->livingAreaRange = livingAreaRange;
+			this->totalAreaRange = totalAreaRange;
 		}
 
 	protected:
@@ -107,6 +116,13 @@ namespace DBnGame {
 
 	private: System::Collections::Generic::List<House^>^ filteredHousesList;
 	private: bool isFilterActive;
+	private: String^ addressSearch;
+		   array<int>^ houseNumberRange = gcnew array<int>(2);
+		   array<int>^ commissionYearRange = gcnew array<int>(2);
+		   array<int>^ floorsNumberRange = gcnew array<int>(2);
+		   array<int>^ appartmentsNumberRange = gcnew array<int>(2);
+		   array<int>^ livingAreaRange = gcnew array<int>(2);
+		   array<int>^ totalAreaRange = gcnew array<int>(2);
 
 
 
@@ -541,13 +557,7 @@ namespace DBnGame {
 
 
 	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ address;
-		array<int>^ houseNumberRange = gcnew array<int>(2);
-		array<int>^ commisionYearRange = gcnew array<int>(2);
-		array<int>^ floorsNumberRange = gcnew array<int>(2);
-		array<int>^ appartmentsNumberRange = gcnew array<int>(2);
-		array<int>^ livingAreaRange = gcnew array<int>(2);
-		array<int>^ totalAreaRange = gcnew array<int>(2);
+		
 
 
 	}
