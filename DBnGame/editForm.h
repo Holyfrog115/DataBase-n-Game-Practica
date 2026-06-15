@@ -1,4 +1,5 @@
 #pragma once
+#include "House.h"
 
 namespace DBnGame {
 
@@ -15,12 +16,13 @@ namespace DBnGame {
 	public ref class editForm : public System::Windows::Forms::Form
 	{
 	public:
-		editForm(void)
+		editForm(int idToEdit)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->idToEdit = idToEdit;
 		}
 
 	protected:
@@ -51,6 +53,8 @@ namespace DBnGame {
 	private: System::Windows::Forms::Button^ changeButton;
 	private: System::Windows::Forms::MaskedTextBox^ streetNameTextBox;
 	private: System::Windows::Forms::Label^ streetNameLabel;
+
+	private: int idToEdit;
 
 	protected:
 
