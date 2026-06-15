@@ -140,7 +140,7 @@ namespace DBnGame {
 
 		if (listId != -1) {
 			editForm^ editFormInstance = gcnew editForm(listId, housesList);
-			this->Hide();
+			this->Opacity = 0;
 			editFormInstance->ShowDialog();
 			this->Close();
 		}
