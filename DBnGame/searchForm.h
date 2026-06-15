@@ -16,7 +16,7 @@ namespace DBnGame {
 	public ref class searchForm : public System::Windows::Forms::Form
 	{
 	public:
-		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive)
+		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool^ isFilterActive)
 		{
 			InitializeComponent();
 			//
@@ -106,7 +106,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::MaskedTextBox^ fromTotalAreaTextBox;
 
 	private: System::Collections::Generic::List<House^>^ filteredHousesList;
-	private: bool isFilterActive;
+	private: bool^ isFilterActive;
 
 
 
@@ -170,6 +170,7 @@ namespace DBnGame {
 			this->resetButton->TabIndex = 47;
 			this->resetButton->Text = L"Отключить все фильтры";
 			this->resetButton->UseVisualStyleBackColor = true;
+			this->resetButton->Click += gcnew System::EventHandler(this, &searchForm::resetButton_Click);
 			// 
 			// totalAreaLabel
 			// 
@@ -515,5 +516,26 @@ namespace DBnGame {
 
 		}
 #pragma endregion
-	};
+	private: System::Void resetButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		streetNameTextBox->Text = "";
+
+		fromHouseNumberTextBox->Text = "";
+		toHouseNumberTextBox->Text = "";
+
+		fromCommissionYearTextBox->Text = "";
+		toCommissionYearTextBox->Text = "";
+
+		fromFloorsTextBox->Text = "";
+		toFloorsTextBox->Text = "";
+
+		fromAppartmentsTextBox->Text = "";
+		toAppartmentsTextBox->Text = "";
+
+		fromLivingAreaTextBox->Text = "";
+		toLivingAreaTextBox->Text = "";
+
+		fromTotalAreaTextBox->Text = "";
+		toTotalAreaTextBox->Text = "";
+	}
+};
 }

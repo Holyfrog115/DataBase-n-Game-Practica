@@ -57,7 +57,7 @@ namespace DBnGame {
 	private: bool isExiting = false;
 	private: bool isAdminMode = false;
 	private: bool isDbOpen = false;
-	private: bool isFilterActive = false;
+	private: bool^ isFilterActive = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
@@ -427,7 +427,7 @@ namespace DBnGame {
 
 
 	private: System::Void changeHouseDataButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		houseIdEditForm^ editFormInstance = gcnew houseIdEditForm(housesList);
+		houseIdEditForm^ editFormInstance = gcnew houseIdEditForm(this->housesList);
 
 		editFormInstance->ShowDialog();
 		updateGridView();
@@ -435,7 +435,7 @@ namespace DBnGame {
 
 
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		searchForm^ searchFormInstance = gcnew searchForm();
+		searchForm^ searchFormInstance = gcnew searchForm(this->filteredHousesList, this->isFilterActive);
 
 		searchFormInstance->ShowDialog();
 	}
