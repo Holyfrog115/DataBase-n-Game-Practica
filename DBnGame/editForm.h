@@ -16,13 +16,14 @@ namespace DBnGame {
 	public ref class editForm : public System::Windows::Forms::Form
 	{
 	public:
-		editForm(int listId)
+		editForm(int listId, System::Collections::Generic::List<House^>^ housesList)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 			this->listId = listId;
+			this->housesList = housesList;
 		}
 
 	protected:
@@ -55,6 +56,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ streetNameLabel;
 
 	private: int listId;
+	private: System::Collections::Generic::List<House^>^ housesList;
 
 	protected:
 
@@ -233,6 +235,7 @@ namespace DBnGame {
 			this->changeButton->TabIndex = 18;
 			this->changeButton->Text = L"Изменить";
 			this->changeButton->UseVisualStyleBackColor = true;
+			this->changeButton->Click += gcnew System::EventHandler(this, &editForm::changeButton_Click);
 			// 
 			// streetNameTextBox
 			// 
@@ -280,6 +283,7 @@ namespace DBnGame {
 			this->Name = L"editForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Корректировка Полей Строки";
+			this->Load += gcnew System::EventHandler(this, &editForm::editForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -287,6 +291,22 @@ namespace DBnGame {
 #pragma endregion
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
+	}
+
+
+	private: System::Void changeButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	}
+
+
+	private: System::Void editForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		streetNameTextBox->Text = housesList[listId]->getAddress();
+		houseNumberTextBox->Text = Convert::ToString(housesList[listId]->getHouseNumber());
+		commissionYearTextBox->Text = Convert::ToString(housesList[listId]->getCommissionYear());
+		floorsTextBox->Text = Convert::ToString(housesList[listId]->getFloorsNumber());
+		appartementsTextBox->Text = Convert::ToString(housesList[listId]->getAppartmentsNumber());
+		livingAreaTextBox->Text = Convert::ToString(housesList[listId]->getLivingArea());
+		totalAreaTextBox->Text = Convert::ToString(housesList[listId]->getTotalArea());
 	}
 };
 }
