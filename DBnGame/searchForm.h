@@ -1,4 +1,5 @@
 #pragma once
+#include "House.h"
 
 namespace DBnGame {
 
@@ -15,12 +16,14 @@ namespace DBnGame {
 	public ref class searchForm : public System::Windows::Forms::Form
 	{
 	public:
-		searchForm(void)
+		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->filteredHousesList = filteredHousesList;
+			this->isFilterActive = isFilterActive;
 		}
 
 	protected:
@@ -102,6 +105,8 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ fromTotalAreaLabel;
 	private: System::Windows::Forms::MaskedTextBox^ fromTotalAreaTextBox;
 
+	private: System::Collections::Generic::List<House^>^ filteredHousesList;
+	private: bool isFilterActive;
 
 
 
