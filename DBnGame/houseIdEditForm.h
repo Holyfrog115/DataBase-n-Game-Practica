@@ -1,5 +1,6 @@
 #pragma once
 #include "editForm.h"
+#include "House.h"
 
 namespace DBnGame {
 
@@ -16,12 +17,13 @@ namespace DBnGame {
 	public ref class houseIdEditForm : public System::Windows::Forms::Form
 	{
 	public:
-		houseIdEditForm(void)
+		houseIdEditForm(System::Collections::Generic::List<House^>^ housesList)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->housesList = housesList;
 		}
 
 	protected:
@@ -40,6 +42,10 @@ namespace DBnGame {
 
 	private: System::Windows::Forms::Label^ idLabel;
 	private: System::Windows::Forms::Button^ continueButton;
+
+	private: System::Collections::Generic::List<House^>^ housesList;
+
+
 	protected:
 
 
@@ -114,9 +120,33 @@ namespace DBnGame {
 	private: System::Void continueButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		editForm^ editFormInstance = gcnew editForm();
 
-		editFormInstance->Show();
-		
-		this->Close();
+		int idToDelete;
+
+		// Проверка ввода ID на корректность (число, не пустая строка и т.д.)
+		if (!Int32::TryParse(idTextBox->Text, idToDelete)) {
+			MessageBox::Show("Пожалуйста, введите корректный числовой ID записи!",
+							 "Ошибка ввода",
+							 MessageBoxButtons::OK,
+							 MessageBoxIcon::Error);
+			return;
+		}
+
+		int listId = -1;
+
+		for each(House ^ house in housesList) {
+			if (house->getId() == idToDelete) {
+				listId = housesList->IndexOf(house);
+				break;
+			}
+		}
+
+		if (listId != -1) {
+			editFormInstance->Show();
+			this->Close();
+		}
+		else {
+			MessageBox::Show("Запись с указанным ID не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 	}
 	};
 }
