@@ -57,7 +57,7 @@ namespace DBnGame {
 	private: bool isExiting = false;
 	private: bool isAdminMode = false;
 	private: bool isDbOpen = false;
-	private: bool^ isFilterActive = false;
+	private: bool isFilterActive = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
@@ -521,7 +521,7 @@ namespace DBnGame {
 
 	private: System::Void updateGridView() {
 		dbGridView->Rows->Clear();
-		if (isFilterActive) {
+		if (this->isFilterActive) {
 			for each (House ^ house in filteredHousesList) {
 				dbGridView->Rows->Add(house->getId(), house->getAddress() + ", " + house->getHouseNumber(), house->getCommissionYear(), house->getFloorsNumber(),
 									  house->getAppartmentsNumber(), house->getLivingArea(), house->getTotalArea());

@@ -16,7 +16,7 @@ namespace DBnGame {
 	public ref class searchForm : public System::Windows::Forms::Form
 	{
 	public:
-		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool^ isFilterActive)
+		searchForm(System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive)
 		{
 			InitializeComponent();
 			//
@@ -106,7 +106,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::MaskedTextBox^ fromTotalAreaTextBox;
 
 	private: System::Collections::Generic::List<House^>^ filteredHousesList;
-	private: bool^ isFilterActive;
+	private: bool isFilterActive;
 
 
 
