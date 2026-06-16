@@ -1,6 +1,5 @@
-#include "House.h"
-
 #pragma once
+#include "House.h"
 ref class searchData
 {
 public:

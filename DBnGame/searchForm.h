@@ -1,5 +1,6 @@
 #pragma once
 #include "House.h"
+#include "searchData.h"
 
 namespace DBnGame {
 
@@ -16,25 +17,14 @@ namespace DBnGame {
 	public ref class searchForm : public System::Windows::Forms::Form
 	{
 	public:
-		searchForm(System::Collections::Generic::List<House^>^ housesList, 
-				   System::Collections::Generic::List<House^>^ filteredHousesList, bool isFilterActive, String^ addressSearch,
-				   array<int>^ houseNumberRange, array<int>^ commissionYearRange, array<int>^ floorsNumberRange, 
-				   array<int>^ appartmentsNumberRange, array<int>^ livingAreaRange, array<int>^ totalAreaRange)
+		searchForm(searchData^ searchData, System::Collections::Generic::List<House^>^ housesList)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->mySearchData = searchData;
 			this->housesList = housesList;
-			this->filteredHousesList = filteredHousesList;
-			this->isFilterActive = isFilterActive;
-			this->addressSearch = addressSearch;
-			this->houseNumberRange = houseNumberRange;
-			this->commissionYearRange = commissionYearRange;
-			this->floorsNumberRange = floorsNumberRange;
-			this->appartmentsNumberRange = appartmentsNumberRange;
-			this->livingAreaRange = livingAreaRange;
-			this->totalAreaRange = totalAreaRange;
 		}
 
 	protected:
@@ -116,16 +106,8 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ fromTotalAreaLabel;
 	private: System::Windows::Forms::MaskedTextBox^ fromTotalAreaTextBox;
 
-	private: System::Collections::Generic::List<House^>^ filteredHousesList;
+	private: searchData^ mySearchData;
 	private: System::Collections::Generic::List<House^>^ housesList;
-	private: bool isFilterActive;
-	private: String^ addressSearch;
-		   array<int>^ houseNumberRange = gcnew array<int>(2);
-		   array<int>^ commissionYearRange = gcnew array<int>(2);
-		   array<int>^ floorsNumberRange = gcnew array<int>(2);
-		   array<int>^ appartmentsNumberRange = gcnew array<int>(2);
-		   array<int>^ livingAreaRange = gcnew array<int>(2);
-		   array<int>^ totalAreaRange = gcnew array<int>(2);
 
 
 
@@ -558,14 +540,13 @@ namespace DBnGame {
 		toTotalAreaTextBox->Text = "";
 
 		applyFilters();
-		this->isFilterActive = false;
+		this->mySearchData->isFilterActive = false;
 	}
 
 
 	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		applyFilters();
-		startSearch();
-		this->isFilterActive = true;
+		this->mySearchData->isFilterActive = true;
 		this->Close();
 	}
 
@@ -574,169 +555,169 @@ namespace DBnGame {
 		// Добавляет введенные пользователем фильтры в соответствующие переменные, которые затем будут использоваться для фильтрации списка домов
 
 		if (!String::IsNullOrWhiteSpace(streetNameTextBox->Text)) {
-			addressSearch = streetNameTextBox->Text;
+			this->mySearchData->addressSearch = streetNameTextBox->Text;
 		}
 		else {
-			addressSearch = "";
+			this->mySearchData->addressSearch = "";
 		}
 
 		if (!String::IsNullOrWhiteSpace(fromHouseNumberTextBox->Text)) {
-			houseNumberRange[0] = Convert::ToInt32(fromHouseNumberTextBox->Text);
+			this->mySearchData->houseNumberRange[0] = Convert::ToInt32(fromHouseNumberTextBox->Text);
 		}
 		else {
-			houseNumberRange[0] = -1;
+			this->mySearchData->houseNumberRange[0] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(toHouseNumberTextBox->Text)) {
-			houseNumberRange[1] = Convert::ToInt32(toHouseNumberTextBox->Text);
+			this->mySearchData->houseNumberRange[1] = Convert::ToInt32(toHouseNumberTextBox->Text);
 		}
 		else {
-			houseNumberRange[1] = -1;
+			this->mySearchData->houseNumberRange[1] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(fromCommissionYearTextBox->Text)) {
-			commissionYearRange[0] = Convert::ToInt32(fromCommissionYearTextBox->Text);
+			this->mySearchData->commissionYearRange[0] = Convert::ToInt32(fromCommissionYearTextBox->Text);
 		}
 		else {
-			commissionYearRange[0] = -1;
+			this->mySearchData->commissionYearRange[0] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(toCommissionYearTextBox->Text)) {
-			commissionYearRange[1] = Convert::ToInt32(toCommissionYearTextBox->Text);
+			this->mySearchData->commissionYearRange[1] = Convert::ToInt32(toCommissionYearTextBox->Text);
 		}
 		else {
-			commissionYearRange[1] = -1;
+			this->mySearchData->commissionYearRange[1] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(fromFloorsTextBox->Text)) {
-			floorsNumberRange[0] = Convert::ToInt32(fromFloorsTextBox->Text);
+			this->mySearchData->floorsNumberRange[0] = Convert::ToInt32(fromFloorsTextBox->Text);
 		}
 		else {
-			floorsNumberRange[0] = -1;
+			this->mySearchData->floorsNumberRange[0] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(toFloorsTextBox->Text)) {
-			floorsNumberRange[1] = Convert::ToInt32(toFloorsTextBox->Text);
+			this->mySearchData->floorsNumberRange[1] = Convert::ToInt32(toFloorsTextBox->Text);
 		}
 		else {
-			floorsNumberRange[1] = -1;
+			this->mySearchData->floorsNumberRange[1] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(fromAppartmentsTextBox->Text)) {
-			appartmentsNumberRange[0] = Convert::ToInt32(fromAppartmentsTextBox->Text);
+			this->mySearchData->appartmentsNumberRange[0] = Convert::ToInt32(fromAppartmentsTextBox->Text);
 		}
 		else {
-			appartmentsNumberRange[0] = -1;
+			this->mySearchData->appartmentsNumberRange[0] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(toAppartmentsTextBox->Text)) {
-			appartmentsNumberRange[1] = Convert::ToInt32(toAppartmentsTextBox->Text);
+			this->mySearchData->appartmentsNumberRange[1] = Convert::ToInt32(toAppartmentsTextBox->Text);
 		}
 		else {
-			appartmentsNumberRange[1] = -1;
+			this->mySearchData->appartmentsNumberRange[1] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(fromLivingAreaTextBox->Text)) {
-			livingAreaRange[0] = Convert::ToDouble(fromLivingAreaTextBox->Text);
+			this->mySearchData->livingAreaRange[0] = Convert::ToDouble(fromLivingAreaTextBox->Text);
 		}
 		else {
-			livingAreaRange[0] = -1;
+			this->mySearchData->livingAreaRange[0] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(toLivingAreaTextBox->Text)) {
-			livingAreaRange[1] = Convert::ToDouble(toLivingAreaTextBox->Text);
+			this->mySearchData->livingAreaRange[1] = Convert::ToDouble(toLivingAreaTextBox->Text);
 		}
 		else {
-			livingAreaRange[1] = -1;
+			this->mySearchData->livingAreaRange[1] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(fromTotalAreaTextBox->Text)) {
-			totalAreaRange[0] = Convert::ToDouble(fromTotalAreaTextBox->Text);
+			this->mySearchData->totalAreaRange[0] = Convert::ToDouble(fromTotalAreaTextBox->Text);
 		}
 		else {
-			totalAreaRange[0] = -1;
+			this->mySearchData->totalAreaRange[0] = -1;
 		}
 
 		if (!String::IsNullOrWhiteSpace(toTotalAreaTextBox->Text)) {
-			totalAreaRange[1] = Convert::ToDouble(toTotalAreaTextBox->Text);
+			this->mySearchData->totalAreaRange[1] = Convert::ToDouble(toTotalAreaTextBox->Text);
 		}
 		else {
-			totalAreaRange[1] = -1;
+			this->mySearchData->totalAreaRange[1] = -1;
 		}
 	}
 
 
 	private: System::Void startSearch() {
-		for each (House ^ house in housesList) {
+		for each (House ^ house in this->housesList) {
 			bool filterFlag = true;
-			if (!String::IsNullOrWhiteSpace(addressSearch)) {
-				if (!house->getAddress()->Contains(addressSearch)) {
+			if (!String::IsNullOrWhiteSpace(this->mySearchData->addressSearch)) {
+				if (!house->getAddress()->Contains(this->mySearchData->addressSearch)) {
 					filterFlag = false;
 				}
 			}
-			if (houseNumberRange[0] != -1 && filterFlag) {
-				if (house->getHouseNumber() < houseNumberRange[0]) {
+			if (this->mySearchData->houseNumberRange[0] != -1 && filterFlag) {
+				if (house->getHouseNumber() < this->mySearchData->houseNumberRange[0]) {
 					filterFlag = false;
 				}
 			}
-			if (houseNumberRange[1] != -1 && filterFlag) {
-				if (house->getHouseNumber() > houseNumberRange[1]) {
+			if (this->mySearchData->houseNumberRange[1] != -1 && filterFlag) {
+				if (house->getHouseNumber() > this->mySearchData->houseNumberRange[1]) {
 					filterFlag = false;
 				}
 			}
-			if (commissionYearRange[0] != -1 && filterFlag) {
-				if (house->getCommissionYear() < commissionYearRange[0]) {
+			if (this->mySearchData->commissionYearRange[0] != -1 && filterFlag) {
+				if (house->getCommissionYear() < this->mySearchData->commissionYearRange[0]) {
 					filterFlag = false;
 				}
 			}
-			if (commissionYearRange[1] != -1 && filterFlag) {
-				if (house->getCommissionYear() > commissionYearRange[1]) {
+			if (this->mySearchData->commissionYearRange[1] != -1 && filterFlag) {
+				if (house->getCommissionYear() > this->mySearchData->commissionYearRange[1]) {
 					filterFlag = false;
 				}
 			}
-			if (floorsNumberRange[0] != -1 && filterFlag) {
-				if (house->getFloorsNumber() < floorsNumberRange[0]) {
+			if (this->mySearchData->floorsNumberRange[0] != -1 && filterFlag) {
+				if (house->getFloorsNumber() < this->mySearchData->floorsNumberRange[0]) {
 					filterFlag = false;
 				}
 			}
-			if (floorsNumberRange[1] != -1 && filterFlag) {
-				if (house->getFloorsNumber() > floorsNumberRange[1]) {
+			if (this->mySearchData->floorsNumberRange[1] != -1 && filterFlag) {
+				if (house->getFloorsNumber() > this->mySearchData->floorsNumberRange[1]) {
 					filterFlag = false;
 				}
 			}
-			if (appartmentsNumberRange[0] != -1 && filterFlag) {
-				if (house->getAppartmentsNumber() < appartmentsNumberRange[0]) {
+			if (this->mySearchData->appartmentsNumberRange[0] != -1 && filterFlag) {
+				if (house->getAppartmentsNumber() < this->mySearchData->appartmentsNumberRange[0]) {
 					filterFlag = false;
 				}
 			}
-			if (appartmentsNumberRange[1] != -1 && filterFlag) {
-				if (house->getAppartmentsNumber() > appartmentsNumberRange[1]) {
+			if (this->mySearchData->appartmentsNumberRange[1] != -1 && filterFlag) {
+				if (house->getAppartmentsNumber() > this->mySearchData->appartmentsNumberRange[1]) {
 					filterFlag = false;
 				}
 			}
-			if (livingAreaRange[0] != -1 && filterFlag) {
-				if (house->getLivingArea() < livingAreaRange[0]) {
+			if (this->mySearchData->livingAreaRange[0] != -1 && filterFlag) {
+				if (house->getLivingArea() < this->mySearchData->livingAreaRange[0]) {
 					filterFlag = false;
 				}
 			}
-			if (livingAreaRange[1] != -1 && filterFlag) {
-				if (house->getLivingArea() > livingAreaRange[1]) {
+			if (this->mySearchData->livingAreaRange[1] != -1 && filterFlag) {
+				if (house->getLivingArea() > this->mySearchData->livingAreaRange[1]) {
 					filterFlag = false;
 				}
 			}
-			if (totalAreaRange[0] != -1 && filterFlag) {
-				if (house->getTotalArea() < totalAreaRange[0]) {
+			if (this->mySearchData->totalAreaRange[0] != -1 && filterFlag) {
+				if (house->getTotalArea() < this->mySearchData->totalAreaRange[0]) {
 					filterFlag = false;
 				}
 			}
-			if (totalAreaRange[1] != -1 && filterFlag) {
-				if (house->getTotalArea() > totalAreaRange[1]) {
+			if (this->mySearchData->totalAreaRange[1] != -1 && filterFlag) {
+				if (house->getTotalArea() > this->mySearchData->totalAreaRange[1]) {
 					filterFlag = false;
 				}
 			}
 
 			if (filterFlag) {
-				filteredHousesList->Add(house);
+				this->mySearchData->filteredHousesList->Add(house);
 			}
 		}
 	}

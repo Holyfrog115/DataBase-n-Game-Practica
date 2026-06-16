@@ -151,6 +151,7 @@
     <ClCompile Include="houseIdEditForm.cpp" />
     <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="mainMenu.cpp" />
+    <ClCompile Include="searchData.cpp" />
     <ClCompile Include="searchForm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="mainMenu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="searchData.h" />
     <ClInclude Include="searchForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

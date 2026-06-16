@@ -6,6 +6,7 @@
 #include "searchForm.h"
 #include "createDbForm.h"
 #include "House.h"
+#include "searchData.h"
 
 namespace DBnGame {
 
@@ -57,19 +58,11 @@ namespace DBnGame {
 	private: bool isExiting = false;
 	private: bool isAdminMode = false;
 	private: bool isDbOpen = false;
-	private: bool isFilterActive = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
-	private: System::Collections::Generic::List<House^>^ filteredHousesList = gcnew System::Collections::Generic::List<House^>();
 	private: int lastId = -1;
-	private: String^ addressSearch;
-		     array<int>^ houseNumberRange = gcnew array<int>(2);
-		     array<int>^ commissionYearRange = gcnew array<int>(2);
-		     array<int>^ floorsNumberRange = gcnew array<int>(2);
-		     array<int>^ appartmentsNumberRange = gcnew array<int>(2);
-		     array<int>^ livingAreaRange = gcnew array<int>(2);
-		     array<int>^ totalAreaRange = gcnew array<int>(2);
+	private: searchData^ mySearchData = gcnew searchData();
 
 
 	protected:
@@ -442,11 +435,10 @@ namespace DBnGame {
 
 
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		searchForm^ searchFormInstance = gcnew searchForm(this->housesList, this->filteredHousesList, this->isFilterActive, this->addressSearch,
-														  this->houseNumberRange, this->commissionYearRange, this->floorsNumberRange,
-														  this->appartmentsNumberRange, this->livingAreaRange, this->totalAreaRange);
+		searchForm^ searchFormInstance = gcnew searchForm(this->mySearchData, housesList);
 
 		searchFormInstance->ShowDialog();
+
 		updateGridView();
 	}
 
@@ -531,8 +523,8 @@ namespace DBnGame {
 
 	private: System::Void updateGridView() {
 		dbGridView->Rows->Clear();
-		if (this->isFilterActive) {
-			for each (House ^ house in filteredHousesList) {
+		if (this->mySearchData->isFilterActive) {
+			for each (House ^ house in this->mySearchData->filteredHousesList) {
 				dbGridView->Rows->Add(house->getId(), house->getAddress() + ", " + house->getHouseNumber(), house->getCommissionYear(), house->getFloorsNumber(),
 									  house->getAppartmentsNumber(), house->getLivingArea(), house->getTotalArea());
 			}
