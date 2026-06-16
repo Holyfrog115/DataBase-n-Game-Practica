@@ -96,5 +96,19 @@ public:
 	double getTotalArea() {
 		return totalArea;
 	}
+
+	bool areValid(String^ address, int houseNumber, int commissionYear, int floorsNumber, int appartmentsNumber, double livingArea) {
+		bool areValid = (
+			(!String::IsNullOrWhiteSpace(address) && address->Length <= 100) &&
+			(houseNumber > 0 && houseNumber < 200) &&
+			(commissionYear > 0 && commissionYear <= System::DateTime::Now.Year) &&
+			(floorsNumber > 1 && floorsNumber <= 100) &&
+			(appartmentsNumber >= 0 && appartmentsNumber <= 5000) &&
+			(livingArea > 0 && livingArea < 100000) &&
+			(totalArea > 0 && totalArea <= 100000 && totalArea >= livingArea)
+		);
+
+		return areValid;
+	}
 };
 
