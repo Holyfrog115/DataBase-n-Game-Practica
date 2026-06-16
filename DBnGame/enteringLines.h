@@ -314,14 +314,35 @@ namespace DBnGame {
 									   Convert::ToInt32(appartementsTextBox->Text), Convert::ToDouble(livingAreaTextBox->Text),
 									   Convert::ToDouble(totalAreaTextBox->Text));
 
-			this->housesList->Add(house);
+			bool isValid = house->areValid(streetNameTextBox->Text, Convert::ToInt32(houseNumberTextBox->Text),
+										   Convert::ToInt32(commissionYearTextBox->Text), Convert::ToInt32(floorsTextBox->Text),
+										   Convert::ToInt32(appartementsTextBox->Text), Convert::ToDouble(livingAreaTextBox->Text),
+										   Convert::ToDouble(totalAreaTextBox->Text));
 
-			this->targetGrid->Rows->Add(this->lastId, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
-										appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
+			if (isValid) {
+				this->housesList->Add(house);
+				this->targetGrid->Rows->Add(this->lastId, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
+											appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
+				emptyFields();
+			}
+			else {
+				MessageBox::Show("Некорректные данные. Пожалуйста, проверьте введенные значения.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
 		}
 		else {
 			MessageBox::Show("Поля не могут быть пустыми.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
+	}
+
+
+	private: System::Void emptyFields() {
+		streetNameTextBox->Text = ""; 
+		houseNumberTextBox->Text = "";
+		commissionYearTextBox->Text = "";
+		floorsTextBox->Text = "";
+		appartementsTextBox->Text = "";
+		livingAreaTextBox->Text = "";
+		totalAreaTextBox->Text = "";
 	}
 };
 }
