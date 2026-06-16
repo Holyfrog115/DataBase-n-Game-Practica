@@ -438,7 +438,6 @@ namespace DBnGame {
 		searchForm^ searchFormInstance = gcnew searchForm(this->mySearchData, housesList);
 
 		searchFormInstance->ShowDialog();
-
 		updateGridView();
 	}
 

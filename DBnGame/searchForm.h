@@ -548,7 +548,13 @@ namespace DBnGame {
 	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		applyFilters();
 		startSearch();
-		this->mySearchData->isFilterActive = true;
+		if (!areEmpty()) {
+			this->mySearchData->isFilterActive = true;
+		}
+		else {
+			this->mySearchData->isFilterActive = false;
+		}
+		
 		this->Close();
 	}
 
@@ -650,6 +656,7 @@ namespace DBnGame {
 
 
 	private: System::Void startSearch() {
+		this->mySearchData->filteredHousesList->Clear();
 		for each (House ^ house in this->housesList) {
 			bool filterFlag = true;
 			if (!String::IsNullOrWhiteSpace(this->mySearchData->addressSearch)) {
@@ -729,34 +736,76 @@ namespace DBnGame {
 		streetNameTextBox->Text = this->mySearchData->addressSearch;
 
 		if (this->mySearchData->houseNumberRange[0] != -1)
-		fromHouseNumberTextBox->Text = Convert::ToString(this->mySearchData->houseNumberRange[0]);
+			fromHouseNumberTextBox->Text = Convert::ToString(this->mySearchData->houseNumberRange[0]);
 		if (this->mySearchData->houseNumberRange[1] != -1)
-		toHouseNumberTextBox->Text = Convert::ToString(this->mySearchData->houseNumberRange[1]);
+			toHouseNumberTextBox->Text = Convert::ToString(this->mySearchData->houseNumberRange[1]);
 
 		if (this->mySearchData->commissionYearRange[0] != -1)
-		fromCommissionYearTextBox->Text = Convert::ToString(this->mySearchData->commissionYearRange[0]);
+			fromCommissionYearTextBox->Text = Convert::ToString(this->mySearchData->commissionYearRange[0]);
 		if (this->mySearchData->commissionYearRange[1] != -1)
-		toCommissionYearTextBox->Text = Convert::ToString(this->mySearchData->commissionYearRange[1]);
+			toCommissionYearTextBox->Text = Convert::ToString(this->mySearchData->commissionYearRange[1]);
 
 		if (this->mySearchData->floorsNumberRange[0] != -1)
-		fromFloorsTextBox->Text = Convert::ToString(this->mySearchData->floorsNumberRange[0]);
+			fromFloorsTextBox->Text = Convert::ToString(this->mySearchData->floorsNumberRange[0]);
 		if (this->mySearchData->floorsNumberRange[1] != -1)
-		toFloorsTextBox->Text = Convert::ToString(this->mySearchData->floorsNumberRange[1]);
+			toFloorsTextBox->Text = Convert::ToString(this->mySearchData->floorsNumberRange[1]);
 
 		if (this->mySearchData->appartmentsNumberRange[0] != -1)
-		fromAppartmentsTextBox->Text = Convert::ToString(this->mySearchData->appartmentsNumberRange[0]);
+			fromAppartmentsTextBox->Text = Convert::ToString(this->mySearchData->appartmentsNumberRange[0]);
 		if (this->mySearchData->appartmentsNumberRange[1] != -1)
-		toAppartmentsTextBox->Text = Convert::ToString(this->mySearchData->appartmentsNumberRange[1]);
+			toAppartmentsTextBox->Text = Convert::ToString(this->mySearchData->appartmentsNumberRange[1]);
 
 		if (this->mySearchData->livingAreaRange[0] != -1)
-		fromLivingAreaTextBox->Text = Convert::ToString(this->mySearchData->livingAreaRange[0]);
+			fromLivingAreaTextBox->Text = Convert::ToString(this->mySearchData->livingAreaRange[0]);
 		if (this->mySearchData->livingAreaRange[1] != -1)
-		toLivingAreaTextBox->Text = Convert::ToString(this->mySearchData->livingAreaRange[1]);
+			toLivingAreaTextBox->Text = Convert::ToString(this->mySearchData->livingAreaRange[1]);
 
 		if (this->mySearchData->totalAreaRange[0] != -1)
-		fromTotalAreaTextBox->Text = Convert::ToString(this->mySearchData->totalAreaRange[0]);
+			fromTotalAreaTextBox->Text = Convert::ToString(this->mySearchData->totalAreaRange[0]);
 		if (this->mySearchData->totalAreaRange[1] != -1)
-		toTotalAreaTextBox->Text = Convert::ToString(this->mySearchData->totalAreaRange[1]);
+			toTotalAreaTextBox->Text = Convert::ToString(this->mySearchData->totalAreaRange[1]);
+	}
+
+	
+	private: bool areEmpty() {
+		// Проверяет пустые ли все поля фильтров
+
+		bool isEmpty = true;
+
+		if (String::IsNullOrWhiteSpace(this->mySearchData->addressSearch))
+			isEmpty = false;
+
+		if (this->mySearchData->houseNumberRange[0] != -1)
+			isEmpty = false;
+		if (this->mySearchData->houseNumberRange[1] != -1)
+			isEmpty = false;
+
+		if (this->mySearchData->commissionYearRange[0] != -1)
+			isEmpty = false;
+		if (this->mySearchData->commissionYearRange[1] != -1)
+			isEmpty = false;
+
+		if (this->mySearchData->floorsNumberRange[0] != -1)
+			isEmpty = false;
+		if (this->mySearchData->floorsNumberRange[1] != -1)
+			isEmpty = false;
+
+		if (this->mySearchData->appartmentsNumberRange[0] != -1)
+			isEmpty = false;
+		if (this->mySearchData->appartmentsNumberRange[1] != -1)
+			isEmpty = false;
+
+		if (this->mySearchData->livingAreaRange[0] != -1)
+			isEmpty = false;
+		if (this->mySearchData->livingAreaRange[1] != -1)
+			isEmpty = false;
+
+		if (this->mySearchData->totalAreaRange[0] != -1)
+			isEmpty = false;
+		if (this->mySearchData->totalAreaRange[1] != -1)
+			isEmpty = false;
+
+		return isEmpty;
 	}
 };
 }
