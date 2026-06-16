@@ -772,7 +772,7 @@ namespace DBnGame {
 
 		bool isEmpty = true;
 
-		if (String::IsNullOrWhiteSpace(this->mySearchData->addressSearch))
+		if (!String::IsNullOrWhiteSpace(this->mySearchData->addressSearch))
 			isEmpty = false;
 
 		if (this->mySearchData->houseNumberRange[0] != -1)
