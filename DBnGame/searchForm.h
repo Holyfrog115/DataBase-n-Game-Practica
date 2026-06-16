@@ -513,6 +513,7 @@ namespace DBnGame {
 			this->Name = L"searchForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Настройка Фильтров Поиска";
+			this->Load += gcnew System::EventHandler(this, &searchForm::searchForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -546,6 +547,7 @@ namespace DBnGame {
 
 	private: System::Void applyButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		applyFilters();
+		startSearch();
 		this->mySearchData->isFilterActive = true;
 		this->Close();
 	}
@@ -720,6 +722,41 @@ namespace DBnGame {
 				this->mySearchData->filteredHousesList->Add(house);
 			}
 		}
+	}
+
+
+	private: System::Void searchForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		streetNameTextBox->Text = this->mySearchData->addressSearch;
+
+		if (this->mySearchData->houseNumberRange[0] != -1)
+		fromHouseNumberTextBox->Text = Convert::ToString(this->mySearchData->houseNumberRange[0]);
+		if (this->mySearchData->houseNumberRange[1] != -1)
+		toHouseNumberTextBox->Text = Convert::ToString(this->mySearchData->houseNumberRange[1]);
+
+		if (this->mySearchData->commissionYearRange[0] != -1)
+		fromCommissionYearTextBox->Text = Convert::ToString(this->mySearchData->commissionYearRange[0]);
+		if (this->mySearchData->commissionYearRange[1] != -1)
+		toCommissionYearTextBox->Text = Convert::ToString(this->mySearchData->commissionYearRange[1]);
+
+		if (this->mySearchData->floorsNumberRange[0] != -1)
+		fromFloorsTextBox->Text = Convert::ToString(this->mySearchData->floorsNumberRange[0]);
+		if (this->mySearchData->floorsNumberRange[1] != -1)
+		toFloorsTextBox->Text = Convert::ToString(this->mySearchData->floorsNumberRange[1]);
+
+		if (this->mySearchData->appartmentsNumberRange[0] != -1)
+		fromAppartmentsTextBox->Text = Convert::ToString(this->mySearchData->appartmentsNumberRange[0]);
+		if (this->mySearchData->appartmentsNumberRange[1] != -1)
+		toAppartmentsTextBox->Text = Convert::ToString(this->mySearchData->appartmentsNumberRange[1]);
+
+		if (this->mySearchData->livingAreaRange[0] != -1)
+		fromLivingAreaTextBox->Text = Convert::ToString(this->mySearchData->livingAreaRange[0]);
+		if (this->mySearchData->livingAreaRange[1] != -1)
+		toLivingAreaTextBox->Text = Convert::ToString(this->mySearchData->livingAreaRange[1]);
+
+		if (this->mySearchData->totalAreaRange[0] != -1)
+		fromTotalAreaTextBox->Text = Convert::ToString(this->mySearchData->totalAreaRange[0]);
+		if (this->mySearchData->totalAreaRange[1] != -1)
+		toTotalAreaTextBox->Text = Convert::ToString(this->mySearchData->totalAreaRange[1]);
 	}
 };
 }

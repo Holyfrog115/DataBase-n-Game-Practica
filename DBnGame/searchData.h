@@ -3,7 +3,7 @@
 ref class searchData
 {
 public:
-	bool isFilterActive = false;
+	bool isFilterActive;
 	System::Collections::Generic::List<House^>^ filteredHousesList;
 	System::String^ addressSearch;
 	array<int>^ houseNumberRange = gcnew array<int>(2);
@@ -27,6 +27,8 @@ public:
 		livingAreaRange[1] = -1;
 		totalAreaRange[0] = -1;
 		totalAreaRange[1] = -1;
+		filteredHousesList = gcnew System::Collections::Generic::List<House^>();
+		isFilterActive = false;
 	}
 };
 
