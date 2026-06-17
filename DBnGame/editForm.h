@@ -295,15 +295,26 @@ namespace DBnGame {
 
 
 	private: System::Void changeButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		housesList[listId]->setAddress(streetNameTextBox->Text);
-		housesList[listId]->setHouseNumber(Convert::ToInt32(houseNumberTextBox->Text));
-		housesList[listId]->setCommissionYear(Convert::ToInt32(commissionYearTextBox->Text));
-		housesList[listId]->setFloorsNumber(Convert::ToInt32(floorsTextBox->Text));
-		housesList[listId]->setAppartmentsNumber(Convert::ToInt32(appartementsTextBox->Text));
-		housesList[listId]->setLivingArea(Convert::ToDouble(livingAreaTextBox->Text));
-		housesList[listId]->setTotalArea(Convert::ToDouble(totalAreaTextBox->Text));
+		House^ validation = gcnew House();
+		bool isValid = validation->areValid(streetNameTextBox->Text, Convert::ToInt32(houseNumberTextBox->Text),
+									   Convert::ToInt32(commissionYearTextBox->Text), Convert::ToInt32(floorsTextBox->Text),
+									   Convert::ToInt32(appartementsTextBox->Text), Convert::ToDouble(livingAreaTextBox->Text),
+									   Convert::ToDouble(totalAreaTextBox->Text));
 
-		this->Close();
+		if (isValid) {
+			housesList[listId]->setAddress(streetNameTextBox->Text);
+			housesList[listId]->setHouseNumber(Convert::ToInt32(houseNumberTextBox->Text));
+			housesList[listId]->setCommissionYear(Convert::ToInt32(commissionYearTextBox->Text));
+			housesList[listId]->setFloorsNumber(Convert::ToInt32(floorsTextBox->Text));
+			housesList[listId]->setAppartmentsNumber(Convert::ToInt32(appartementsTextBox->Text));
+			housesList[listId]->setLivingArea(Convert::ToDouble(livingAreaTextBox->Text));
+			housesList[listId]->setTotalArea(Convert::ToDouble(totalAreaTextBox->Text));
+			this->Close();
+		}
+		else {
+			MessageBox::Show("Некорректные данные! Пожалуйста, проверьте введенные значения.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
 	}
 
 

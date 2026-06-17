@@ -80,13 +80,16 @@ namespace DBnGame {
 
 	private: System::Collections::Generic::List<House^>^ housesList;
 	private: System::Windows::Forms::DataGridView^ targetGrid;
+	private: System::Windows::Forms::ErrorProvider^ errorProvider;
+
+	private: System::ComponentModel::IContainer^ components;
 
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -95,6 +98,7 @@ namespace DBnGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(enteringLines::typeid));
 			this->streetNameLabel = (gcnew System::Windows::Forms::Label());
 			this->streetNameTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
@@ -112,6 +116,8 @@ namespace DBnGame {
 			this->totalAreaTextBox = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->totalAreaLabel = (gcnew System::Windows::Forms::Label());
 			this->cancelButton = (gcnew System::Windows::Forms::Button());
+			this->errorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// streetNameLabel
@@ -131,6 +137,7 @@ namespace DBnGame {
 			this->streetNameTextBox->Name = L"streetNameTextBox";
 			this->streetNameTextBox->Size = System::Drawing::Size(216, 36);
 			this->streetNameTextBox->TabIndex = 1;
+			this->streetNameTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::streetNameTextBox_Validating);
 			// 
 			// addButton
 			// 
@@ -150,6 +157,7 @@ namespace DBnGame {
 			this->houseNumberTextBox->Name = L"houseNumberTextBox";
 			this->houseNumberTextBox->Size = System::Drawing::Size(216, 36);
 			this->houseNumberTextBox->TabIndex = 4;
+			this->houseNumberTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::houseNumberTextBox_Validating);
 			// 
 			// houseNumberLabel
 			// 
@@ -168,6 +176,7 @@ namespace DBnGame {
 			this->commissionYearTextBox->Name = L"commissionYearTextBox";
 			this->commissionYearTextBox->Size = System::Drawing::Size(216, 36);
 			this->commissionYearTextBox->TabIndex = 6;
+			this->commissionYearTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::commissionYearTextBox_Validating);
 			// 
 			// commissionYearLabel
 			// 
@@ -186,6 +195,7 @@ namespace DBnGame {
 			this->floorsTextBox->Name = L"floorsTextBox";
 			this->floorsTextBox->Size = System::Drawing::Size(216, 36);
 			this->floorsTextBox->TabIndex = 8;
+			this->floorsTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::floorsTextBox_Validating);
 			// 
 			// floorsLabel
 			// 
@@ -204,6 +214,7 @@ namespace DBnGame {
 			this->appartementsTextBox->Name = L"appartementsTextBox";
 			this->appartementsTextBox->Size = System::Drawing::Size(216, 36);
 			this->appartementsTextBox->TabIndex = 10;
+			this->appartementsTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::appartementsTextBox_Validating);
 			// 
 			// appartementsLabel
 			// 
@@ -222,6 +233,7 @@ namespace DBnGame {
 			this->livingAreaTextBox->Name = L"livingAreaTextBox";
 			this->livingAreaTextBox->Size = System::Drawing::Size(216, 36);
 			this->livingAreaTextBox->TabIndex = 12;
+			this->livingAreaTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::livingAreaTextBox_Validating);
 			// 
 			// livingAreaLabel
 			// 
@@ -240,6 +252,7 @@ namespace DBnGame {
 			this->totalAreaTextBox->Name = L"totalAreaTextBox";
 			this->totalAreaTextBox->Size = System::Drawing::Size(216, 36);
 			this->totalAreaTextBox->TabIndex = 14;
+			this->totalAreaTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::totalAreaTextBox_Validating);
 			// 
 			// totalAreaLabel
 			// 
@@ -261,6 +274,11 @@ namespace DBnGame {
 			this->cancelButton->Text = L"Отменить Ввод";
 			this->cancelButton->UseVisualStyleBackColor = true;
 			this->cancelButton->Click += gcnew System::EventHandler(this, &enteringLines::cancelButton_Click);
+			// 
+			// errorProvider
+			// 
+			this->errorProvider->BlinkStyle = System::Windows::Forms::ErrorBlinkStyle::NeverBlink;
+			this->errorProvider->ContainerControl = this;
 			// 
 			// enteringLines
 			// 
@@ -290,6 +308,7 @@ namespace DBnGame {
 			this->Name = L"enteringLines";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Ввод Строк";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -303,34 +322,35 @@ namespace DBnGame {
 
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Проверка на пустые поля
-		bool areEmpty = String::IsNullOrWhiteSpace(streetNameTextBox->Text) || String::IsNullOrWhiteSpace(houseNumberTextBox->Text) ||
-			String::IsNullOrWhiteSpace(commissionYearTextBox->Text) || String::IsNullOrWhiteSpace(floorsTextBox->Text) ||
-			String::IsNullOrWhiteSpace(appartementsTextBox->Text) || String::IsNullOrWhiteSpace(livingAreaTextBox->Text) ||
-			String::IsNullOrWhiteSpace(totalAreaTextBox->Text);
 
-		if (!areEmpty) {
-			House^ house = gcnew House(++this->lastId, streetNameTextBox->Text, Convert::ToInt32(houseNumberTextBox->Text),
-									   Convert::ToInt32(commissionYearTextBox->Text), Convert::ToInt32(floorsTextBox->Text),
-									   Convert::ToInt32(appartementsTextBox->Text), Convert::ToDouble(livingAreaTextBox->Text),
+		if (hasValidationErrors()) {
+			MessageBox::Show("Некорректные данные. Пожалуйста, проверьте введенные значения.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		try {
+			House^ house = gcnew House(++this->lastId,
+									   streetNameTextBox->Text,
+									   Convert::ToInt32(houseNumberTextBox->Text),
+									   Convert::ToInt32(commissionYearTextBox->Text),
+									   Convert::ToInt32(floorsTextBox->Text),
+									   Convert::ToInt32(appartementsTextBox->Text),
+									   Convert::ToDouble(livingAreaTextBox->Text),
 									   Convert::ToDouble(totalAreaTextBox->Text));
 
-			bool isValid = house->areValid(streetNameTextBox->Text, Convert::ToInt32(houseNumberTextBox->Text),
-										   Convert::ToInt32(commissionYearTextBox->Text), Convert::ToInt32(floorsTextBox->Text),
-										   Convert::ToInt32(appartementsTextBox->Text), Convert::ToDouble(livingAreaTextBox->Text),
-										   Convert::ToDouble(totalAreaTextBox->Text));
+			this->housesList->Add(house);
+			this->targetGrid->Rows->Add(this->lastId,
+										streetNameTextBox->Text + ", " + houseNumberTextBox->Text,
+										commissionYearTextBox->Text,
+										floorsTextBox->Text,
+										appartementsTextBox->Text,
+										livingAreaTextBox->Text,
+										totalAreaTextBox->Text);
 
-			if (isValid) {
-				this->housesList->Add(house);
-				this->targetGrid->Rows->Add(this->lastId, streetNameTextBox->Text + ", " + houseNumberTextBox->Text, commissionYearTextBox->Text, floorsTextBox->Text,
-											appartementsTextBox->Text, livingAreaTextBox->Text, totalAreaTextBox->Text);
-				emptyFields();
-			}
-			else {
-				MessageBox::Show("Некорректные данные. Пожалуйста, проверьте введенные значения.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			}
+			emptyFields();
 		}
-		else {
-			MessageBox::Show("Поля не могут быть пустыми.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		catch (System::Exception^ ex) {
+			MessageBox::Show("Ошибка при сохранении данных: " + ex->Message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 
@@ -343,6 +363,103 @@ namespace DBnGame {
 		appartementsTextBox->Text = "";
 		livingAreaTextBox->Text = "";
 		totalAreaTextBox->Text = "";
+	}
+
+
+	private: System::Void streetNameTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(streetNameTextBox, "");
+		if (String::IsNullOrWhiteSpace(streetNameTextBox->Text)) {
+			errorProvider->SetError(streetNameTextBox, "Название улицы не может быть пустым.");
+		}
+		else if (streetNameTextBox->Text->Length > 100) {
+			errorProvider->SetError(streetNameTextBox, "Название улицы не может быть длиннее 100 символов.");
+		}
+	}
+
+
+	private: System::Void houseNumberTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(houseNumberTextBox, "");
+		if (String::IsNullOrWhiteSpace(houseNumberTextBox->Text)) {
+			errorProvider->SetError(houseNumberTextBox, "Номер дома не может быть пустым.");
+		}
+		else if (Convert::ToInt32(houseNumberTextBox->Text) < 0 || Convert::ToInt32(houseNumberTextBox->Text) > 200) {
+			errorProvider->SetError(houseNumberTextBox, "Номер дома не может быть отрицательным или больше 200.");
+		}
+	}
+
+
+	private: System::Void commissionYearTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(commissionYearTextBox, "");
+		if (String::IsNullOrWhiteSpace(commissionYearTextBox->Text)) {
+			errorProvider->SetError(commissionYearTextBox, "Год сдачи не может быть пустым.");
+		}
+		else if (Convert::ToInt32(commissionYearTextBox->Text) < 1700 || Convert::ToInt32(commissionYearTextBox->Text) > DateTime::Now.Year) {
+			errorProvider->SetError(commissionYearTextBox, "Год сдачи должен быть между 1700 и текущим годом.");
+		}
+	}
+
+
+	private: System::Void floorsTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(floorsTextBox, "");
+		if (String::IsNullOrWhiteSpace(floorsTextBox->Text)) {
+			errorProvider->SetError(floorsTextBox, "Количество этажей не может быть пустым.");
+		}
+		else if (Convert::ToInt32(floorsTextBox->Text) < 1 || Convert::ToInt32(floorsTextBox->Text) > 200) {
+			errorProvider->SetError(floorsTextBox, "Количество этажей должно быть между 1 и 200.");
+		}
+	}
+
+
+	private: System::Void appartementsTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(appartementsTextBox, "");
+		if (String::IsNullOrWhiteSpace(appartementsTextBox->Text)) {
+			errorProvider->SetError(appartementsTextBox, "Количество квартир не может быть пустым.");
+		}
+		else if (Convert::ToInt32(appartementsTextBox->Text) < 0 || Convert::ToInt32(appartementsTextBox->Text) > 5000) {
+			errorProvider->SetError(appartementsTextBox, "Количество квартир не может быть отрицательным или больше 5000.");
+		}
+	}
+
+
+	private: System::Void livingAreaTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(livingAreaTextBox, "");
+		if (String::IsNullOrWhiteSpace(livingAreaTextBox->Text)) {
+			errorProvider->SetError(livingAreaTextBox, "Общая жилая площадь не может быть пустой.");
+		}
+		else if (Convert::ToDouble(livingAreaTextBox->Text) < 0 || Convert::ToDouble(livingAreaTextBox->Text) > 100000) {
+			errorProvider->SetError(livingAreaTextBox, "Общая жилая площадь не может быть отрицательным или больше 100000.");
+		}
+	}
+
+
+	private: System::Void totalAreaTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+		errorProvider->SetError(totalAreaTextBox, "");
+		if (String::IsNullOrWhiteSpace(totalAreaTextBox->Text)) {
+			errorProvider->SetError(totalAreaTextBox, "Общая площадь дома не может быть пустой.");
+		}
+		else if (Convert::ToDouble(totalAreaTextBox->Text) < 0 || Convert::ToDouble(totalAreaTextBox->Text) > 100000) {
+			errorProvider->SetError(totalAreaTextBox, "Общая площадь дома не может быть отрицательным или больше 100000.");
+		}
+		else if (Convert::ToDouble(totalAreaTextBox->Text) < Convert::ToDouble(livingAreaTextBox->Text)) {
+			errorProvider->SetError(totalAreaTextBox, "Общая площадь дома не может быть меньше общей жилой площади.");
+		}
+	}
+
+
+	private: bool hasValidationErrors() {
+		// Проверяем все поля на наличие ошибок в ErrorProvider
+		array<MaskedTextBox^>^ fieldsToValidate = {
+			streetNameTextBox, houseNumberTextBox, commissionYearTextBox,
+			floorsTextBox, appartementsTextBox, livingAreaTextBox, totalAreaTextBox
+		};
+
+		for each(MaskedTextBox ^ textBox in fieldsToValidate) {
+			// Если у ErrorProvider есть текст ошибки для этого поля, то есть и сама ошибка
+			if (!String::IsNullOrEmpty(errorProvider->GetError(textBox))) {
+				return true;
+			}
+		}
+		return false;
 	}
 };
 }
