@@ -255,6 +255,7 @@ namespace DBnGame {
 			if (listId != -1) {
 				housesList->RemoveAt(listId);
 				targetGrid->Rows->RemoveAt(listId);
+				this->Close();
 			}
 			else {
 				MessageBox::Show("Запись с указанным ID не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -292,6 +293,7 @@ namespace DBnGame {
 						}
 					}
 				}
+				this->Close();
 			}
 			else {
 				MessageBox::Show("Записей с указанными ID не найдено.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
