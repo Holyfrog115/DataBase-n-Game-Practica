@@ -127,6 +127,7 @@ namespace DBnGame {
 			this->lineIdTextBox->Name = L"lineIdTextBox";
 			this->lineIdTextBox->Size = System::Drawing::Size(264, 36);
 			this->lineIdTextBox->TabIndex = 3;
+			this->lineIdTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &deletingLines::digitsOnly_KeyPress);
 			// 
 			// deleteButton
 			// 
@@ -147,6 +148,7 @@ namespace DBnGame {
 			this->startIdTextBox->Size = System::Drawing::Size(192, 36);
 			this->startIdTextBox->TabIndex = 6;
 			this->startIdTextBox->Visible = false;
+			this->startIdTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &deletingLines::digitsOnly_KeyPress);
 			// 
 			// startIdLabel
 			// 
@@ -167,6 +169,7 @@ namespace DBnGame {
 			this->endIdTextBox->Size = System::Drawing::Size(192, 36);
 			this->endIdTextBox->TabIndex = 8;
 			this->endIdTextBox->Visible = false;
+			this->endIdTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &deletingLines::digitsOnly_KeyPress);
 			// 
 			// endIdLabel
 			// 
@@ -293,6 +296,14 @@ namespace DBnGame {
 			else {
 				MessageBox::Show("Записей с указанными ID не найдено.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
+		}
+	}
+
+	private: System::Void digitsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой и не является клавишей Backspace
+		if (!System::Char::IsDigit(e->KeyChar) && e->KeyChar != (char)Keys::Back) {
+			// Пропускаем, если не цифра и не Backspace
+			e->Handled = true;
 		}
 	}
 };
