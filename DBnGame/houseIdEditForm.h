@@ -75,6 +75,7 @@ namespace DBnGame {
 			this->idTextBox->Name = L"idTextBox";
 			this->idTextBox->Size = System::Drawing::Size(120, 36);
 			this->idTextBox->TabIndex = 5;
+			this->idTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &houseIdEditForm::digitsOnly_KeyPress);
 			// 
 			// idLabel
 			// 
@@ -146,6 +147,15 @@ namespace DBnGame {
 		}
 		else {
 			MessageBox::Show("Запись с указанным ID не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+
+
+	private: System::Void digitsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой и не является клавишей Backspace
+		if (!System::Char::IsDigit(e->KeyChar) && e->KeyChar != (char)Keys::Back) {
+			// Пропускаем, если не цифра и не Backspace
+			e->Handled = true;
 		}
 	}
 	};
