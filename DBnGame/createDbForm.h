@@ -142,7 +142,6 @@ namespace DBnGame {
 			else {
 				createDb();
 			}
-			
 		}
 	}
 	};

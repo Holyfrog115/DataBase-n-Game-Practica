@@ -157,6 +157,7 @@ namespace DBnGame {
 			this->houseNumberTextBox->Name = L"houseNumberTextBox";
 			this->houseNumberTextBox->Size = System::Drawing::Size(216, 36);
 			this->houseNumberTextBox->TabIndex = 4;
+			this->houseNumberTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &enteringLines::digitsOnly_KeyPress);
 			this->houseNumberTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::houseNumberTextBox_Validating);
 			// 
 			// houseNumberLabel
@@ -176,6 +177,7 @@ namespace DBnGame {
 			this->commissionYearTextBox->Name = L"commissionYearTextBox";
 			this->commissionYearTextBox->Size = System::Drawing::Size(216, 36);
 			this->commissionYearTextBox->TabIndex = 6;
+			this->commissionYearTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &enteringLines::digitsOnly_KeyPress);
 			this->commissionYearTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::commissionYearTextBox_Validating);
 			// 
 			// commissionYearLabel
@@ -195,6 +197,7 @@ namespace DBnGame {
 			this->floorsTextBox->Name = L"floorsTextBox";
 			this->floorsTextBox->Size = System::Drawing::Size(216, 36);
 			this->floorsTextBox->TabIndex = 8;
+			this->floorsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &enteringLines::digitsOnly_KeyPress);
 			this->floorsTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::floorsTextBox_Validating);
 			// 
 			// floorsLabel
@@ -214,6 +217,7 @@ namespace DBnGame {
 			this->appartementsTextBox->Name = L"appartementsTextBox";
 			this->appartementsTextBox->Size = System::Drawing::Size(216, 36);
 			this->appartementsTextBox->TabIndex = 10;
+			this->appartementsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &enteringLines::digitsOnly_KeyPress);
 			this->appartementsTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::appartementsTextBox_Validating);
 			// 
 			// appartementsLabel
@@ -233,6 +237,7 @@ namespace DBnGame {
 			this->livingAreaTextBox->Name = L"livingAreaTextBox";
 			this->livingAreaTextBox->Size = System::Drawing::Size(216, 36);
 			this->livingAreaTextBox->TabIndex = 12;
+			this->livingAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &enteringLines::decimalsOnly_KeyPress);
 			this->livingAreaTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::livingAreaTextBox_Validating);
 			// 
 			// livingAreaLabel
@@ -252,6 +257,7 @@ namespace DBnGame {
 			this->totalAreaTextBox->Name = L"totalAreaTextBox";
 			this->totalAreaTextBox->Size = System::Drawing::Size(216, 36);
 			this->totalAreaTextBox->TabIndex = 14;
+			this->totalAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &enteringLines::decimalsOnly_KeyPress);
 			this->totalAreaTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &enteringLines::totalAreaTextBox_Validating);
 			// 
 			// totalAreaLabel
@@ -323,6 +329,18 @@ namespace DBnGame {
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Проверка на пустые поля
 
+		bool areEmptyFields = String::IsNullOrWhiteSpace(streetNameTextBox->Text) ||
+			String::IsNullOrWhiteSpace(houseNumberTextBox->Text) ||
+			String::IsNullOrWhiteSpace(commissionYearTextBox->Text) ||
+			String::IsNullOrWhiteSpace(floorsTextBox->Text) ||
+			String::IsNullOrWhiteSpace(appartementsTextBox->Text) ||
+			String::IsNullOrWhiteSpace(livingAreaTextBox->Text) ||
+			String::IsNullOrWhiteSpace(totalAreaTextBox->Text);
+
+		if (areEmptyFields) {
+			MessageBox::Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
 		if (hasValidationErrors()) {
 			MessageBox::Show("Некорректные данные. Пожалуйста, проверьте введенные значения.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
@@ -460,6 +478,39 @@ namespace DBnGame {
 			}
 		}
 		return false;
+	}
+
+
+	private: System::Void digitsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой и не является клавишей Backspace
+		if (!System::Char::IsDigit(e->KeyChar) && e->KeyChar != (char)Keys::Back) {
+			// Пропускаем, если не цифра и не Backspace
+			e->Handled = true;
+		}
+	}
+
+	private: System::Void decimalsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой, запятой и не является клавишей Backspace
+		System::Windows::Forms::MaskedTextBox^ currentTextBox = dynamic_cast<MaskedTextBox^>(sender);
+		if (currentTextBox == nullptr) return;
+
+		char decimalSeparator = System::Globalization::CultureInfo::CurrentCulture->NumberFormat->NumberDecimalSeparator[0];
+
+		// Если это цифра или Backspace — разрешаем ввод
+		if (System::Char::IsDigit(e->KeyChar) || e->KeyChar == (char)Keys::Back) {
+			return;
+		}
+
+		if (e->KeyChar == decimalSeparator) {
+			// Проверяем, нет ли уже разделителя в тексте. Если есть - запрещаем второй
+			if (currentTextBox->Text->Contains(decimalSeparator.ToString())) {
+				e->Handled = true;
+			}
+		}
+		else {
+			// Любой другой символ (буквы, пробелы) - блокируем
+			e->Handled = true;
+		}
 	}
 };
 }
