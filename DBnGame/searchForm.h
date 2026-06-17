@@ -230,6 +230,7 @@ namespace DBnGame {
 			this->fromHouseNumberTextBox->Name = L"fromHouseNumberTextBox";
 			this->fromHouseNumberTextBox->Size = System::Drawing::Size(120, 36);
 			this->fromHouseNumberTextBox->TabIndex = 36;
+			this->fromHouseNumberTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// houseNumberLabel
 			// 
@@ -295,6 +296,7 @@ namespace DBnGame {
 			this->toHouseNumberTextBox->Name = L"toHouseNumberTextBox";
 			this->toHouseNumberTextBox->Size = System::Drawing::Size(120, 36);
 			this->toHouseNumberTextBox->TabIndex = 49;
+			this->toHouseNumberTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// toCommissionYearLabel
 			// 
@@ -312,6 +314,7 @@ namespace DBnGame {
 			this->toCommissionYearTextBox->Name = L"toCommissionYearTextBox";
 			this->toCommissionYearTextBox->Size = System::Drawing::Size(120, 36);
 			this->toCommissionYearTextBox->TabIndex = 53;
+			this->toCommissionYearTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// fromCommissionYearLabel
 			// 
@@ -329,6 +332,7 @@ namespace DBnGame {
 			this->fromCommissionYearTextBox->Name = L"fromCommissionYearTextBox";
 			this->fromCommissionYearTextBox->Size = System::Drawing::Size(120, 36);
 			this->fromCommissionYearTextBox->TabIndex = 51;
+			this->fromCommissionYearTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// toFloorsLabel
 			// 
@@ -346,6 +350,7 @@ namespace DBnGame {
 			this->toFloorsTextBox->Name = L"toFloorsTextBox";
 			this->toFloorsTextBox->Size = System::Drawing::Size(120, 36);
 			this->toFloorsTextBox->TabIndex = 57;
+			this->toFloorsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// fromFloorsLabel
 			// 
@@ -363,6 +368,7 @@ namespace DBnGame {
 			this->fromFloorsTextBox->Name = L"fromFloorsTextBox";
 			this->fromFloorsTextBox->Size = System::Drawing::Size(120, 36);
 			this->fromFloorsTextBox->TabIndex = 55;
+			this->fromFloorsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// toAppartmentsLabel
 			// 
@@ -380,6 +386,7 @@ namespace DBnGame {
 			this->toAppartmentsTextBox->Name = L"toAppartmentsTextBox";
 			this->toAppartmentsTextBox->Size = System::Drawing::Size(120, 36);
 			this->toAppartmentsTextBox->TabIndex = 61;
+			this->toAppartmentsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// fromAppartmentsLabel
 			// 
@@ -397,6 +404,7 @@ namespace DBnGame {
 			this->fromAppartmentsTextBox->Name = L"fromAppartmentsTextBox";
 			this->fromAppartmentsTextBox->Size = System::Drawing::Size(120, 36);
 			this->fromAppartmentsTextBox->TabIndex = 59;
+			this->fromAppartmentsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::digitsOnly_KeyPress);
 			// 
 			// toLivingAreaLabel
 			// 
@@ -414,6 +422,7 @@ namespace DBnGame {
 			this->toLivingAreaTextBox->Name = L"toLivingAreaTextBox";
 			this->toLivingAreaTextBox->Size = System::Drawing::Size(120, 36);
 			this->toLivingAreaTextBox->TabIndex = 65;
+			this->toLivingAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::decimalsOnly_KeyPress);
 			// 
 			// fromLivingAreaLabel
 			// 
@@ -431,6 +440,7 @@ namespace DBnGame {
 			this->fromLivingAreaTextBox->Name = L"fromLivingAreaTextBox";
 			this->fromLivingAreaTextBox->Size = System::Drawing::Size(120, 36);
 			this->fromLivingAreaTextBox->TabIndex = 63;
+			this->fromLivingAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::decimalsOnly_KeyPress);
 			// 
 			// toTotalAreaLabel
 			// 
@@ -448,6 +458,7 @@ namespace DBnGame {
 			this->toTotalAreaTextBox->Name = L"toTotalAreaTextBox";
 			this->toTotalAreaTextBox->Size = System::Drawing::Size(120, 36);
 			this->toTotalAreaTextBox->TabIndex = 69;
+			this->toTotalAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::decimalsOnly_KeyPress);
 			// 
 			// fromTotalAreaLabel
 			// 
@@ -465,6 +476,7 @@ namespace DBnGame {
 			this->fromTotalAreaTextBox->Name = L"fromTotalAreaTextBox";
 			this->fromTotalAreaTextBox->Size = System::Drawing::Size(120, 36);
 			this->fromTotalAreaTextBox->TabIndex = 67;
+			this->fromTotalAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &searchForm::decimalsOnly_KeyPress);
 			// 
 			// searchForm
 			// 
@@ -806,6 +818,39 @@ namespace DBnGame {
 			isEmpty = false;
 
 		return isEmpty;
+	}
+
+
+	private: System::Void digitsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой и не является клавишей Backspace
+		if (!System::Char::IsDigit(e->KeyChar) && e->KeyChar != (char)Keys::Back) {
+			// Пропускаем, если не цифра и не Backspace
+			e->Handled = true;
+		}
+	}
+
+	private: System::Void decimalsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой, запятой и не является клавишей Backspace
+		System::Windows::Forms::MaskedTextBox^ currentTextBox = dynamic_cast<MaskedTextBox^>(sender);
+		if (currentTextBox == nullptr) return;
+
+		char decimalSeparator = System::Globalization::CultureInfo::CurrentCulture->NumberFormat->NumberDecimalSeparator[0];
+
+		// Если это цифра или Backspace — разрешаем ввод
+		if (System::Char::IsDigit(e->KeyChar) || e->KeyChar == (char)Keys::Back) {
+			return;
+		}
+
+		if (e->KeyChar == decimalSeparator) {
+			// Проверяем, нет ли уже разделителя в тексте. Если есть - запрещаем второй
+			if (currentTextBox->Text->Contains(decimalSeparator.ToString())) {
+				e->Handled = true;
+			}
+		}
+		else {
+			// Любой другой символ (буквы, пробелы) - блокируем
+			e->Handled = true;
+		}
 	}
 };
 }
