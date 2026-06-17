@@ -130,6 +130,7 @@ namespace DBnGame {
 			this->totalAreaTextBox->Name = L"totalAreaTextBox";
 			this->totalAreaTextBox->Size = System::Drawing::Size(216, 36);
 			this->totalAreaTextBox->TabIndex = 30;
+			this->totalAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editForm::decimalsOnly_KeyPress);
 			this->totalAreaTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editForm::totalAreaTextBox_Validating);
 			// 
 			// totalAreaLabel
@@ -149,6 +150,7 @@ namespace DBnGame {
 			this->livingAreaTextBox->Name = L"livingAreaTextBox";
 			this->livingAreaTextBox->Size = System::Drawing::Size(216, 36);
 			this->livingAreaTextBox->TabIndex = 28;
+			this->livingAreaTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editForm::decimalsOnly_KeyPress);
 			this->livingAreaTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editForm::livingAreaTextBox_Validating);
 			// 
 			// livingAreaLabel
@@ -168,6 +170,7 @@ namespace DBnGame {
 			this->appartementsTextBox->Name = L"appartementsTextBox";
 			this->appartementsTextBox->Size = System::Drawing::Size(216, 36);
 			this->appartementsTextBox->TabIndex = 26;
+			this->appartementsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editForm::digitsOnly_KeyPress);
 			this->appartementsTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editForm::appartementsTextBox_Validating);
 			// 
 			// appartementsLabel
@@ -187,6 +190,7 @@ namespace DBnGame {
 			this->floorsTextBox->Name = L"floorsTextBox";
 			this->floorsTextBox->Size = System::Drawing::Size(216, 36);
 			this->floorsTextBox->TabIndex = 24;
+			this->floorsTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editForm::digitsOnly_KeyPress);
 			this->floorsTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editForm::floorsTextBox_Validating);
 			// 
 			// floorsLabel
@@ -206,6 +210,7 @@ namespace DBnGame {
 			this->commissionYearTextBox->Name = L"commissionYearTextBox";
 			this->commissionYearTextBox->Size = System::Drawing::Size(216, 36);
 			this->commissionYearTextBox->TabIndex = 22;
+			this->commissionYearTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editForm::digitsOnly_KeyPress);
 			this->commissionYearTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editForm::commissionYearTextBox_Validating);
 			// 
 			// commissionYearLabel
@@ -225,6 +230,7 @@ namespace DBnGame {
 			this->houseNumberTextBox->Name = L"houseNumberTextBox";
 			this->houseNumberTextBox->Size = System::Drawing::Size(216, 36);
 			this->houseNumberTextBox->TabIndex = 20;
+			this->houseNumberTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editForm::digitsOnly_KeyPress);
 			this->houseNumberTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editForm::houseNumberTextBox_Validating);
 			// 
 			// houseNumberLabel
@@ -438,6 +444,39 @@ namespace DBnGame {
 			}
 		}
 		return false;
+	}
+
+
+	private: System::Void digitsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой и не является клавишей Backspace
+		if (!System::Char::IsDigit(e->KeyChar) && e->KeyChar != (char)Keys::Back) {
+			// Пропускаем, если не цифра и не Backspace
+			e->Handled = true;
+		}
+	}
+
+	private: System::Void decimalsOnly_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		// Проверяем: если символ не является цифрой, запятой и не является клавишей Backspace
+		System::Windows::Forms::MaskedTextBox^ currentTextBox = dynamic_cast<MaskedTextBox^>(sender);
+		if (currentTextBox == nullptr) return;
+
+		char decimalSeparator = System::Globalization::CultureInfo::CurrentCulture->NumberFormat->NumberDecimalSeparator[0];
+
+		// Если это цифра или Backspace — разрешаем ввод
+		if (System::Char::IsDigit(e->KeyChar) || e->KeyChar == (char)Keys::Back) {
+			return;
+		}
+
+		if (e->KeyChar == decimalSeparator) {
+			// Проверяем, нет ли уже разделителя в тексте. Если есть - запрещаем второй
+			if (currentTextBox->Text->Contains(decimalSeparator.ToString())) {
+				e->Handled = true;
+			}
+		}
+		else {
+			// Любой другой символ (буквы, пробелы) - блокируем
+			e->Handled = true;
+		}
 	}
 };
 }
