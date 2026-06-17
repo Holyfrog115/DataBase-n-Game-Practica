@@ -672,7 +672,7 @@ namespace DBnGame {
 		for each (House ^ house in this->housesList) {
 			bool filterFlag = true;
 			if (!String::IsNullOrWhiteSpace(this->mySearchData->addressSearch)) {
-				if (!house->getAddress()->Contains(this->mySearchData->addressSearch)) {
+				if (!house->getAddress()->ToLower()->Contains(this->mySearchData->addressSearch->ToLower())) {
 					filterFlag = false;
 				}
 			}
