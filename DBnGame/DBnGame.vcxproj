@@ -151,6 +151,8 @@
     <ClCompile Include="houseIdEditForm.cpp" />
     <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="mainMenu.cpp" />
+    <ClCompile Include="MineField.cpp" />
+    <ClCompile Include="MineSweeper.cpp" />
     <ClCompile Include="searchData.cpp" />
     <ClCompile Include="searchForm.cpp" />
   </ItemGroup>
@@ -178,6 +180,10 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="mainMenu.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MineField.h" />
+    <ClInclude Include="MineSweeper.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="searchData.h" />
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="mainMenu.resx">
       <DependentUpon>mainMenu.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MineSweeper.resx">
+      <DependentUpon>MineSweeper.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="searchForm.resx">
       <DependentUpon>searchForm.h</DependentUpon>

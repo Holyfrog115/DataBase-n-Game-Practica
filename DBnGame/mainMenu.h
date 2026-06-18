@@ -1,5 +1,6 @@
 #pragma once
 #include "dataBase.h"
+#include "MineSweeper.h"
 
 namespace DBnGame {
 
@@ -82,8 +83,9 @@ namespace DBnGame {
 			this->gameButton->Name = L"gameButton";
 			this->gameButton->Size = System::Drawing::Size(288, 120);
 			this->gameButton->TabIndex = 1;
-			this->gameButton->Text = L"Морской Бой";
+			this->gameButton->Text = L"Сапер";
 			this->gameButton->UseVisualStyleBackColor = true;
+			this->gameButton->Click += gcnew System::EventHandler(this, &mainMenu::gameButton_Click);
 			// 
 			// mainMenu
 			// 
@@ -107,6 +109,14 @@ namespace DBnGame {
 		this->Hide();
 
 		dataBaseForm->Show();
+	}
+
+
+	private: System::Void gameButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		MineSweeper^ mineSweeperForm = gcnew MineSweeper();
+		this->Hide();
+
+		mineSweeperForm->Show();
 	}
 	};
 }
