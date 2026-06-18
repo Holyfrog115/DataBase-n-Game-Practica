@@ -80,6 +80,7 @@ namespace DBnGame {
 		// Создаем поле 10x10 с 15 минами
 		MineField^ mineField = gcnew MineField(10, 10, 15);
 		mineField->InitializeField(this);
+		mineField->GenerateMines();
 	}
 	};
 }
