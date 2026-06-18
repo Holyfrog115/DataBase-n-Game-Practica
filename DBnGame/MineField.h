@@ -10,6 +10,7 @@ private:
 	int rows;
 	int cols;
 	int mines;
+	int cellsLeft;
 	array<int, 2>^ fieldLogic; // -1 - мина, 0 - пустая клетка, >0 - количество мин вокруг
 	array<Button^, 2>^ fieldButtons; // Кнопки на форме
 	bool isGameOver;
@@ -19,6 +20,7 @@ public:
 		this->rows = rows;
 		this->cols = cols;
 		this->mines = mines;
+		this->cellsLeft = (rows * cols) - mines;
 		this->isGameOver = false;
 	}
 
@@ -126,6 +128,13 @@ public:
 			fieldButtons[r, c]->Text = "💣";
 			fieldButtons[r, c]->BackColor = System::Drawing::Color::Red;
 			GameOver(false);
+			return;
+		}
+
+		cellsLeft--;
+		// Условие победы
+		if (cellsLeft == 0) {
+			GameOver(true);
 			return;
 		}
 
