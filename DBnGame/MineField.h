@@ -40,5 +40,44 @@ public:
 			}
 		}
 	}
+
+	System::Void GenerateMines() {
+		System::Random^ rand = gcnew System::Random();
+		int plantedMines = 0;
+
+		// 1. Расставляем мины
+		while (plantedMines < mines) {
+			int r = rand->Next(rows);
+			int c = rand->Next(cols);
+
+			if (fieldLogic[r, c] != -1) { // Если тут еще нет мины
+				fieldLogic[r, c] = -1;
+				plantedMines++;
+			}
+		}
+
+		// 2. Считаем цифры вокруг мин
+		for (int r = 0; r < rows; r++) {
+			for (int c = 0; c < cols; c++) {
+				if (fieldLogic[r, c] == -1) continue; // Мины не трогаем
+
+				int minesAround = 0;
+				// Проверяем соседей в квадрате 3х3 вокруг текущей клетки
+				for (int dr = -1; dr <= 1; dr++) {
+					for (int dc = -1; dc <= 1; dc++) {
+						int nr = r + dr;
+						int nc = c + dc;
+						// Проверяем, что сосед не вышел за границы поля
+						if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+							if (fieldLogic[nr, nc] == -1) {
+								minesAround++;
+							}
+						}
+					}
+				}
+				fieldLogic[r, c] = minesAround; // Записываем число от 0 до 8
+			}
+		}
+	}
 };
 
