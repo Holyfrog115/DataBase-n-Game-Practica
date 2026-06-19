@@ -48,6 +48,23 @@ public:
 		}
 	}
 
+
+	System::Void CleanUpField(Form^ form) {
+		// Удаляем кнопки с формы и уничтожаем их объекты
+		if (fieldButtons != nullptr) {
+			for (int r = 0; r < rows; r++) {
+				for (int c = 0; c < cols; c++) {
+					Button^ btn = fieldButtons[r, c];
+					if (btn != nullptr) {
+						form->Controls->Remove(btn);
+						delete btn;
+					}
+				}
+			}
+		}
+	}
+
+
 	System::Void GenerateMines() {
 		System::Random^ rand = gcnew System::Random();
 		int plantedMines = 0;
