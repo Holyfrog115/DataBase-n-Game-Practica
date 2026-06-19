@@ -18,6 +18,7 @@ private:
 	array<int, 2>^ fieldLogic; // -1 - мина, 0 - пустая клетка, >0 - количество мин вокруг
 	array<Button^, 2>^ fieldButtons; // Кнопки на форме
 	bool isGameOver;
+	bool isFirstMove;
 
 public:
 	MineField(int rows, int cols, int mines, Button^ restartButton, Timer^ timer, Label^ flagLabel) {
@@ -29,6 +30,7 @@ public:
 		this->cellsLeft = (rows * cols) - mines;
 		this->isGameOver = false;
 		this->restartButton = restartButton;
+		this->isFirstMove = true;
 		this->timer = timer;
 		timer->Stop();
 	}

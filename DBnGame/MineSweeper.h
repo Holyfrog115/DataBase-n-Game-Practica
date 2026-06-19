@@ -16,12 +16,13 @@ namespace DBnGame {
 	public ref class MineSweeper : public System::Windows::Forms::Form
 	{
 	public:
-		MineSweeper(void)
+		MineSweeper(System::Windows::Forms::Form^ MainMenu)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			this->MainMenu = MainMenu;
 		}
 
 	protected:
@@ -41,7 +42,10 @@ namespace DBnGame {
 	private: System::Windows::Forms::Timer^ timer;
 	private: System::Windows::Forms::Label^ timeLabel;
 	private: int secondsPassed;
+	private: System::Windows::Forms::Form^ MainMenu;
+	private: bool isExiting = false;
 	private: System::Windows::Forms::Label^ flagsLabel;
+	private: System::Windows::Forms::Button^ backButton;
 
 
 	private: System::ComponentModel::IContainer^ components;
@@ -67,6 +71,7 @@ namespace DBnGame {
 			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->timeLabel = (gcnew System::Windows::Forms::Label());
 			this->flagsLabel = (gcnew System::Windows::Forms::Label());
+			this->backButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// restartButton
@@ -94,9 +99,9 @@ namespace DBnGame {
 			// 
 			// timeLabel
 			// 
-			this->timeLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(40)),
-																		  static_cast<System::Int32>(static_cast<System::Byte>(40)));
-			this->timeLabel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->timeLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)),
+																		  static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->timeLabel->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->timeLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 																 static_cast<System::Byte>(204)));
 			this->timeLabel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(204)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
@@ -110,9 +115,9 @@ namespace DBnGame {
 			// 
 			// flagsLabel
 			// 
-			this->flagsLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(40)),
-																		   static_cast<System::Int32>(static_cast<System::Byte>(40)));
-			this->flagsLabel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->flagsLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)),
+																		   static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->flagsLabel->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->flagsLabel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(204)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 																		   static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->flagsLabel->Location = System::Drawing::Point(120, 48);
@@ -122,12 +127,27 @@ namespace DBnGame {
 			this->flagsLabel->TabIndex = 2;
 			this->flagsLabel->Text = L"015";
 			// 
+			// backButton
+			// 
+			this->backButton->BackColor = System::Drawing::Color::Silver;
+			this->backButton->FlatAppearance->BorderColor = System::Drawing::Color::Silver;
+			this->backButton->FlatAppearance->BorderSize = 0;
+			this->backButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->backButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"backButton.Image")));
+			this->backButton->Location = System::Drawing::Point(0, 0);
+			this->backButton->Name = L"backButton";
+			this->backButton->Size = System::Drawing::Size(48, 48);
+			this->backButton->TabIndex = 3;
+			this->backButton->UseVisualStyleBackColor = false;
+			this->backButton->Click += gcnew System::EventHandler(this, &MineSweeper::backButton_Click);
+			// 
 			// MineSweeper
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 30);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Silver;
 			this->ClientSize = System::Drawing::Size(584, 661);
+			this->Controls->Add(this->backButton);
 			this->Controls->Add(this->flagsLabel);
 			this->Controls->Add(this->timeLabel);
 			this->Controls->Add(this->restartButton);
@@ -146,7 +166,12 @@ namespace DBnGame {
 		}
 #pragma endregion
 	private: System::Void MineSweeper_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
-		Application::Exit();
+		if (!isExiting) {
+			Application::Exit();
+		}
+		else {
+			this->MainMenu->Show();
+		}
 	}
 
 
@@ -178,6 +203,11 @@ namespace DBnGame {
 			return;
 		}
 		timeLabel->Text = secondsPassed.ToString("D3");
+	}
+
+	private: System::Void backButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->isExiting = true;
+		this->Close();
 	}
 };
 }

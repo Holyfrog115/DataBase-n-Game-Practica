@@ -113,7 +113,7 @@ namespace DBnGame {
 
 
 	private: System::Void gameButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		MineSweeper^ mineSweeperForm = gcnew MineSweeper();
+		MineSweeper^ mineSweeperForm = gcnew MineSweeper(this);
 		this->Hide();
 
 		mineSweeperForm->Show();
