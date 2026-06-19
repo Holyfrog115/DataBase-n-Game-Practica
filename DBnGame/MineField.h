@@ -129,7 +129,12 @@ public:
 		if (e->Button == System::Windows::Forms::MouseButtons::Right) {
 			if (clickedButton->Text == "") {
 				flagsLeft--;
-				flagsLabel->Text = flagsLeft.ToString("D3");
+				if (flagsLeft < 0) {
+					flagsLabel->Text = flagsLeft.ToString("D2");
+				}
+				else {
+					flagsLabel->Text = flagsLeft.ToString("D3");
+				}
 				clickedButton->Text = "🚩";
 				clickedButton->ForeColor = System::Drawing::Color::Red;
 			}

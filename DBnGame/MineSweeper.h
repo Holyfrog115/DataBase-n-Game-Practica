@@ -94,25 +94,31 @@ namespace DBnGame {
 			// 
 			// timeLabel
 			// 
-			this->timeLabel->AutoSize = true;
+			this->timeLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(40)),
+																		  static_cast<System::Int32>(static_cast<System::Byte>(40)));
+			this->timeLabel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->timeLabel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 																 static_cast<System::Byte>(204)));
 			this->timeLabel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(204)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 																		  static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->timeLabel->Location = System::Drawing::Point(384, 48);
+			this->timeLabel->Location = System::Drawing::Point(408, 48);
 			this->timeLabel->Name = L"timeLabel";
-			this->timeLabel->Size = System::Drawing::Size(49, 30);
+			this->timeLabel->Padding = System::Windows::Forms::Padding(10, 5, 10, 5);
+			this->timeLabel->Size = System::Drawing::Size(71, 42);
 			this->timeLabel->TabIndex = 1;
 			this->timeLabel->Text = L"000";
 			// 
 			// flagsLabel
 			// 
-			this->flagsLabel->AutoSize = true;
+			this->flagsLabel->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(40)),
+																		   static_cast<System::Int32>(static_cast<System::Byte>(40)));
+			this->flagsLabel->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->flagsLabel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(204)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 																		   static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->flagsLabel->Location = System::Drawing::Point(120, 48);
 			this->flagsLabel->Name = L"flagsLabel";
-			this->flagsLabel->Size = System::Drawing::Size(46, 30);
+			this->flagsLabel->Padding = System::Windows::Forms::Padding(10, 5, 10, 5);
+			this->flagsLabel->Size = System::Drawing::Size(68, 42);
 			this->flagsLabel->TabIndex = 2;
 			this->flagsLabel->Text = L"015";
 			// 
@@ -136,7 +142,6 @@ namespace DBnGame {
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MineSweeper::MineSweeper_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &MineSweeper::MineSweeper_Load);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
