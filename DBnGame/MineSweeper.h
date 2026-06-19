@@ -40,6 +40,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::ImageList^ imageList1;
 	private: System::Windows::Forms::Timer^ timer;
 	private: System::Windows::Forms::Label^ timeLabel;
+	private: int secondsPassed;
 
 	private: System::ComponentModel::IContainer^ components;
 	protected:
@@ -86,6 +87,7 @@ namespace DBnGame {
 			// timer
 			// 
 			this->timer->Interval = 1000;
+			this->timer->Tick += gcnew System::EventHandler(this, &MineSweeper::timer_Tick);
 			// 
 			// timeLabel
 			// 
@@ -96,9 +98,9 @@ namespace DBnGame {
 																		  static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->timeLabel->Location = System::Drawing::Point(384, 48);
 			this->timeLabel->Name = L"timeLabel";
-			this->timeLabel->Size = System::Drawing::Size(66, 30);
+			this->timeLabel->Size = System::Drawing::Size(49, 30);
 			this->timeLabel->TabIndex = 1;
-			this->timeLabel->Text = L"00:00";
+			this->timeLabel->Text = L"000";
 			// 
 			// MineSweeper
 			// 
@@ -130,7 +132,9 @@ namespace DBnGame {
 
 	private: System::Void MineSweeper_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Создаем поле 10x10 с 15 минами
-		this->mineField = gcnew MineField(10, 10, 15, restartButton);
+		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer);
+		this->secondsPassed = 0;
+		timeLabel->Text = "000";
 		mineField->InitializeField(this);
 		mineField->GenerateMines();
 	}
@@ -138,9 +142,22 @@ namespace DBnGame {
 
 	private: System::Void restartButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->mineField->CleanUpField(this);
-		this->mineField = gcnew MineField(10, 10, 15, restartButton);
+		this->secondsPassed = 0;
+		timeLabel->Text = "000";
+		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer);
 		mineField->InitializeField(this);
 		mineField->GenerateMines();
 	}
-	};
+
+
+	private: System::Void timer_Tick(System::Object^ sender, System::EventArgs^ e) {
+		this->secondsPassed++;
+
+		if (secondsPassed > 999) {
+			timer->Stop();
+			return;
+		}
+		timeLabel->Text = secondsPassed.ToString("D3");
+	}
+};
 }

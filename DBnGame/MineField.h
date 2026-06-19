@@ -10,20 +10,25 @@ private:
 	int rows;
 	int cols;
 	int mines;
+	int flagsLeft;
 	int cellsLeft;
+	Timer^ timer;
 	Button^ restartButton;
 	array<int, 2>^ fieldLogic; // -1 - мина, 0 - пустая клетка, >0 - количество мин вокруг
 	array<Button^, 2>^ fieldButtons; // Кнопки на форме
 	bool isGameOver;
 
 public:
-	MineField(int rows, int cols, int mines, Button^ restartButton) {
+	MineField(int rows, int cols, int mines, Button^ restartButton, Timer^ timer) {
 		this->rows = rows;
 		this->cols = cols;
 		this->mines = mines;
+		this->flagsLeft = mines;
 		this->cellsLeft = (rows * cols) - mines;
 		this->isGameOver = false;
 		this->restartButton = restartButton;
+		this->timer = timer;
+		timer->Stop();
 	}
 
 	System::Void InitializeField(System::Windows::Forms::Form^ form) {
@@ -111,6 +116,7 @@ public:
 	System::Void OnCellMouseUp(Object^ sender, MouseEventArgs^ e) {
 		if (isGameOver) return;
 
+		timer->Start(); // Запускаем таймер при первом клике
 		Button^ clickedButton = safe_cast<Button^>(sender);
 		Point coords = (Point) clickedButton->Tag;
 		int r = coords.X;
@@ -177,6 +183,7 @@ public:
 
 	System::Void GameOver(bool success) {
 		isGameOver = true;
+		timer->Stop();
 		if (success) {
 			MessageBox::Show("Вы победили!");
 			this->restartButton->ImageIndex = 2;
