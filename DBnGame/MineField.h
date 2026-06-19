@@ -79,7 +79,7 @@ public:
 	}
 
 
-	System::Void GenerateMines() {
+	System::Void GenerateMines(int startR, int startC) {
 		System::Random^ rand = gcnew System::Random();
 		int plantedMines = 0;
 
@@ -87,6 +87,11 @@ public:
 		while (plantedMines < mines) {
 			int r = rand->Next(rows);
 			int c = rand->Next(cols);
+
+			// Не позволяем расставлять мины вокруг первой клетки
+			if (Math::Abs(r - startR) <= 1 && Math::Abs(c - startC) <= 1) {
+				continue;
+			}
 
 			if (fieldLogic[r, c] != -1) {
 				fieldLogic[r, c] = -1;
@@ -149,6 +154,11 @@ public:
 		// Левая кнопка - открыть клетку
 		else if (e->Button == System::Windows::Forms::MouseButtons::Left) {
 			if (clickedButton->Text == "🚩") return;
+
+			if (isFirstMove) {
+				isFirstMove = false;
+				GenerateMines(r, c);
+			}
 
 			OpenCell(r, c);
 		}

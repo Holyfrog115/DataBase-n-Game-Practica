@@ -181,7 +181,6 @@ namespace DBnGame {
 		this->secondsPassed = 0;
 		timeLabel->Text = "000";
 		mineField->InitializeField(this);
-		mineField->GenerateMines();
 	}
 
 
@@ -191,7 +190,6 @@ namespace DBnGame {
 		timeLabel->Text = "000";
 		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer, flagsLabel);
 		mineField->InitializeField(this);
-		mineField->GenerateMines();
 	}
 
 
