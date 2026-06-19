@@ -41,6 +41,8 @@ namespace DBnGame {
 	private: System::Windows::Forms::Timer^ timer;
 	private: System::Windows::Forms::Label^ timeLabel;
 	private: int secondsPassed;
+	private: System::Windows::Forms::Label^ flagsLabel;
+
 
 	private: System::ComponentModel::IContainer^ components;
 	protected:
@@ -64,6 +66,7 @@ namespace DBnGame {
 			this->imageList1 = (gcnew System::Windows::Forms::ImageList(this->components));
 			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->timeLabel = (gcnew System::Windows::Forms::Label());
+			this->flagsLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// restartButton
@@ -102,12 +105,24 @@ namespace DBnGame {
 			this->timeLabel->TabIndex = 1;
 			this->timeLabel->Text = L"000";
 			// 
+			// flagsLabel
+			// 
+			this->flagsLabel->AutoSize = true;
+			this->flagsLabel->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(204)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+																		   static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->flagsLabel->Location = System::Drawing::Point(120, 48);
+			this->flagsLabel->Name = L"flagsLabel";
+			this->flagsLabel->Size = System::Drawing::Size(46, 30);
+			this->flagsLabel->TabIndex = 2;
+			this->flagsLabel->Text = L"015";
+			// 
 			// MineSweeper
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 30);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Silver;
 			this->ClientSize = System::Drawing::Size(584, 661);
+			this->Controls->Add(this->flagsLabel);
 			this->Controls->Add(this->timeLabel);
 			this->Controls->Add(this->restartButton);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -132,7 +147,7 @@ namespace DBnGame {
 
 	private: System::Void MineSweeper_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Создаем поле 10x10 с 15 минами
-		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer);
+		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer, flagsLabel);
 		this->secondsPassed = 0;
 		timeLabel->Text = "000";
 		mineField->InitializeField(this);
@@ -144,7 +159,7 @@ namespace DBnGame {
 		this->mineField->CleanUpField(this);
 		this->secondsPassed = 0;
 		timeLabel->Text = "000";
-		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer);
+		this->mineField = gcnew MineField(10, 10, 15, restartButton, timer, flagsLabel);
 		mineField->InitializeField(this);
 		mineField->GenerateMines();
 	}

@@ -13,17 +13,19 @@ private:
 	int flagsLeft;
 	int cellsLeft;
 	Timer^ timer;
+	Label^ flagsLabel;
 	Button^ restartButton;
 	array<int, 2>^ fieldLogic; // -1 - мина, 0 - пустая клетка, >0 - количество мин вокруг
 	array<Button^, 2>^ fieldButtons; // Кнопки на форме
 	bool isGameOver;
 
 public:
-	MineField(int rows, int cols, int mines, Button^ restartButton, Timer^ timer) {
+	MineField(int rows, int cols, int mines, Button^ restartButton, Timer^ timer, Label^ flagLabel) {
 		this->rows = rows;
 		this->cols = cols;
 		this->mines = mines;
 		this->flagsLeft = mines;
+		this->flagsLabel = flagLabel;
 		this->cellsLeft = (rows * cols) - mines;
 		this->isGameOver = false;
 		this->restartButton = restartButton;
@@ -33,6 +35,7 @@ public:
 
 	System::Void InitializeField(System::Windows::Forms::Form^ form) {
 		this->restartButton->ImageIndex = 0;
+		this->flagsLabel->Text = flagsLeft.ToString("D3");
 		fieldLogic = gcnew array<int, 2>(rows, cols);
 		fieldButtons = gcnew array<Button^, 2>(rows, cols);
 		int cellSize = 50;
@@ -125,10 +128,14 @@ public:
 		// Правая кнопка - поставить/снять флажок
 		if (e->Button == System::Windows::Forms::MouseButtons::Right) {
 			if (clickedButton->Text == "") {
+				flagsLeft--;
+				flagsLabel->Text = flagsLeft.ToString("D3");
 				clickedButton->Text = "🚩";
 				clickedButton->ForeColor = System::Drawing::Color::Red;
 			}
 			else if (clickedButton->Text == "🚩") {
+				flagsLeft++;
+				flagsLabel->Text = flagsLeft.ToString("D3");
 				clickedButton->Text = "";
 			}
 		}
