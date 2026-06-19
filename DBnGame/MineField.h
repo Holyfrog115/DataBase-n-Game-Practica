@@ -11,20 +11,23 @@ private:
 	int cols;
 	int mines;
 	int cellsLeft;
+	Button^ restartButton;
 	array<int, 2>^ fieldLogic; // -1 - мина, 0 - пустая клетка, >0 - количество мин вокруг
 	array<Button^, 2>^ fieldButtons; // Кнопки на форме
 	bool isGameOver;
 
 public:
-	MineField(int rows, int cols, int mines) {
+	MineField(int rows, int cols, int mines, Button^ restartButton) {
 		this->rows = rows;
 		this->cols = cols;
 		this->mines = mines;
 		this->cellsLeft = (rows * cols) - mines;
 		this->isGameOver = false;
+		this->restartButton = restartButton;
 	}
 
 	System::Void InitializeField(System::Windows::Forms::Form^ form) {
+		this->restartButton->ImageIndex = 0;
 		fieldLogic = gcnew array<int, 2>(rows, cols);
 		fieldButtons = gcnew array<Button^, 2>(rows, cols);
 		int cellSize = 50;
@@ -35,6 +38,7 @@ public:
 				Button^ btn = gcnew Button();
 				btn->Width = cellSize;
 				btn->Height = cellSize;
+				btn->BackColor = System::Drawing::Color::White;
 				btn->Left = 45 + (c * cellSize);
 				btn->Top = 125 + (r * cellSize);
 				btn->Font = gcnew System::Drawing::Font("Arial", 10, System::Drawing::FontStyle::Bold);
@@ -175,6 +179,7 @@ public:
 		isGameOver = true;
 		if (success) {
 			MessageBox::Show("Вы победили!");
+			this->restartButton->ImageIndex = 2;
 		}
 		else {
 			MessageBox::Show("Взрыв! Игра окончена.");
@@ -186,6 +191,7 @@ public:
 					}
 				}
 			}
+			this->restartButton->ImageIndex = 1;
 		}
 	}
 };
