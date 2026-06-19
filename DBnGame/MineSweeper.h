@@ -35,6 +35,9 @@ namespace DBnGame {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^ restartButton;
+	private: MineField^ mineField;
+	protected:
 
 	private:
 		/// <summary>
@@ -50,13 +53,25 @@ namespace DBnGame {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MineSweeper::typeid));
+			this->restartButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
+			// 
+			// restartButton
+			// 
+			this->restartButton->Location = System::Drawing::Point(240, 48);
+			this->restartButton->Name = L"restartButton";
+			this->restartButton->Size = System::Drawing::Size(96, 48);
+			this->restartButton->TabIndex = 0;
+			this->restartButton->Text = L"Restart";
+			this->restartButton->UseVisualStyleBackColor = true;
+			this->restartButton->Click += gcnew System::EventHandler(this, &MineSweeper::restartButton_Click);
 			// 
 			// MineSweeper
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 30);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(584, 661);
+			this->Controls->Add(this->restartButton);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 													  static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -78,7 +93,14 @@ namespace DBnGame {
 
 	private: System::Void MineSweeper_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Создаем поле 10x10 с 15 минами
-		MineField^ mineField = gcnew MineField(10, 10, 15);
+		this->mineField = gcnew MineField(10, 10, 15);
+		mineField->InitializeField(this);
+		mineField->GenerateMines();
+	}
+
+	private: System::Void restartButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->mineField->CleanUpField(this);
+		this->mineField = gcnew MineField(10, 10, 15);
 		mineField->InitializeField(this);
 		mineField->GenerateMines();
 	}
