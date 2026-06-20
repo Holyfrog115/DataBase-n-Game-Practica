@@ -83,6 +83,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::ErrorProvider^ errorProvider;
 
 	private: System::ComponentModel::IContainer^ components;
+	private: bool wasAdded = false;
 
 
 	private:
@@ -314,15 +315,27 @@ namespace DBnGame {
 			this->Name = L"enteringLines";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Ввод Строк";
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &enteringLines::enteringLines_FormClosed);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void enteringLines_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+		if (this->wasAdded) {
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+		}
+	}
+
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Закрытие формы без сохранения данных
-		this->Close();
+		if (this->wasAdded) {
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+		}
+		else {
+			this->Close();
+		}
 	}
 
 
@@ -366,6 +379,7 @@ namespace DBnGame {
 										totalAreaTextBox->Text);
 
 			emptyFields();
+			this->wasAdded = true;
 		}
 		catch (System::Exception^ ex) {
 			MessageBox::Show("Ошибка при сохранении данных: " + ex->Message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);

@@ -58,6 +58,7 @@ namespace DBnGame {
 	private: bool isExiting = false;
 	private: bool isAdminMode = false;
 	private: bool isDbOpen = false;
+	private: bool isChanged = false;
 	private: String^ currentDbFilePath = "";
 	private: String^ currentDbName = "";
 	private: System::Collections::Generic::List<House^>^ housesList = gcnew System::Collections::Generic::List<House^>();
@@ -414,7 +415,9 @@ namespace DBnGame {
 	private: System::Void enterHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		enteringLines^ enteringLinesFormInstance = gcnew enteringLines(this->housesList, dbGridView, this->lastId);
 
-		enteringLinesFormInstance->ShowDialog();
+		if (enteringLinesFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			this->isChanged = true;
+		}
 	}
 
 
@@ -583,16 +586,22 @@ namespace DBnGame {
 
 
 	private: System::Void savingDb() {
-		StreamWriter^ writer = gcnew StreamWriter(this->currentDbFilePath, false, System::Text::Encoding::UTF8);
+		// Проверка, были ли сделаны изменения в БД
+		if (isChanged) {
+			if (MessageBox::Show(this, "Сохранить Базу Данных?", "Сохранение", MessageBoxButtons::YesNo, MessageBoxIcon::Question)
+				== System::Windows::Forms::DialogResult::Yes) {
+				StreamWriter^ writer = gcnew StreamWriter(this->currentDbFilePath, false, System::Text::Encoding::UTF8);
 
-		// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
-		for each (House ^ house in housesList) {
-			writer->WriteLine(house->getId() + ";" + house->getAddress() + ";" + house->getHouseNumber() + ";"
-							  + house->getCommissionYear() + ";" + house->getFloorsNumber() + ";" + house->getAppartmentsNumber()
-							  + ";" + house->getLivingArea() + ";" + house->getTotalArea());
+				// Запись данных в формате: улица;номер;год;этажи;квартиры;жилая площадь;общая площадь
+				for each(House ^ house in housesList) {
+					writer->WriteLine(house->getId() + ";" + house->getAddress() + ";" + house->getHouseNumber() + ";"
+									  + house->getCommissionYear() + ";" + house->getFloorsNumber() + ";" + house->getAppartmentsNumber()
+									  + ";" + house->getLivingArea() + ";" + house->getTotalArea());
+				}
+
+				writer->Close();
+			}
 		}
-
-		writer->Close();
 	}
 };
 }

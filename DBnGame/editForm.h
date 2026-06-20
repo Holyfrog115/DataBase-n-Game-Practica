@@ -56,6 +56,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::Label^ streetNameLabel;
 
 	private: int listId;
+	private: bool isChanged;
 	private: System::Collections::Generic::List<House^>^ housesList;
 	private: System::Windows::Forms::ErrorProvider^ errorProvider;
 	private: System::ComponentModel::IContainer^ components;
