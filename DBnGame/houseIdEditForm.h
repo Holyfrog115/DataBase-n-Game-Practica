@@ -142,8 +142,12 @@ namespace DBnGame {
 		if (listId != -1) {
 			editForm^ editFormInstance = gcnew editForm(listId, housesList);
 			this->Opacity = 0;
-			editFormInstance->ShowDialog();
-			this->Close();
+			if (editFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				this->DialogResult = System::Windows::Forms::DialogResult::OK;
+			}
+			else {
+				this->Close();
+			}
 		}
 		else {
 			MessageBox::Show("Запись с указанным ID не найдена.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);

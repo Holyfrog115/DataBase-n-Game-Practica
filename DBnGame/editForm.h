@@ -333,7 +333,7 @@ namespace DBnGame {
 			housesList[listId]->setAppartmentsNumber(Convert::ToInt32(appartementsTextBox->Text));
 			housesList[listId]->setLivingArea(Convert::ToDouble(livingAreaTextBox->Text));
 			housesList[listId]->setTotalArea(Convert::ToDouble(totalAreaTextBox->Text));
-			this->Close();
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
 		}
 		catch (System::Exception^ ex) {
 			MessageBox::Show("Ошибка при сохранении данных: " + ex->Message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);

@@ -434,7 +434,9 @@ namespace DBnGame {
 	private: System::Void changeHouseDataButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		houseIdEditForm^ editFormInstance = gcnew houseIdEditForm(this->housesList);
 
-		editFormInstance->ShowDialog();
+		if (editFormInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			this->isChanged = true;
+		}
 		updateGridView();
 	}
 
