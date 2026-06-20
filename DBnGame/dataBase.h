@@ -424,7 +424,9 @@ namespace DBnGame {
 	private: System::Void deleteHouseButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		deletingLines^ deletingLinesInstance = gcnew deletingLines(this->housesList, dbGridView);
 
-		deletingLinesInstance->ShowDialog();
+		if (deletingLinesInstance->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			this->isChanged = true;
+		}
 		updateLastId();
 	}
 
