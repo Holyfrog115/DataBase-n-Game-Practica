@@ -92,6 +92,7 @@ namespace DBnGame {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ appartments;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ livingArea;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ totalArea;
+	private: System::Windows::Forms::StatusStrip^ statusStrip2;
 
 
 
@@ -137,6 +138,7 @@ namespace DBnGame {
 			this->appartments = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->livingArea = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->totalArea = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->statusStrip2 = (gcnew System::Windows::Forms::StatusStrip());
 			this->topBarMenuStrip->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dbGridView))->BeginInit();
@@ -353,11 +355,20 @@ namespace DBnGame {
 			this->totalArea->Name = L"totalArea";
 			this->totalArea->ReadOnly = true;
 			// 
+			// statusStrip2
+			// 
+			this->statusStrip2->Location = System::Drawing::Point(0, 487);
+			this->statusStrip2->Name = L"statusStrip2";
+			this->statusStrip2->Size = System::Drawing::Size(934, 22);
+			this->statusStrip2->TabIndex = 5;
+			this->statusStrip2->Text = L"statusStrip2";
+			// 
 			// dataBase
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(934, 531);
+			this->Controls->Add(this->statusStrip2);
 			this->Controls->Add(this->dbGridView);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->headerLabel);

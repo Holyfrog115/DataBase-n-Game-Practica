@@ -76,6 +76,7 @@ namespace DBnGame {
 			// 
 			this->dbNameTextBox->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->dbNameTextBox->Location = System::Drawing::Point(48, 120);
+			this->dbNameTextBox->MaxLength = 50;
 			this->dbNameTextBox->Name = L"dbNameTextBox";
 			this->dbNameTextBox->Size = System::Drawing::Size(288, 36);
 			this->dbNameTextBox->TabIndex = 6;
@@ -103,6 +104,7 @@ namespace DBnGame {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
+			this->MaximizeBox = false;
 			this->Name = L"createDbForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Создание Базы Данных";
@@ -125,6 +127,17 @@ namespace DBnGame {
 	private: System::Void createButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (String::IsNullOrWhiteSpace(this->dbNameTextBox->Text)) {
 			MessageBox::Show(this, "Имя базы данных не может быть пустым.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else if (this->dbNameTextBox->Text->Contains("/") ||
+				 this->dbNameTextBox->Text->Contains("\\") ||
+				 this->dbNameTextBox->Text->Contains(":") ||
+				 this->dbNameTextBox->Text->Contains("*") ||
+				 this->dbNameTextBox->Text->Contains("?") ||
+				 this->dbNameTextBox->Text->Contains("\"") ||
+				 this->dbNameTextBox->Text->Contains("<") ||
+				 this->dbNameTextBox->Text->Contains(">") ||
+				 this->dbNameTextBox->Text->Contains("|")) {
+			MessageBox::Show(this, "Имя базы содержит запрещенные символы.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else if (this->dbNameTextBox->Text->Contains(".txt")) {
 			MessageBox::Show(this, "Имя базы данных не должно содержать расширение .txt.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);

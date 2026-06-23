@@ -96,6 +96,7 @@ namespace DBnGame {
 			this->Controls->Add(this->dataBaseButton);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MaximizeBox = false;
 			this->MinimumSize = System::Drawing::Size(600, 600);
 			this->Name = L"mainMenu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
